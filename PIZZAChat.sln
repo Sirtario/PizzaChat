@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2018
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaChatCore", "src\PizzaChatGeneral\PizzaChatCore.csproj", "{FAE2D599-8632-40D4-A1FD-AF101B85B8C1}"
 EndProject
@@ -10,6 +10,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPLibrary", "src\TCPLibrary\TCPLibrary.csproj", "{546D5D2C-25F0-4973-8A94-3EB4952A658B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{EE560B1D-945E-461E-82D1-A1308363E58D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIZZA.Hub.Core", "PIZZA.Hub.Core\PIZZA.Hub.Core.csproj", "{0A4A1570-1899-42F1-8F55-DF26F1722FA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +34,10 @@ Global
 		{EE560B1D-945E-461E-82D1-A1308363E58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE560B1D-945E-461E-82D1-A1308363E58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE560B1D-945E-461E-82D1-A1308363E58D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A4A1570-1899-42F1-8F55-DF26F1722FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A4A1570-1899-42F1-8F55-DF26F1722FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A4A1570-1899-42F1-8F55-DF26F1722FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A4A1570-1899-42F1-8F55-DF26F1722FA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
