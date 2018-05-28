@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PIZZA.Core
 {
-    public class PIZZAInt3
+    public class PIZZAInt5
     {
-        private byte[] _value = new byte[3];
+        private byte[] _value = new byte[5];
 
-        private PIZZAInt3(byte[] value)
+        private PIZZAInt5(byte[] value)
         {
-            if(value.Length < 3)
+            if (value.Length < 5)
             {
                 throw new ArgumentOutOfRangeException("value is too short");
             }
 
-            _value = PIZZAIntHelper.GetNBytes(value, 3);
+            _value = PIZZAIntHelper.GetNBytes(value, 5);
         }
 
-        public PIZZAInt3()
+        public PIZZAInt5()
         {
             Value = 0;
         }
@@ -31,7 +29,7 @@ namespace PIZZA.Core
             }
             set
             {
-                _value = PIZZAIntHelper.GetBytesFromLong((long)value, 3);
+                _value = PIZZAIntHelper.GetBytesFromLong((long)value, 5);
             }
         }
 
@@ -40,9 +38,9 @@ namespace PIZZA.Core
             return _value;
         }
 
-        public static PIZZAInt3 FromBytes(byte[] value)
+        public static PIZZAInt5 FromBytes(byte[] value)
         {
-            return new PIZZAInt3(value);
+            return new PIZZAInt5(value);
         }
     }
 }
