@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PIZZA.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,8 @@ namespace PIZZA.Chat.Core
 {
     public class ChatFixedHeader
     {
+        private PIZZAInt5 _remainingLength;
+
         public ChatFixedHeader(Packettypes packetType)
         {
             PacketType = packetType;
@@ -13,14 +16,21 @@ namespace PIZZA.Chat.Core
 
         private ChatFixedHeader(byte[] bytes)
         {
-            //TODO: FromBytes Logik einfügen
+            var list = new List<byte>(bytes);
+
+            list.RemoveRange(0, 7);
+
+            PacketType = (Packettypes)list[0];
+            list.RemoveAt(0);
+
+            RemainingLength = PIZZAInt5.FromBytes(list.ToArray());
         }
 
         public Packettypes PacketType { get; set; }
 
-        public PIZZAInt5 RemainingLength { get; set; }
+        public long RemainingLength { get { return _remainingLength.Value; } set { _remainingLength.Value = value; } }
 
-        public Byte[] Protokollname { get; } = Encoding.UTF8.GetBytes("PIZZAC");
+        public Byte[] Protokollname { get; private set; } = Encoding.UTF8.GetBytes("PIZZAC");
 
         /// <summary>
         /// Version of PIZZAChat Protokoll

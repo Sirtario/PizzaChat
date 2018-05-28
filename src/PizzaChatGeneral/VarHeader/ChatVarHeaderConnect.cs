@@ -1,26 +1,54 @@
-﻿using System;
+﻿using PIZZA.Core;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PIZZA.Chat.Core
 {
     class ChatVarHeaderConnect : ChatVariableHeader
     {
-        private ChatVarHeaderConnect(byte[] bytes)
-        {
-            //TODO: FromBytes Logic 
-        }
+        private PIZZAString _clientID;
+
+        private PIZZAString _password;
 
         public ChatVarHeaderConnect()
         {
-
+            _clientID = new PIZZAString();
+            _password = new PIZZAString();
         }
 
-        PIZZAString ClientID { get; set; }
+        private ChatVarHeaderConnect(byte[] bytes)
+        {
+            var list = bytes.ToList();
 
-        PIZZAString Password { get; set; }
+            Lenght = PIZZAInt5.FromBytes(list.ToArray());
+            list.RemoveRange(0, 5);
 
-        public static FromBytes(byte[] bytes)
+            _clientID.FromBytes(list.ToArray());
+            list.RemoveRange(0, _clientID.Length.Value);
+
+            _password.FromBytes(list.ToArray());
+            list.RemoveRange(0, _password.Length.Value);
+
+            if (list.Count != 0)
+            {
+                throw new Exception();
+            }
+        }
+
+        public string ClientID {
+            get { return _clientID.Value; }
+            set { _clientID.Value = value; }
+        }
+
+        public string Password
+        {
+            get { return _password.Value; }
+            set { _password.Value = value; }
+        }
+
+        public static ChatVarHeaderConnect FromBytes(byte[] bytes)
         {
             return new ChatVarHeaderConnect(bytes);
         }
@@ -35,6 +63,5 @@ namespace PIZZA.Chat.Core
 
             return bytes.ToArray();
         }
-
     }
 }

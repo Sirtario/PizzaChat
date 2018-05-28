@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pizza.Chat.Core
+namespace PIZZA.Chat.Core
 {
     class ChatPayload
     {
