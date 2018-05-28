@@ -44,5 +44,15 @@ namespace PIZZA.Core
 
             return result;
         }
+
+        public byte[] GetBytes()
+        {
+            var result = new List<byte>();
+
+            result.AddRange(Length.GetBytes());
+            result.AddRange(_value);
+
+            return result.ToArray();
+        }
     }
 }
