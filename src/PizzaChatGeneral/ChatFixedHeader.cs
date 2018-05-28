@@ -6,8 +6,6 @@ namespace PIZZA.Chat.Core
 {
     public class ChatFixedHeader
     {
-        private byte[] bytes;
-
         public ChatFixedHeader(Packettypes packetType)
         {
             PacketType = packetType;

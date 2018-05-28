@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pizza.Chat.Core
+namespace PIZZA.Chat.Core
 {
     class ChatVariableHeader
     {
+        public PIZZAInt5 Lenght { get; set; }
     }
 }
