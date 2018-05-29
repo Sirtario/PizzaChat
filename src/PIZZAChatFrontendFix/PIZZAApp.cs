@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PIZZAChatFrontend
+namespace PIZZA.Client
 {
     public class PIZZAApp
     {

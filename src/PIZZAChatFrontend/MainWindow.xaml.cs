@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PIZZAChatFrontend
+namespace PIZZA.Client
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
