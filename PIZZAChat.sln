@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Core\Core.cspro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIZZAChatFrontend", "src\PIZZAChatFrontend\PIZZAChatFrontend.csproj", "{9209C287-4623-4351-BDFF-F23E8AF17342}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIZZAChatFrontendFix", "src\PIZZAChatFrontendFix\PIZZAChatFrontendFix.csproj", "{041DDDE5-55C4-4A99-B264-244F89C8DE18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9209C287-4623-4351-BDFF-F23E8AF17342}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9209C287-4623-4351-BDFF-F23E8AF17342}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9209C287-4623-4351-BDFF-F23E8AF17342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

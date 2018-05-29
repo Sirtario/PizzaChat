@@ -18,11 +18,33 @@ namespace PIZZAChatFrontend
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IPIZZAFrontend
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public event Action<string> SendMessage;
+        public event Action<string, string> WhisperMessage;
+        public event Action<string> EnterRoom;
+        public event Action<int> Connect;
+        public event Action Disconnect;
+        public event Action GetServers;
+
+        public void ReceiveMessage(string Message, string sender, bool isWhispered)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RefreshStatus(List<string> usersInChannel, string channel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowServerlist(List<Tuple<string, string, string>> servers)
+        {
+            throw new NotImplementedException();
         }
     }
 }
