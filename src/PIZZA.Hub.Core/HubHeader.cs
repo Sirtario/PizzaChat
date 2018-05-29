@@ -35,7 +35,15 @@ namespace PIZZA.Hub.Core
             tmp.RemoveAt(0);
             _payloadLength = PIZZAInt3.FromBytes(tmp.GetRange(0, 3).ToArray());
             tmp.Clear();
-        }  
+        }
+
+        public HubHeader(byte protocollversion, HubPacketTypes type, PIZZAInt3 payloadlength)
+        {
+            _protocollName = Encoding.UTF8.GetBytes("PIZZAH");
+            _protocollVersion = protocollversion;
+            _packetType = type;
+            _payloadLength = payloadlength;
+        }
 
         public static HubHeader FromBytes(byte[] bytes)
         {
