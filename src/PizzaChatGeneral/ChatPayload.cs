@@ -4,7 +4,11 @@ using System.Text;
 
 namespace PIZZA.Chat.Core
 {
-    class ChatPayload
+    public class ChatPayload
     {
+        public virtual byte[] GetBytes()
+        {
+            return new byte[0];
+        }
     }
 }

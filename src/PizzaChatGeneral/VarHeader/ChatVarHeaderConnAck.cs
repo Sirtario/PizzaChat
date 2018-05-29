@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PIZZA.Chat.Core
 {
-    class ChatVarHeaderConnAck : ChatVariableHeader
+    public class ChatVarHeaderConnAck : ChatVariableHeader
     {
         public ChatVarHeaderConnAck()
         {
@@ -38,7 +38,7 @@ namespace PIZZA.Chat.Core
         public byte CommunicationMode { get; private set; }
         public byte PingIntervall { get; private set; }
 
-        public byte[] GetBytes()
+        public override byte[] GetBytes()
         {
             var bytes = new List< byte>();
 

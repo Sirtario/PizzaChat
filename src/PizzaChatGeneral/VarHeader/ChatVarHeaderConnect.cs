@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PIZZA.Chat.Core
 {
-    class ChatVarHeaderConnect : ChatVariableHeader
+    public class ChatVarHeaderConnect : ChatVariableHeader
     {
         private PIZZAString _clientID;
 
@@ -25,10 +25,10 @@ namespace PIZZA.Chat.Core
             Lenght = PIZZAInt5.FromBytes(list.ToArray());
             list.RemoveRange(0, 5);
 
-            _clientID.FromBytes(list.ToArray());
+            _clientID = PIZZAString.FromBytes(list.ToArray());
             list.RemoveRange(0, _clientID.Length.Value);
 
-            _password.FromBytes(list.ToArray());
+            _password = PIZZAString.FromBytes(list.ToArray());
             list.RemoveRange(0, _password.Length.Value);
 
             if (list.Count != 0)
@@ -53,13 +53,13 @@ namespace PIZZA.Chat.Core
             return new ChatVarHeaderConnect(bytes);
         }
 
-        public byte[] GetBytes()
+        public override byte[] GetBytes()
         {
             var bytes = new List<byte>();
 
             bytes.AddRange(Lenght.GetBytes());
-            bytes.AddRange(ClientID.GetBytes());
-            bytes.AddRange(Password.GetBytes());
+            bytes.AddRange(_clientID.GetBytes());
+            bytes.AddRange(_password.GetBytes());
 
             return bytes.ToArray();
         }

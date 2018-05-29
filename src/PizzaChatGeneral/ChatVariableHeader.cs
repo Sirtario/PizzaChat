@@ -5,8 +5,13 @@ using System.Text;
 
 namespace PIZZA.Chat.Core
 {
-    class ChatVariableHeader
+    public class ChatVariableHeader
     {
         public PIZZAInt5 Lenght { get; set; }
+
+        public virtual byte[] GetBytes()
+        {
+            return new byte[0];
+        }
     }
 }
