@@ -42,10 +42,9 @@ namespace PIZZA.Hub.Core
 
         public byte[] GetBytes()
         {
-            List<byte> result =  ;
+            byte[] result = _hostname.GetBytes();
             
-
-            return 
+            return result.Concat(_friendlyname.GetBytes()).Concat(_description.GetBytes()).Concat(new byte[] { _flags }).ToArray();
         }
     }
 }
