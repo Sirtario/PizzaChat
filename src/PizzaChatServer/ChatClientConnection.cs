@@ -24,5 +24,6 @@ namespace PIZZA.Chat.Server
         public string ClientID { get; private set; }
         public IPEndPoint ClientIP { get; private set; }
         public string CourentChannel { get; set; }
+        public byte Channelpower { get; set; }
     }
 }
