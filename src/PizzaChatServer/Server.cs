@@ -2,6 +2,7 @@
 using PIZZA.Chat.Core;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace PIZZA.Chat.Server
 {
@@ -13,6 +14,8 @@ namespace PIZZA.Chat.Server
         private ChannelManager _channelmanager;
         private StatusManager _statusManager;
 
+        public event ChatClientConnectionApprovalEventHandler ClientConnecting;
+
         public Server(ITCPServer server)
         {
             _tcpServer = server ?? throw new ArgumentNullException();
@@ -21,17 +24,40 @@ namespace PIZZA.Chat.Server
             _connectManager = new ConnectManager();
             _connectManager.ClientConnected += _connectManager_ClientConnected;
             _connectManager.SendMessage += SendMessage;
+            _connectManager.ClientConnectionApprove += _connectManager_ClientConnectionApprove;
+
+            _statusManager.SendMessage += SendMessage;
         }
 
-        private void _connectManager_ClientConnected(ChatClientConnection obj)
-        {
-            _statusManager.SendInitialStatus();
-        }
 
         /// <summary>
         /// conntains all PIZZAChat Connections
         /// </summary>
         public List<ChatClientConnection> Connections { get; private set; }
+       
+        /// <summary>
+        /// The Channel All new clients connect to
+        /// </summary>
+        public string DefaultChannel { get; set; }
+       
+        /// <summary>
+        /// List of all Channels
+        /// </summary>
+        public List<PIZZAChannel> Channels { get; set; }
+
+        //passes the Appoval event through
+        private void _connectManager_ClientConnectionApprove(object sender, ChatConnectApprovalEventArgs e)
+        {
+            ClientConnecting.Invoke(this, e);
+        }
+
+        private void _connectManager_ClientConnected(ChatClientConnection obj)
+        {
+            obj.CourentChannel = DefaultChannel;
+            Connections.Add(obj);
+
+            _statusManager.SendStatus(obj, Connections.FindAll(c=>c.CourentChannel== obj.CourentChannel),Channels );
+        }
 
         private void _tcpServer_TCPMessagereceived(object sender, TcpServerMessageReceivedEventArgs e)
         {
@@ -75,9 +101,9 @@ namespace PIZZA.Chat.Server
 
         }
 
-        private void SendMessage(PizzaChatMessage message)
+        private void SendMessage(PizzaChatMessage message, IPEndPoint endPoint)
         {
-            throw new NotImplementedException();
+            _tcpServer.Send(endPoint, message.GetBytes());
         }
 
         /// <summary>
