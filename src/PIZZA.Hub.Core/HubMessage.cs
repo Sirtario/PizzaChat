@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using PIZZA.Core;
 
@@ -7,18 +8,26 @@ namespace PIZZA.Hub.Core
 {
     public class HubMessage
     {
-        private HubHeader _header;
-        private HubPacketTypes _type;
-        private HubPayLoad _payLoad;
+        public HubHeader Header { get; private set; }
+        public HubPayLoad PayLoad { get; private set; }
 
         public HubMessage(HubPacketTypes type, HubPayLoad PayLoad)
         {
-            _payLoad = PayLoad;
+            this.PayLoad = PayLoad;
 
-            PIZZAInt3 payLoadLength = new PIZZAInt3() { Value = _payLoad.GetBytes().Length };
+            PIZZAInt3 payLoadLength = new PIZZAInt3() { Value = this.PayLoad.GetBytes().Length };
 
-            _header = new HubHeader(1 ,type, payLoadLength); 
+            Header = new HubHeader(1 ,type, payLoadLength); 
         }
 
+        public byte[] GetBytes()
+        {
+            var bytes = PayLoad.GetBytes();
+            var headerBytes = Header.GetBytes(bytes.Length);
+
+            bytes = headerBytes.Concat(bytes).ToArray();
+
+            return bytes;
+        }
     }
 }

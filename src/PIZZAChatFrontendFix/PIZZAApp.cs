@@ -1,4 +1,5 @@
 ﻿using ACX.ViciOne.TCPLibrary;
+using PIZZA.Hub.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,10 +41,21 @@ namespace PIZZA.Client
         {
             if(_tcpClientHub == null || !_tcpClientHub.IsAlive)
             {
-                _tcpClientHub = new TCPClient()
+                _tcpClientHub = new TCPClient(TcpDelegate.IsPIZZAHubMessageComplete);
             }
 
-            _t
+            _tcpClientHub.TCPMessageReceived += _tcpClientHub_TCPMessageReceived;
+
+            _tcpClientHub.Connect(HubHostName);
+
+            var message = HubMessageFactory.GetMessage(HubPacketTypes.HOSTLISTREQ);
+
+            
+        }
+
+        private void _tcpClientHub_TCPMessageReceived(object sender, TcpMessageReceivedEventArgs e)
+        {
+            
         }
 
         private void Frontend_EnterRoom(string obj)

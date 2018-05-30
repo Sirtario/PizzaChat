@@ -53,9 +53,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj">
+      <Project>{ac93b995-7638-43c8-83bd-50ef50d0d5dd}</Project>
+      <Name>PIZZA.Hub.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PIZZAChatFrontend\PIZZAChatFrontend.csproj">
       <Project>{9209c287-4623-4351-bdff-f23e8af17342}</Project>
       <Name>PIZZAChatFrontend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PizzaChatGeneral\PizzaChatCore.csproj">
+      <Project>{FAE2D599-8632-40D4-A1FD-AF101B85B8C1}</Project>
+      <Name>PizzaChatCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCPLibrary\TCPLibrary.csproj">
       <Project>{546D5D2C-25F0-4973-8A94-3EB4952A658B}</Project>
