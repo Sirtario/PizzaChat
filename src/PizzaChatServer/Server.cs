@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 
 namespace PIZZA.Chat.Server
 {
@@ -74,7 +75,21 @@ namespace PIZZA.Chat.Server
                 throw;
             }
 
-            //TODO: check message header
+            // check message header
+            if (message.FixedHeader.Protokollname != Encoding.UTF8.GetBytes("PIZZAC")) 
+            {
+                throw new Exception("False Protokoll or malformed Packet!");
+            }
+
+            if (message.FixedHeader.ProtokollVersion != 1)
+            {
+                throw new Exception("False Protokoll or malformed Packet!");
+            }
+
+            if (message.FixedHeader.RemainingLength != message.GetBytes().Length -13)
+            {
+                throw new Exception("False Protokoll or malformed Packet!");
+            }
 
             //dipatches the message to the managers 
             switch (message.FixedHeader.PacketType)
