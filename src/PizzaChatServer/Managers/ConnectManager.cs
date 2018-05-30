@@ -7,7 +7,7 @@ namespace PIZZA.Chat.Server
     internal class ConnectManager
     {
         public event ChatClientConnectionApprovalEventHandler ClientConnectionApprove;
-        public event Action<PizzaChatMessage> SendMessage;
+        public event Action<PizzaChatMessage, IPEndPoint> SendMessage;
         internal event Action<ChatClientConnection> ClientConnected;
 
         internal void RecieveConnect(PizzaChatMessage message, IPEndPoint endPoint)
@@ -19,7 +19,7 @@ namespace PIZZA.Chat.Server
 
             ClientConnectionApprove.Invoke(this, eventargs);
 
-            SendMessage.Invoke(GenerateAckMessage(eventargs.ConnectReturncode, eventargs.CommunicationMode, eventargs.PingIntervall));
+            SendMessage.Invoke(GenerateAckMessage(eventargs.ConnectReturncode, eventargs.CommunicationMode, eventargs.PingIntervall), endPoint);
 
             if (eventargs.ConnectReturncode == ChatConnectReturncode.ACCEPTED)
             {
