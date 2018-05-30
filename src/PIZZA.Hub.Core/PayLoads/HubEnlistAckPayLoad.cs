@@ -9,9 +9,12 @@ namespace PIZZA.Hub.Core.PayLoads
 {
     class HubEnlistAckPayLoad : HubPayLoad
     {
-        private HubReturnCodes _returncode;
-        private byte   _pingintervall;
-        private PIZZAInt _hostIdentifier;
+        private HubReturnCodes _returncode = new HubReturnCodes();
+        private byte   _pingintervall = new byte();
+        private PIZZAInt _hostIdentifier = new PIZZAInt();
+
+        public HubEnlistAckPayLoad()
+        { }
 
         private HubEnlistAckPayLoad(byte[] bytes)
         {

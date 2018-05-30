@@ -8,7 +8,10 @@ namespace PIZZA.Hub.Core.PayLoads
 {
     class HubHostlistDatPayLoad : HubPayLoad
     {
-        private List<HubHostInfo> _hosts;
+        private List<HubHostInfo> _hosts = new List<HubHostInfo>();
+
+        public HubHostlistDatPayLoad()
+        { }
 
         private HubHostlistDatPayLoad(byte[] bytes)
         {
@@ -25,7 +28,7 @@ namespace PIZZA.Hub.Core.PayLoads
 
         }
 
-        public HubHostlistDatPayLoad FromBytes(byte[] bytes)
+        public static HubHostlistDatPayLoad FromBytes(byte[] bytes)
         {
             HubHostlistDatPayLoad result = new HubHostlistDatPayLoad(bytes);
 

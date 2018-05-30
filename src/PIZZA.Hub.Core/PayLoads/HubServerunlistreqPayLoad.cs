@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.Text;
 using PIZZA.Core;
 
-namespace PIZZA.Hub.Core
+namespace PIZZA.Hub.Core.PayLoads
 {
     class HubServerunlistreqPayLoad : HubPayLoad
     {
-        private PIZZAString _hostname;
-        private PIZZAString _friendlyname;
-        private PIZZAString _description;
-        private byte   _flags;
+        private PIZZAString _hostname = new PIZZAString();
+        private PIZZAString _friendlyname = new PIZZAString();
+        private PIZZAString _description = new PIZZAString();
+        private byte   _flags = new byte();
+
+        public HubServerunlistreqPayLoad()
+        { }
 
         private HubServerunlistreqPayLoad(byte[] bytes)
         {

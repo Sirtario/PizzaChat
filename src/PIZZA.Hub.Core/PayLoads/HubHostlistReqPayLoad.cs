@@ -6,8 +6,10 @@ namespace PIZZA.Hub.Core.PayLoads
 {
     class HubHostlistReqPayLoad : HubPayLoad
     {
-        private byte _flags;
+        private byte _flags = new byte();
 
+        public HubHostlistReqPayLoad()
+        { }
 
         private HubHostlistReqPayLoad(byte[] bytes)
         {

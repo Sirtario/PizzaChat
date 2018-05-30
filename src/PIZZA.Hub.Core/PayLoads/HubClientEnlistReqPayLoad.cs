@@ -6,14 +6,16 @@ using PIZZA.Core;
 
 namespace PIZZA.Hub.Core.PayLoads
 {
-    class HubClientEnlistReqPayLoad : HubPayLoad
+    public class HubClientEnlistReqPayLoad : HubPayLoad
     {
 
-        private PIZZAString _hostname;
-        private PIZZAString _friendlyname;
-        private PIZZAString _description;
-        private byte      _flags;
+        private PIZZAString _hostname = new PIZZAString();
+        private PIZZAString _friendlyname = new PIZZAString();
+        private PIZZAString _description = new PIZZAString();
+        private byte      _flags = new byte();
 
+        public HubClientEnlistReqPayLoad()
+        { }
 
         private HubClientEnlistReqPayLoad(byte[] bytes)
         {

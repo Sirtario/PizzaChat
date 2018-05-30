@@ -9,10 +9,15 @@ namespace PIZZA.Hub.Core
     {
         private HubHeader _header;
         private HubPacketTypes _type;
+        private HubPayLoad _payLoad;
 
-        public HubMessage(HubPacketTypes type)
+        public HubMessage(HubPacketTypes type, HubPayLoad PayLoad)
         {
-            _header = new HubHeader(1 ,type, payloadlength); 
+            _payLoad = PayLoad;
+
+            PIZZAInt3 payLoadLength = new PIZZAInt3() { Value = _payLoad.GetBytes().Length };
+
+            _header = new HubHeader(1 ,type, payLoadLength); 
         }
 
     }
