@@ -56,9 +56,15 @@ namespace PIZZA.Chat.Server
         private void _connectManager_ClientConnected(ChatClientConnection obj)
         {
             obj.CourentChannel = DefaultChannel;
+            obj.PingTimer.Elapsed += PingTimer_Elapsed;
             Connections.Add(obj);
 
             _statusManager.SendStatus(obj, Connections.FindAll(c=>c.CourentChannel== obj.CourentChannel),Channels );
+        }
+
+        private void PingTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            _tcpServer.DisconnectClient((sender as ChatClientConnection).ClientIP);
         }
 
         private void _tcpServer_TCPMessagereceived(object sender, TcpServerMessageReceivedEventArgs e)
@@ -105,7 +111,8 @@ namespace PIZZA.Chat.Server
                     _statusManager.RecieveGetStatus( myconnection, usersInMyChannel, Channels);
                     break;
                 case Packettypes.PING:
-                    _connectManager.ReceivePing(message, e.Sender);
+                    ResetPingTimer(Connections.Find(prop => prop.ClientIP == e.Sender));
+                    SendPingRESP(Connections.Find(prop => prop.ClientIP == e.Sender).ClientIP);
                     break;
                 case Packettypes.ENTERCHANNEL:
                     _channelmanager.RecieveEnterChannel(message, e.Sender);
@@ -121,6 +128,17 @@ namespace PIZZA.Chat.Server
             }
 
 
+        }
+
+        private void SendPingRESP(IPEndPoint clientIP)
+        {
+            _tcpServer.Send(clientIP,new PizzaChatMessage(Packettypes.PINGRESP).GetBytes());
+        }
+
+        private void ResetPingTimer(ChatClientConnection chatClientConnection)
+        {
+            chatClientConnection.PingTimer.Stop();
+            chatClientConnection.PingTimer.Start();
         }
 
         private void SendMessage(PizzaChatMessage message, IPEndPoint endPoint)

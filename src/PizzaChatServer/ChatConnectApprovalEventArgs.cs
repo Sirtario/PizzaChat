@@ -22,6 +22,9 @@ namespace PIZZA.Chat.Server
         public string Password { get; set; }
         public ChatConnectReturncode ConnectReturncode { get; set; }
         public byte CommunicationMode { get; set; }
+        /// <summary>
+        /// Pingintervall in Sek.
+        /// </summary>
         public byte PingIntervall { get; set; }
     }
 }

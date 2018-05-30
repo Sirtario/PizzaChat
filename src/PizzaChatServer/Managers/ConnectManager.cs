@@ -23,7 +23,7 @@ namespace PIZZA.Chat.Server
 
             if (eventargs.ConnectReturncode == ChatConnectReturncode.ACCEPTED)
             {
-                ClientConnected.Invoke(new ChatClientConnection(Varheader.ClientID, endPoint));
+                ClientConnected.Invoke(new ChatClientConnection(Varheader.ClientID, endPoint, eventargs.PingIntervall));
             }
         }
 
@@ -43,7 +43,7 @@ namespace PIZZA.Chat.Server
 
         internal void ReceivePing(PizzaChatMessage message, IPEndPoint sender)
         {
-            throw new NotImplementedException();
+            
         }
 
         internal void ReceiveDisconnect(PizzaChatMessage message, IPEndPoint sender)
