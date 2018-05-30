@@ -12,7 +12,7 @@ namespace PIZZA.Hub.Interface
 
         private Dictionary<string,cmdFunc> _commands = new Dictionary<string,cmdFunc>();
 
-        public void Cout(ConsoleColor color, string txt, bool IsLine = true)
+        public static void Cout(ConsoleColor color, string txt, bool IsLine = true)
         {
             Console.ForegroundColor = color;
 
