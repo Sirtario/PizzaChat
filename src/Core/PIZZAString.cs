@@ -38,7 +38,7 @@ namespace PIZZA.Core
             }
         }
 
-        public PIZZAString FromBytes(byte[] value)
+        public static PIZZAString FromBytes(byte[] value)
         {
             var result = new PIZZAString(value);
 
