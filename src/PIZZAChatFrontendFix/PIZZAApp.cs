@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACX.ViciOne.TCPLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,13 @@ namespace PIZZA.Client
 {
     public class PIZZAApp
     {
+        private TCPClient _tcpClientChat;
+        private TCPClient _tcpClientHub;
+
+        public string HubHostName { get; set; }
+
+        private List<Tuple<string, string, string>> _servers;
+
         public void Prepare(IPIZZAFrontend frontend)
         {
             frontend.Connect += Frontend_Connect;
@@ -30,7 +38,12 @@ namespace PIZZA.Client
 
         private void Frontend_GetServers()
         {
-            throw new NotImplementedException();
+            if(_tcpClientHub == null || !_tcpClientHub.IsAlive)
+            {
+                _tcpClientHub = new TCPClient()
+            }
+
+            _t
         }
 
         private void Frontend_EnterRoom(string obj)
@@ -45,7 +58,10 @@ namespace PIZZA.Client
 
         private void Frontend_Connect(int obj)
         {
-            throw new NotImplementedException();
+            if(_servers == null)
+            {
+                return;
+            }
         }
     }
 }

@@ -57,6 +57,10 @@
       <Project>{9209c287-4623-4351-bdff-f23e8af17342}</Project>
       <Name>PIZZAChatFrontend</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCPLibrary\TCPLibrary.csproj">
+      <Project>{546D5D2C-25F0-4973-8A94-3EB4952A658B}</Project>
+      <Name>TCPLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
