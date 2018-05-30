@@ -38,9 +38,11 @@ namespace PIZZA.Hub.Core
             }
         }
 
-        public static HubMessage GetMessage(HubPacketTypes type , byte[] bytes)
+        public static HubMessage GetMessage(byte[] bytes)
         {
-            switch (type)
+            var header = HubHeader.FromBytes(bytes);
+
+            switch (header.PacketType)
             {
                 case HubPacketTypes.SERVERENLISTREQ:
                     return new HubMessage(HubPacketTypes.SERVERENLISTREQ, HubServerunlistreqPayLoad.FromBytes(bytes));

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pizza.Chat.Core
+namespace PIZZA.Chat.Core
 {
     public enum Packettypes
     {

@@ -21,15 +21,15 @@ namespace PIZZA.Core
             Value = 0;
         }
 
-        public int Value
+        public long Value
         {
             get
             {
-                return (int)PIZZAIntHelper.GetValueFromBytes(_value);
+                return PIZZAIntHelper.GetValueFromBytes(_value);
             }
             set
             {
-                _value = PIZZAIntHelper.GetBytesFromLong((long)value, 5);
+                _value = PIZZAIntHelper.GetBytesFromLong(value, 5);
             }
         }
 
