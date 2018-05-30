@@ -16,23 +16,9 @@ namespace PIZZA.Hub.Core.PayLoads
 
             while (tmp.Count != 0)
             {
-                HubHostInfo _current = new HubHostInfo();
+                HubHostInfo _current = HubHostInfo.FromBytes(tmp.ToArray());
 
-                _current.Hostname = PIZZAString.FromBytes(tmp.ToArray());
-
-                tmp.RemoveRange(0, 2);
-
-                _current.Friendlyname = PIZZAString.FromBytes(tmp.ToArray());
-
-                tmp.RemoveRange(0, 2);
-
-                _current.Description = PIZZAString.FromBytes(tmp.ToArray());
-
-                tmp.RemoveRange(0, 2);
-
-                _current.RequiresPassword = tmp[0];
-
-                tmp.RemoveAt(0);
+                tmp.RemoveRange(0, _current.Length);
 
                 _hosts.Add(_current);
             }
@@ -52,14 +38,7 @@ namespace PIZZA.Hub.Core.PayLoads
 
             foreach(HubHostInfo i in _hosts)
             {
-                byte[] tmp = i.Hostname.GetBytes();
-                tmp.Concat(i.Friendlyname.GetBytes()).Concat(i.Description.GetBytes()).Concat(new byte[] { i.RequiresPassword });
-
-                foreach (byte b in tmp)
-                {
-                    result.Add(b);
-                }
-
+                result.Concat(i.GetBytes());
             }
 
             return result.ToArray();
