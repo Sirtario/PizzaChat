@@ -9,9 +9,9 @@ namespace PIZZA.Chat.Server
     {
         public event Action<PizzaChatMessage, IPEndPoint> SendMessage;
 
-        internal void RecieveGetStatus(PizzaChatMessage message, IPEndPoint sender)
+        internal void RecieveGetStatus(ChatClientConnection connection, List<ChatClientConnection> users, List<PIZZAChannel> channels)
         {
-            throw new NotImplementedException();
+            SendStatus(connection, users, channels);
         }
 
         internal void SendStatus(ChatClientConnection connection, List<ChatClientConnection> users, List<PIZZAChannel> channels)

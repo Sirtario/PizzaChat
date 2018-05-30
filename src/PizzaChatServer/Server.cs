@@ -2,6 +2,7 @@
 using PIZZA.Chat.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace PIZZA.Chat.Server
@@ -73,6 +74,8 @@ namespace PIZZA.Chat.Server
                 throw;
             }
 
+            //TODO: check message header
+
             //dipatches the message to the managers 
             switch (message.FixedHeader.PacketType)
             {
@@ -80,7 +83,11 @@ namespace PIZZA.Chat.Server
                     _connectManager.RecieveConnect(message, e.Sender);
                     break;
                 case Packettypes.GETSTATUS:
-                    _statusManager.RecieveGetStatus(message, e.Sender);
+
+                    var myconnection = Connections.Find(prop => prop.ClientIP == e.Sender);
+                    var usersInMyChannel = Connections.FindAll(prop => prop.CourentChannel == myconnection.CourentChannel);
+
+                    _statusManager.RecieveGetStatus( myconnection, usersInMyChannel, Channels);
                     break;
                 case Packettypes.PING:
                     _connectManager.ReceivePing(message, e.Sender);
