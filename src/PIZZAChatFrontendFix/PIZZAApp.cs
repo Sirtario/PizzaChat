@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PIZZA.Hub.Core.PayLoads;
 
 namespace PIZZA.Client
 {
@@ -16,6 +17,7 @@ namespace PIZZA.Client
         public string HubHostName { get; set; }
 
         private List<Tuple<string, string, string>> _servers;
+        private IPIZZAFrontend _frontend;
 
         public void Prepare(IPIZZAFrontend frontend)
         {
@@ -25,6 +27,8 @@ namespace PIZZA.Client
             frontend.GetServers += Frontend_GetServers;
             frontend.SendMessage += Frontend_SendMessage;
             frontend.WhisperMessage += Frontend_WhisperMessage;
+
+            _frontend = frontend;
         }
 
         private void Frontend_WhisperMessage(string arg1, string arg2)
@@ -50,12 +54,48 @@ namespace PIZZA.Client
 
             var message = HubMessageFactory.GetMessage(HubPacketTypes.HOSTLISTREQ);
 
-            
+            _tcpClientHub.Send(message.GetBytes());
         }
 
         private void _tcpClientHub_TCPMessageReceived(object sender, TcpMessageReceivedEventArgs e)
         {
-            
+            var message = HubMessageFactory.GetMessage(e.Message);
+
+            switch (message.Header.PacketType)
+            {
+                //case HubPacketTypes.SERVERENLISTREQ:
+                //    break;
+                //case HubPacketTypes.CLIENTENLISTREQ:
+                //    break;
+                //case HubPacketTypes.ENLISTACK:
+                //    break;
+                //case HubPacketTypes.HOSTLISTREQ:
+                //    break;
+                case HubPacketTypes.HOSTLISTDAT:
+                    ShowServerlist(message.PayLoad as HubHostlistDatPayLoad);
+                    break;
+                //case HubPacketTypes.HOSTAVAILABLEREQ:
+                //    break;
+                //case HubPacketTypes.HOSTAVAILABLEDAT:
+                //    break;
+                //case HubPacketTypes.UNLISTREQ:
+                //    break;
+                //case HubPacketTypes.UNLISTTACK:
+                //    break;
+                //case HubPacketTypes.PING:
+                //    break;
+                //case HubPacketTypes.PINGACK:
+                //    break;
+                //default:
+                //    break;
+            }
+        }
+
+        private void ShowServerlist(HubHostlistDatPayLoad hubHostlistDatPayLoad)
+        {
+            var serverList = hubHostlistDatPayLoad.Hosts.Select(h => new Tuple<string, string, string>(h.Friendlyname, h.Description, h.Hostname));
+
+            _frontend.ShowServerlist(serverList.ToList());
         }
 
         private void Frontend_EnterRoom(string obj)
