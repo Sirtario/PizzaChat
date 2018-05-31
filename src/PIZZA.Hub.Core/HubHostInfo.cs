@@ -13,6 +13,18 @@ namespace PIZZA.Hub.Core
         private PIZZAString _description = new PIZZAString();
         private byte _requiresPassword;
 
+        public bool RequiresPassword
+        {
+            get
+            {
+                return _requiresPassword >= 1;
+            }
+            set
+            {
+                _requiresPassword = (byte)(value ? 1 : 0);
+            }
+        }
+
         public string Hostname
         {
             get
