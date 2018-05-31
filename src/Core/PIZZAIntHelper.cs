@@ -24,7 +24,7 @@ namespace PIZZA.Core
        
             for (int i = 0; i < bytes.Length; i++)
             {
-                result += bytes[i] * Convert.ToInt64(Math.Pow(Convert.ToDouble(255), Convert.ToDouble(i)));
+                result += bytes[i] * Convert.ToInt64(Math.Pow(Convert.ToDouble(256), Convert.ToDouble(i)));
             }
 
             return result;

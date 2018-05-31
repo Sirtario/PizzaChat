@@ -11,7 +11,7 @@ namespace PIZZA.Core
 
         public PIZZAInt Length { get; }
 
-        private PIZZAString (byte[] value)
+        private PIZZAString (byte[] value) : this()
         {
             var valueList = value.ToList();
 
