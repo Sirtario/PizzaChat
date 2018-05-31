@@ -29,10 +29,13 @@ namespace PIZZA.Chat.Server
             _connectManager.SendMessage += SendMessage;
             _connectManager.ClientConnectionApprove += _connectManager_ClientConnectionApprove;
 
+            _statusManager = new StatusManager();
             _statusManager.SendMessage += SendMessage;
 
+            _publishManager = new PublishManager();
             _publishManager.SendMessage += SendMessage;
 
+            _channelmanager = new ChannelManager();
             _channelmanager.SendMessage += SendMessage;
             _channelmanager.ClientEnteringChannel += _channelmanager_ClientEnteringChannel;
         }

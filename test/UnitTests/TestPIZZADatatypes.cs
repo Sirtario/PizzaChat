@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PIZZA.Core;
 
-namespace UnitTests
+namespace Tests
 {
     [TestClass]
     public class TestPIZZADatatypes
