@@ -11,13 +11,13 @@ namespace PIZZA.Hub
     {
         private Dictionary<int, PIZZAString> _serverList;
 
-        public void AddServer(int id, PIZZAString nserver) => _serverList.Add(id, nserver);
+        public void AddServer(int id, PIZZAString newserver) => _serverList.Add(id, newserver);
 
-        public bool ContainsServerID(int ID) => _serverList.ContainsKey(ID);
+        public bool ContainsServerID(int id) => _serverList.ContainsKey(id);
 
-        public bool ContainsEndPoint(PIZZAString EndPoint) => _serverList.ContainsValue(EndPoint);
+        public bool ContainsHostname(PIZZAString EndPoint) => _serverList.ContainsValue(EndPoint);
 
-        public PIZZAString GetEndPoint(int ID) => _serverList[ID];
+        public PIZZAString GetHostname(int id) => _serverList[id];
 
         public HubPizzaServerList()
         {

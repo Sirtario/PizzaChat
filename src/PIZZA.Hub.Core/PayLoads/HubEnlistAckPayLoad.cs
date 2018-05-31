@@ -7,7 +7,7 @@ using PIZZA.Hub.Core.Enumerationen;
 
 namespace PIZZA.Hub.Core.PayLoads
 {
-    class HubEnlistAckPayLoad : HubPayLoad
+    public class HubEnlistAckPayLoad : HubPayLoad
     {
         private HubReturnCodes _returncode = new HubReturnCodes();
         private byte   _pingintervall = new byte();
