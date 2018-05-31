@@ -34,9 +34,9 @@ namespace PIZZA.Chat.Core
             }
         }
 
-        public ChatConnectReturncode Returncode { get; private set; }
-        public byte CommunicationMode { get; private set; }
-        public byte PingIntervall { get; private set; }
+        public ChatConnectReturncode Returncode { get;  set; }
+        public byte CommunicationMode { get; set; }
+        public byte PingIntervall { get;  set; }
 
         public override byte[] GetBytes()
         {
