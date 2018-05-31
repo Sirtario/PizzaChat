@@ -67,7 +67,7 @@ namespace PIZZA.Hub.Core
                 case HubPacketTypes.PINGACK:
                     return new HubMessage(HubPacketTypes.PINGACK, HubPingAckPayLoad.FromBytes(bytes));
                 default:
-                    throw new NotSupportedException($"Unknown packet type {type.ToString()} couldn't create HubMessage!");
+                    throw new NotSupportedException($"Unknown packet type {header.PacketType.ToString()} couldn't create HubMessage!");
             }
         }
     }
