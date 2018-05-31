@@ -15,7 +15,7 @@ namespace PIZZA.Client
         /// whisperTarget, message
         /// </summary>
         event Action<string, string> WhisperMessage;
-        event Action<string> EnterRoom;
+        event Action<PIZZAChannel> EnterRoom;
         event Action<int> Connect;
         event Action Disconnect;
         event Action GetServers;
@@ -27,10 +27,10 @@ namespace PIZZA.Client
         /// </summary>
         /// <param name="servers"></param>
         void ShowServerlist(List<Tuple<string, string, string, bool>> servers);
-        void RefreshStatus(List<string> usersInChannel, List<string> channels, string channel);
+        void RefreshStatus(List<string> usersInChannel, List<PIZZAChannel> channels, string channel);
         string GetClientId();
-        string GetPassword(int serverId);
-        void ShowReturncode(Chat.Core.ChatConnectReturncode returncode);
+        string GetPassword(string topic);
+        void ShowReturncode(ChatConnectReturncode returncode);
         void ShowEnterChannelReturncode(ChatEnterChannelReturnCode returnCode);
     }
 }

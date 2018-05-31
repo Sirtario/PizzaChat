@@ -59,11 +59,11 @@ namespace PIZZA.Chat.Core
             }
         }
 
-        public IEnumerable<string> Channels
+        public IEnumerable<PIZZAChannel> Channels
         {
             get
             {
-                return _channels.Select(prop => prop.Channelname.Value).ToList();
+                return _channels;
             }
         }
 

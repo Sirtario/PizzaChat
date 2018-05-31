@@ -103,12 +103,19 @@ namespace PIZZA.Client
             _frontend.ShowServerlist(serverList.ToList());
         }
 
-        private void Frontend_EnterRoom(string obj)
+        private void Frontend_EnterRoom(PIZZAChannel obj)
         {
             var message = new PizzaChatMessage(Packettypes.ENTERCHANNEL);
             var varheader = message.VariableHeader as ChatVarHeaderEnterChannel;
 
-            varheader.Channel = obj
+            varheader.Channel = obj.Channelname.Value;
+           
+            if(obj.HasPassword >= 1)
+            {
+                varheader.Password = _frontend.GetPassword(obj.Channelname.Value);
+            }
+
+            varheader.Lenght
         }
 
         private void Frontend_Disconnect()
@@ -134,7 +141,7 @@ namespace PIZZA.Client
 
             if(_servers[obj].Item4)
             {
-                varheader.Password = _frontend.GetPassword(obj);
+                varheader.Password = _frontend.GetPassword(_servers[obj].Item1);
             }
 
             _tcpClientChat.Send(message.GetBytes());
