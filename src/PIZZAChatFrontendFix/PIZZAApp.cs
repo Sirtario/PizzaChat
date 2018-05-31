@@ -72,8 +72,8 @@ namespace PIZZA.Client
                 //    break;
                 //case HubPacketTypes.CLIENTENLISTREQ:
                 //    break;
-                //case HubPacketTypes.ENLISTACK:
-                //    break;
+                case HubPacketTypes.ENLISTACK:
+                    break;
                 //case HubPacketTypes.HOSTLISTREQ:
                 //    break;
                 case HubPacketTypes.HOSTLISTDAT:
@@ -81,16 +81,16 @@ namespace PIZZA.Client
                     break;
                 //case HubPacketTypes.HOSTAVAILABLEREQ:
                 //    break;
-                //case HubPacketTypes.HOSTAVAILABLEDAT:
-                //    break;
+                case HubPacketTypes.HOSTAVAILABLEDAT:
+                    break;
                 //case HubPacketTypes.UNLISTREQ:
                 //    break;
-                //case HubPacketTypes.UNLISTTACK:
-                //    break;
+                case HubPacketTypes.UNLISTTACK:
+                    break;
                 //case HubPacketTypes.PING:
                 //    break;
-                //case HubPacketTypes.PINGACK:
-                //    break;
+                case HubPacketTypes.PINGACK:
+                    break;
                 //default:
                 //    break;
             }
@@ -177,6 +177,7 @@ namespace PIZZA.Client
                 //case Packettypes.GETSTATUS:
                 //    break;
                 case Packettypes.STATUS:
+                    ReceiveStatus(message);
                     break;
                 //case Packettypes.PING:
                 //    break;
@@ -194,6 +195,14 @@ namespace PIZZA.Client
                 default:
                     break;
             }
+        }
+
+        private void ReceiveStatus(PizzaChatMessage message)
+        {
+            var varheader = message.VariableHeader as ChatVarHeaderStatus;
+            var payload = message.Payload as ChatPayloadStatus;
+
+            _frontend.RefreshStatus(payload.ClientsInCurrentChannel.ToList(), paygit)
         }
 
         private void ReceiveEnterChannelAck(PizzaChatMessage message)

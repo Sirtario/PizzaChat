@@ -27,7 +27,7 @@ namespace PIZZA.Client
         /// </summary>
         /// <param name="servers"></param>
         void ShowServerlist(List<Tuple<string, string, string, bool>> servers);
-        void RefreshStatus(List<string> usersInChannel, string channel);
+        void RefreshStatus(List<string> usersInChannel, List<string> channels, string channel);
         string GetClientId();
         string GetPassword(int serverId);
         void ShowReturncode(Chat.Core.ChatConnectReturncode returncode);

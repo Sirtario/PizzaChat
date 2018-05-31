@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PIZZA.Chat.Core
 {
-    class ChatPayloadStatus : ChatPayload
+    public class ChatPayloadStatus : ChatPayload
     {
         private List<PIZZAString> _clientsInCurrentChannel;
         private List<PIZZAChannel> _channels;
