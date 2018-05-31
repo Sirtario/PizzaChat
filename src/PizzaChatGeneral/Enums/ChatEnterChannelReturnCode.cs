@@ -13,6 +13,7 @@ namespace PIZZA.Chat.Core
         DeniedChannelFull,
         DeniedClientNotWhitelisted,
         DeniedInternalError,
-        DeniedMISC
+        DeniedMISC,
+        DeniedChannelNotAvailable
     }
 }

@@ -11,17 +11,9 @@ namespace PIZZA.Chat.Core
     {
         private List<PIZZAString> _clientsInCurrentChannel;
         private List<PIZZAChannel> _channels;
-        private int _clientcount;
-        private int _channelcount;
 
         public ChatPayloadStatus()
         {
-        }
-
-        public ChatPayloadStatus(int clientcount, int channelcount)
-        {
-            _clientcount = clientcount;
-            _channelcount = channelcount;
         }
 
         private ChatPayloadStatus(byte[] bytes)
@@ -31,13 +23,13 @@ namespace PIZZA.Chat.Core
 
             var list = bytes.ToList();
 
-            for (int i = 0; i < _clientcount; i++)
+            for (int i = 0; i < _clientsInCurrentChannel.Count; i++)
             {
                 _clientsInCurrentChannel.Add(PIZZAString.FromBytes(list.ToArray()));
                 list.RemoveRange(0, _clientsInCurrentChannel[_clientsInCurrentChannel.Count - 1].Length.Value);
             }
 
-            for (int i = 0; i < _channelcount; i++)
+            for (int i = 0; i < _channels.Count; i++)
             {
                 _channels.Add(PIZZAChannel.FromBytes(list.ToArray()));
                 list.RemoveRange(0, _channels[_channels.Count - 1].Length);
@@ -47,6 +39,16 @@ namespace PIZZA.Chat.Core
             {
                 throw new Exception();
             }
+        }
+
+        public void AddUser(string clientID)
+        {
+            _clientsInCurrentChannel.Add((new PIZZAString() { Value = clientID }));
+        }
+
+        public void AddChannel(PIZZAChannel channel)
+        {
+            _channels.Add(channel);
         }
 
         public IEnumerable<string> ClientsInCurrentChannel
@@ -70,7 +72,7 @@ namespace PIZZA.Chat.Core
             return new ChatPayloadStatus(bytes);
         }
 
-        public byte[] GetBytes()
+        public override byte[] GetBytes()
         {
             var bytes = new List<byte>();
 
