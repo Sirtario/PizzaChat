@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PIZZA.Chat.Core
 {
-    internal class PIZZAChannel
+    public class PIZZAChannel
     {
         public PIZZAChannel(byte[] bytes)
         {
