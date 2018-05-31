@@ -13,18 +13,22 @@ namespace PIZZA.Hub
 
         static void Main(string[] args)
         {
+            HubPizzaServerList slist = new HubPizzaServerList();
             HubTerminal term = new HubTerminal();
             Thread listener = new Thread(term.RunListener);
             TCPServer server = new TCPServer(IsPackageCompleteHb);
 
             HubTerminal.Cout(ConsoleColor.Gray, "PizzaHub");
 
-            HubTerminal.Cout(ConsoleColor.Yellow, "[TCP] Server Gestarted...");
+            HubTerminal.Cout(ConsoleColor.Yellow, "[TCP] Server started...");
             server.ServerStart();
+            
+            
 
             term.CommandAdd("test", HubTerminalCommands.testCmd);
             
             listener.Start();
+
         }
 
         private static bool IsPackageCompleteHb(byte[] currentBytes)
