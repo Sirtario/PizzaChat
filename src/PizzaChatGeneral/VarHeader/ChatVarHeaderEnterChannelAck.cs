@@ -30,7 +30,7 @@ namespace PIZZA.Chat.Core
         public ChatEnterChannelReturnCode ReturnCode
         {
             get;
-            private set;
+            set;
         } 
 
         /// <summary>

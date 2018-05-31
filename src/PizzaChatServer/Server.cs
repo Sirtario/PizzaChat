@@ -17,6 +17,7 @@ namespace PIZZA.Chat.Server
         private StatusManager _statusManager;
 
         public event ChatClientConnectionApprovalEventHandler ClientConnecting;
+        public event ChatClientEnteringChannelEventHandler ClientEnteringChannel;
 
         public Server(ITCPServer server)
         {
@@ -29,7 +30,13 @@ namespace PIZZA.Chat.Server
             _connectManager.ClientConnectionApprove += _connectManager_ClientConnectionApprove;
 
             _statusManager.SendMessage += SendMessage;
+
+            _publishManager.SendMessage += SendMessage;
+
+            _channelmanager.SendMessage += SendMessage;
+            _channelmanager.ClientEnteringChannel += _channelmanager_ClientEnteringChannel;
         }
+
 
 
         /// <summary>
@@ -46,6 +53,11 @@ namespace PIZZA.Chat.Server
         /// List of all Channels
         /// </summary>
         public List<PIZZAChannel> Channels { get; set; }
+
+        private void _channelmanager_ClientEnteringChannel(object sender, ChatClientEnteringChannelEventArgs e)
+        {
+            ClientEnteringChannel.Invoke(this, e);
+        }
 
         //passes the Appoval event through
         private void _connectManager_ClientConnectionApprove(object sender, ChatConnectApprovalEventArgs e)
@@ -97,17 +109,16 @@ namespace PIZZA.Chat.Server
                 throw new Exception("False Protokoll or malformed Packet!");
             }
 
+            var myconnection = Connections.Find(prop => prop.ClientIP == e.Sender);
+            var usersInMyChannel = Connections.FindAll(prop => prop.CourentChannel == myconnection.CourentChannel);
+
             //dipatches the message to the managers 
             switch (message.FixedHeader.PacketType)
             {
                 case Packettypes.CONNECT:
-                    _connectManager.RecieveConnect(message, e.Sender);
+                    _connectManager.RecieveConnect(message, myconnection);
                     break;
                 case Packettypes.GETSTATUS:
-
-                    var myconnection = Connections.Find(prop => prop.ClientIP == e.Sender);
-                    var usersInMyChannel = Connections.FindAll(prop => prop.CourentChannel == myconnection.CourentChannel);
-
                     _statusManager.RecieveGetStatus( myconnection, usersInMyChannel, Channels);
                     break;
                 case Packettypes.PING:
@@ -115,19 +126,20 @@ namespace PIZZA.Chat.Server
                     SendPingRESP(Connections.Find(prop => prop.ClientIP == e.Sender).ClientIP);
                     break;
                 case Packettypes.ENTERCHANNEL:
-                    _channelmanager.RecieveEnterChannel(message, e.Sender);
+                    _channelmanager.RecieveEnterChannel(message, myconnection, Channels);
                     break;
                 case Packettypes.DISCONNECT:
-                    _connectManager.ReceiveDisconnect(message,e.Sender);
+                    (Connections.Find(prop => prop.ClientIP == e.Sender)).PingTimer.Dispose();
+
+                    Connections.Remove(Connections.Find(prop => prop.ClientIP == e.Sender));
+                    _tcpServer.DisconnectClient(e.Sender);
                     break;
                 case Packettypes.PUBLISH:
-                    _publishManager.Publish(message);
+                    _publishManager.Publish(message,myconnection,usersInMyChannel);
                     break;
                 default:
                     throw new NotSupportedException($"the Packet type is not supportet as recieving packet on the server {message.FixedHeader.PacketType}");
             }
-
-
         }
 
         private void SendPingRESP(IPEndPoint clientIP)
@@ -147,7 +159,7 @@ namespace PIZZA.Chat.Server
         }
 
         /// <summary>
-        /// Starts the server on Default port (6666)
+        /// Starts the server on Default port
         /// </summary>
         public void Start()
         {
