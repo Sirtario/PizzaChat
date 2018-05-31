@@ -105,7 +105,10 @@ namespace PIZZA.Client
 
         private void Frontend_EnterRoom(string obj)
         {
-            throw new NotImplementedException();
+            var message = new PizzaChatMessage(Packettypes.ENTERCHANNEL);
+            var varheader = message.VariableHeader as ChatVarHeaderEnterChannel;
+
+            varheader.Channel = obj
         }
 
         private void Frontend_Disconnect()
@@ -202,7 +205,7 @@ namespace PIZZA.Client
             var varheader = message.VariableHeader as ChatVarHeaderStatus;
             var payload = message.Payload as ChatPayloadStatus;
 
-            _frontend.RefreshStatus(payload.ClientsInCurrentChannel.ToList(), paygit)
+            _frontend.RefreshStatus(payload.ClientsInCurrentChannel.ToList(), payload.Channels.ToList(), varheader.CurrentChannel);
         }
 
         private void ReceiveEnterChannelAck(PizzaChatMessage message)

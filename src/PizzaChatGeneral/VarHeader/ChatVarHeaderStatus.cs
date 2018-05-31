@@ -57,7 +57,7 @@ namespace PIZZA.Chat.Core
         /// <summary>
         /// Name of the Courent Channel
         /// </summary>
-        public string CourentChannel {
+        public string CurrentChannel {
             get
             {
                 return _courentChannel.Value;
