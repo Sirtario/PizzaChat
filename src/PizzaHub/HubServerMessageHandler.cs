@@ -43,20 +43,20 @@ namespace PIZZA.Hub
                         HubEnlistAckPayLoad pl;
                         HubMessage anser;
 
-                        PIZZAString ServerAdress = PIZZAString.FromBytes(message.PayLoad.GetBytes());
+                        HubHostInfo ServerInfo = HubHostInfo.FromBytes(message.PayLoad.GetBytes());
 
-                        if (ServerAdress.Value == String.Empty)
+                        if (ServerInfo.Hostname.Value == String.Empty)
                         {
-                            ServerAdress.Value = e.Sender.ToString();
+                            ServerInfo.Hostname.Value = e.Sender.ToString();
                             HubTerminal.Cout(ConsoleColor.Yellow, $"[Hub Info] Hostname was empty using EndPoint: {e.Sender.ToString()} as Hostname...");
                         }
 
-                        if (!_serverlist.ContainsHostname(ServerAdress))
+                        if (!_serverlist.ContainsHostInfo(ServerInfo))
                         {
                             if (_serverlist.ContainsServerID(_serverMaxID))
                                 _serverMaxID++;
 
-                                _serverlist.AddServer(_serverMaxID, ServerAdress);
+                                _serverlist.AddServer(_serverMaxID, ServerInfo);
                             
 
                             payload = new byte[] { (byte)HubReturnCodes.ACCEPTED };
@@ -66,7 +66,7 @@ namespace PIZZA.Hub
 
                             anser = new HubMessage(HubPacketTypes.ENLISTACK, pl);
 
-                            HubTerminal.Cout(ConsoleColor.Green, $"[Server Added] Server with EndPoint {e.Sender} has been added as ID: { _serverMaxID } Hostname: { ServerAdress }");
+                            HubTerminal.Cout(ConsoleColor.Green, $"[Server Added] Server with EndPoint {e.Sender} has been added as ID: { _serverMaxID } Hostname: { ServerInfo }");
 
                             _serverMaxID++;
                         }
@@ -79,7 +79,7 @@ namespace PIZZA.Hub
 
                             anser = new HubMessage(HubPacketTypes.ENLISTACK, pl);
 
-                            HubTerminal.Cout(ConsoleColor.Red, $"Server with Hostname: { ServerAdress } could not be added because it is alredy listed...");
+                            HubTerminal.Cout(ConsoleColor.Red, $"Server with Hostname: { ServerInfo } could not be added because it is alredy listed...");
                         }
 
                         _server.Send(e.Sender, anser.GetBytes());
@@ -92,12 +92,12 @@ namespace PIZZA.Hub
                         HubEnlistAckPayLoad pl;
                         HubMessage anser;
 
-                        PIZZAString ClientAddress = PIZZAString.FromBytes(e.Message);
+                        HubHostInfo ClientAddress = HubHostInfo.FromBytes(e.Message);
 
-                        if (ClientAddress.Value == String.Empty)
-                            ClientAddress.Value = e.Sender.ToString();
+                        if (ClientAddress.Hostname.Value == String.Empty)
+                            ClientAddress.Hostname.Value = e.Sender.ToString();
 
-                        if (!_clientlist.ContainsHostname(ClientAddress))
+                        if (!_clientlist.ContainsHostInfo(ClientAddress))
                         {
                             if (_clientlist.ContainsClientID(_clientMaxID))
                             _clientMaxID++;
@@ -130,22 +130,93 @@ namespace PIZZA.Hub
                 case HubPacketTypes.HOSTLISTREQ:
                     {
                         byte flags;
-                        byte[] payload;
+                        byte[] payload = new byte[0];
                         HubMessage anser;
+                        HubHostlistDatPayLoad pl;
 
                         flags = message.PayLoad.GetBytes()[0];
 
+                        if (IsBitSet(flags, 1))
+                        {
+                            
+                            if (IsBitSet(flags, 0) && !IsBitSet(flags, 2))
+                            {
+                                try
+                                {
+                                    for (int i = 0; i <= _serverlist.Count; i++)
+                                    { payload = payload.Concat(_serverlist.GetHostInfo(i).GetBytes()).ToArray(); }
+                                }
+                                catch { }
+                            }
+                            if (IsBitSet(flags, 0) && IsBitSet(flags, 2))
+                            {
+
+                                for (int i = 0; i <= _serverlist.Count; i++)
+                                {
+                                    try
+                                    {
+                                        if (_serverlist.GetHostInfo(i).RequiresPassword == 0)
+                                            payload = payload.Concat(_serverlist.GetHostInfo(i).GetBytes()).ToArray();
+                                    }
+                                    catch { }
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i <= _clientlist.Count; i++)
+                            {
+                                try
+                                {
+                                    payload = payload.Concat(_clientlist.GetHostInfo(i).GetBytes()).ToArray();
+                                }
+                                catch { }
+                            }
+                        }
+
+                        pl = HubHostlistDatPayLoad.FromBytes(payload);
+                        anser = new HubMessage(HubPacketTypes.HOSTLISTDAT, pl);
+
+                        _server.Send(e.Sender, anser.GetBytes());
+                    }
+                    break;
+               // case HubPacketTypes.HOSTLISTDAT:
+                 //   break;
+                case HubPacketTypes.HOSTAVAILABLEREQ:
+                    {
+                        PIZZAString hostname = PIZZAString.FromBytes(message.PayLoad.GetBytes());
+                        HubMessage anser;
+                        HubHostavailableDatPayLoad pl;
+                        byte[] payload = new byte[] { 0 };
+
+                        if (_serverlist.ContainsHostname(hostname) || _clientlist.ContainsHostname(hostname))
+                            payload[0] = 1;
+
+                        pl = HubHostavailableDatPayLoad.FromBytes(payload);
+
+                        anser = new HubMessage(HubPacketTypes.HOSTAVAILABLEDAT, pl);
+
+                        _server.Send(e.Sender, anser.GetBytes());
+                    }
+                    break;
+              //  case HubPacketTypes.HOSTAVAILABLEDAT:
+                //    break;
+                case HubPacketTypes.UNLISTREQ:
+                    {
+                        PIZZAString hostname = PIZZAString.FromBytes(message.PayLoad.GetBytes());
+                        HubMessage anser;
+                        byte[] payload = new byte[] { };
+
+
+
+                        if (_serverlist.ContainsHostname(hostname))
+                            _serverlist.RemoveServer(_serverlist.GetIdByHostname(hostname));
+                        else if (_clientlist.ContainsHostname(hostname))
+                            _clientlist.RemoveClient(_clientlist.GetIdByHostname(hostname));
 
 
                     }
-                    break;
-                case HubPacketTypes.HOSTLISTDAT:
-                    break;
-                case HubPacketTypes.HOSTAVAILABLEREQ:
-                    break;
-                case HubPacketTypes.HOSTAVAILABLEDAT:
-                    break;
-                case HubPacketTypes.UNLISTREQ:
                     break;
                 case HubPacketTypes.UNLISTTACK:
                     break;

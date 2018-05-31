@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PIZZA.Hub.Core.PayLoads
 {
-    class HubUnlistAckPayLoad : HubPayLoad
+    public class HubUnlistAckPayLoad : HubPayLoad
     {
         public HubUnlistAckPayLoad()
         { }

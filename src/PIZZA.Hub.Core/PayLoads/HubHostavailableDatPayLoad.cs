@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PIZZA.Hub.Core.PayLoads
 {
-    class HubHostavailableDatPayLoad : HubPayLoad
+    public class HubHostavailableDatPayLoad : HubPayLoad
     {
         private byte _isAvailable = new byte();
 

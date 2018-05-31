@@ -6,12 +6,17 @@ using PIZZA.Core;
 
 namespace PIZZA.Hub.Core
 {
-    class HubHostInfo
+    public class HubHostInfo
     {
         private PIZZAString _hostname;
         private PIZZAString _friendlyname;
         private PIZZAString _description;
         private byte _requiresPassword;
+
+        public PIZZAString Hostname => _hostname;
+        public PIZZAString Friendlyname => _friendlyname;
+        public PIZZAString Description => _description;
+        public byte RequiresPassword => _requiresPassword;
 
         public int Length => GetBytes().Length;
 
