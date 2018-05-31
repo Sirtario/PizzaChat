@@ -40,15 +40,5 @@ namespace PIZZA.Chat.Server
 
             return ackmessage;
         }
-
-        internal void ReceivePing(PizzaChatMessage message, IPEndPoint sender)
-        {
-            
-        }
-
-        internal void ReceiveDisconnect(PizzaChatMessage message, IPEndPoint sender)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
