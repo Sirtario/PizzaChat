@@ -38,12 +38,32 @@ namespace PIZZA.Client
 
         private void Frontend_WhisperMessage(string arg1, string arg2)
         {
-            throw new NotImplementedException();
+            var message = GetPublishMessage(arg1);
+            var varheader = message.VariableHeader as ChatVarHeaderPublish;
+
+            varheader.WhisperTarget = arg2;
+
+            _tcpClientChat.Send(message.GetBytes());
+        }
+
+        private PizzaChatMessage GetPublishMessage(string str)
+        {
+            var message = new PizzaChatMessage(Packettypes.PUBLISH);
+            var varheader = message.VariableHeader as ChatVarHeaderPublish;
+            var payload = message.Payload as ChatPayloadPublish;
+
+            varheader.Datatype = ChatPayloadDatatypes.Text;
+
+            payload.Payload = Encoding.UTF8.GetBytes(str);
+
+            return message;
         }
 
         private void Frontend_SendMessage(string obj)
         {
-            throw new NotImplementedException();
+            var message = GetPublishMessage(obj);
+
+            _tcpClientChat.Send(message.GetBytes());
         }
 
         private void Frontend_GetServers()
@@ -115,12 +135,14 @@ namespace PIZZA.Client
                 varheader.Password = _frontend.GetPassword(obj.Channelname.Value);
             }
 
-            varheader.Lenght
+            _tcpClientChat.Send(message.GetBytes());
         }
 
         private void Frontend_Disconnect()
         {
-            throw new NotImplementedException();
+            var message = new PizzaChatMessage(Packettypes.DISCONNECT);
+
+            _tcpClientChat.Send(message.GetBytes());
         }
 
         private void Frontend_Connect(int obj)

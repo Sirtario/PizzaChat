@@ -17,7 +17,6 @@ namespace PIZZA.Chat.Core
         {
             var list = bytes.ToList();
 
-            Lenght = PIZZAInt5.FromBytes(list.ToArray());
             list.RemoveRange(0, 5);
 
             ReturnCode = (ChatEnterChannelReturnCode)list[0];
