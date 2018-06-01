@@ -58,7 +58,7 @@ namespace PIZZA.Chat.Core
             bytes.AddRange(Protokollname);
             bytes.Add(ProtokollVersion);
             bytes.Add((byte)PacketType);
-            bytes.AddRange(RemainingLength.GetBytes());
+            bytes.AddRange(_remainingLength.GetBytes());
 
             return bytes.ToArray();
         }
