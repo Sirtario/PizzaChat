@@ -6,12 +6,60 @@ using PIZZA.Core;
 
 namespace PIZZA.Hub.Core
 {
-    class HubHostInfo
+    public class HubHostInfo
     {
-        private PIZZAString _hostname;
-        private PIZZAString _friendlyname;
-        private PIZZAString _description;
+        private PIZZAString _hostname = new PIZZAString();
+        private PIZZAString _friendlyname = new PIZZAString();
+        private PIZZAString _description = new PIZZAString();
         private byte _requiresPassword;
+
+        public bool RequiresPassword
+        {
+            get
+            {
+                return _requiresPassword >= 1;
+            }
+            set
+            {
+                _requiresPassword = (byte)(value ? 1 : 0);
+            }
+        }
+
+        public string Hostname
+        {
+            get
+            {
+                return _hostname.Value;
+            }
+            set
+            {
+                _hostname.Value = value;
+            }
+        }
+
+        public string Friendlyname
+        {
+            get
+            {
+                return _friendlyname.Value;
+            }
+            set
+            {
+                _friendlyname.Value = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return _description.Value;
+            }
+            set
+            {
+                _description.Value = value;
+            }
+        }
 
         public int Length => GetBytes().Length;
 

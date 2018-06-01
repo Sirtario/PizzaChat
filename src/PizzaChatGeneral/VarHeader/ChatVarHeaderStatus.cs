@@ -18,7 +18,6 @@ namespace PIZZA.Chat.Core
         {
             var list = bytes.ToList();
 
-            Lenght = PIZZAInt5.FromBytes(list.ToArray());
             list.RemoveRange(0, 5);
 
             _courentChannel = PIZZAString.FromBytes(list.ToArray());
@@ -57,7 +56,7 @@ namespace PIZZA.Chat.Core
         /// <summary>
         /// Name of the Courent Channel
         /// </summary>
-        public string CourentChannel {
+        public string CurrentChannel {
             get
             {
                 return _courentChannel.Value;

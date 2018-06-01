@@ -38,9 +38,11 @@ namespace PIZZA.Hub.Core
             }
         }
 
-        public static HubMessage GetMessage(HubPacketTypes type , byte[] bytes)
+        public static HubMessage GetMessage(byte[] bytes)
         {
-            switch (type)
+            var header = HubHeader.FromBytes(bytes);
+
+            switch (header.PacketType)
             {
                 case HubPacketTypes.SERVERENLISTREQ:
                     return new HubMessage(HubPacketTypes.SERVERENLISTREQ, HubServerunlistreqPayLoad.FromBytes(bytes));
@@ -65,7 +67,7 @@ namespace PIZZA.Hub.Core
                 case HubPacketTypes.PINGACK:
                     return new HubMessage(HubPacketTypes.PINGACK, HubPingAckPayLoad.FromBytes(bytes));
                 default:
-                    throw new NotSupportedException($"Unknown packet type {type.ToString()} couldn't create HubMessage!");
+                    throw new NotSupportedException($"Unknown packet type {header.PacketType.ToString()} couldn't create HubMessage!");
             }
         }
     }

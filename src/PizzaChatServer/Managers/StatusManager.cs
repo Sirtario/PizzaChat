@@ -24,7 +24,7 @@ namespace PIZZA.Chat.Server
             varheader.ChannelCount = (byte)channels.Count;
             varheader.ChannelPower = connection.Channelpower;
             varheader.ClientCount = (byte)users.Count;
-            varheader.CourentChannel = connection.CourentChannel;
+            varheader.CurrentChannel = connection.CourentChannel;
 
             foreach (var channel in channels)
             {
