@@ -22,14 +22,13 @@ namespace PIZZA.Chat.Core
         {
             var list = bytes.ToList();
 
-            Lenght = PIZZAInt5.FromBytes(list.ToArray());
             list.RemoveRange(0, 5);
 
             _clientID = PIZZAString.FromBytes(list.ToArray());
-            list.RemoveRange(0, _clientID.Length.Value);
+            list.RemoveRange(0, _clientID.GetBytes().Length);
 
             _password = PIZZAString.FromBytes(list.ToArray());
-            list.RemoveRange(0, _password.Length.Value);
+            list.RemoveRange(0, _password.GetBytes().Length);
 
             if (list.Count != 0)
             {
@@ -53,11 +52,10 @@ namespace PIZZA.Chat.Core
             return new ChatVarHeaderConnect(bytes);
         }
 
-        public override byte[] GetBytes()
+        protected override byte[] GetBytes()
         {
             var bytes = new List<byte>();
 
-            bytes.AddRange(Lenght.GetBytes());
             bytes.AddRange(_clientID.GetBytes());
             bytes.AddRange(_password.GetBytes());
 

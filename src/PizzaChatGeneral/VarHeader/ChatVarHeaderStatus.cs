@@ -8,7 +8,7 @@ namespace PIZZA.Chat.Core
 {
     public class ChatVarHeaderStatus : ChatVariableHeader
     {
-        private PIZZAString _courentChannel;
+        private PIZZAString _courentChannel = new PIZZAString();
 
         public ChatVarHeaderStatus()
         {
@@ -18,7 +18,6 @@ namespace PIZZA.Chat.Core
         {
             var list = bytes.ToList();
 
-            Lenght = PIZZAInt5.FromBytes(list.ToArray());
             list.RemoveRange(0, 5);
 
             _courentChannel = PIZZAString.FromBytes(list.ToArray());
@@ -82,11 +81,10 @@ namespace PIZZA.Chat.Core
         /// returns a bytearray that represents the VarHeader
         /// </summary>
         /// <returns></returns>
-        public override byte[] GetBytes()
+        protected override byte[] GetBytes()
         {
             var bytes = new List<byte>();
 
-            bytes.AddRange(Lenght.GetBytes());
             bytes.AddRange(_courentChannel.GetBytes());
             bytes.Add(ChannelPower);
             bytes.Add(ClientCount);

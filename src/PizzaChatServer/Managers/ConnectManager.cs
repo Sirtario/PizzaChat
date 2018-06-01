@@ -36,8 +36,6 @@ namespace PIZZA.Chat.Server
             varheader.PingIntervall = pingintervall;
             varheader.Returncode = connectReturncode;
 
-            ackmessage.FixedHeader.RemainingLength = varheader.Lenght.Value;
-
             return ackmessage;
         }
     }

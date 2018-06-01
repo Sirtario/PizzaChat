@@ -9,9 +9,9 @@ namespace PIZZA.Chat.Core
 {
     public class ChatVarHeaderPublish : ChatVariableHeader
     {
-        private PIZZAString _whisperTarget;
-        private PIZZAInt _datatype;
-        private PIZZAString _sendername;
+        private PIZZAString _whisperTarget = new PIZZAString() ;
+        private PIZZAInt _datatype = new PIZZAInt();
+        private PIZZAString _sendername = new PIZZAString();
 
         public ChatVarHeaderPublish()
         {
@@ -20,18 +20,19 @@ namespace PIZZA.Chat.Core
         private ChatVarHeaderPublish(byte[] bytes)
         {
             var list = bytes.ToList();
+            var lenght = PIZZAInt5.FromBytes(list.GetRange(0, 5).ToArray());
 
-            Lenght = PIZZAInt5.FromBytes(list.ToArray());
+            list = list.GetRange(0, (int)lenght.Value);
             list.RemoveRange(0, 5);
 
             _datatype = PIZZAInt.FromBytes(list.ToArray());
             list.RemoveRange(0, 2);
 
             _sendername = PIZZAString.FromBytes(list.ToArray());
-            list.RemoveRange(0, _sendername.Length.Value);
+            list.RemoveRange(0, _sendername.GetBytes().Length);
 
             _whisperTarget = PIZZAString.FromBytes(list.ToArray());
-            list.RemoveRange(0, _whisperTarget.Length.Value);
+            list.RemoveRange(0, _whisperTarget.GetBytes().Length);
 
             if (list.Count !=0)
             {
@@ -81,11 +82,10 @@ namespace PIZZA.Chat.Core
         /// Returns a byte[] that resembles the Var Header
         /// </summary>
         /// <returns></returns>
-        public override byte[] GetBytes()
+        protected override byte[] GetBytes()
         {
             var bytes = new List<byte>();
 
-            bytes.AddRange(Lenght.GetBytes());
             bytes.AddRange(_datatype.GetBytes());
             bytes.AddRange(_sendername.GetBytes());
             bytes.AddRange(_whisperTarget.GetBytes());

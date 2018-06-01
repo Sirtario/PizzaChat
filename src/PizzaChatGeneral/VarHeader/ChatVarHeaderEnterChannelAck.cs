@@ -17,7 +17,6 @@ namespace PIZZA.Chat.Core
         {
             var list = bytes.ToList();
 
-            Lenght = PIZZAInt5.FromBytes(list.ToArray());
             list.RemoveRange(0, 5);
 
             ReturnCode = (ChatEnterChannelReturnCode)list[0];
@@ -47,11 +46,10 @@ namespace PIZZA.Chat.Core
         /// gets the byte[] that resembles the Var header
         /// </summary>
         /// <returns></returns>
-        public override byte[] GetBytes()
+        protected override byte[] GetBytes()
         {
             var bytes = new List<byte>();
 
-            bytes.AddRange(Lenght.GetBytes());
             bytes.Add((byte)ReturnCode);
 
             return bytes.ToArray();
