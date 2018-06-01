@@ -29,6 +29,7 @@ namespace PIZZA.Hub
             _serverlist = serverlist;
             _clientlist = clientlist;
             _respondingHost = respondingHost;
+            HubTerminal.Cout(ConsoleColor.White, "[PizzaHub] HubMessageHandler Initialized...");
         }
 
         private void RecievedMessageEventHandler(object sender, TcpServerMessageReceivedEventArgs e)
@@ -39,7 +40,6 @@ namespace PIZZA.Hub
             {
                 case HubPacketTypes.SERVERENLISTREQ:
                     {
-                       // HubMessage inmessage = HubMessageFactory.GetMessage(e.Message);
                         byte[] payload;
                         HubEnlistAckPayLoad pl;
                         HubMessage anser;

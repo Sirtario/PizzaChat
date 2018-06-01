@@ -13,17 +13,18 @@ namespace PIZZA.Hub
 
         static void Main(string[] args)
         {
-            HubPizzaServerList slist = new HubPizzaServerList();
-            HubTerminal term = new HubTerminal();
-            Thread listener = new Thread(term.RunListener);
-            TCPServer server = new TCPServer(IsPackageCompleteHb);
-
             HubTerminal.Cout(ConsoleColor.Gray, "PizzaHub");
+            HubPizzaServerList ServerList = new HubPizzaServerList();
+            HubPizzaClientList ClientList = new HubPizzaClientList();
+            HubRespondingHosts respondinghosts = new HubRespondingHosts();
 
-            HubTerminal.Cout(ConsoleColor.Yellow, "[TCP] Server started...");
-            server.ServerStart();
-            
-            
+            TCPServer server = new TCPServer(IsPackageCompleteHb);
+            HubTerminal term = new HubTerminal(server);
+            Thread listener = new Thread(term.RunListener);
+
+            HubServerMessageHandler messagehandler = new HubServerMessageHandler(server, ServerList, ClientList, respondinghosts);
+
+            HubResponseTimer timer = new HubResponseTimer(respondinghosts, ClientList, ServerList);
 
             term.CommandAdd("test", HubTerminalCommands.testCmd);
             

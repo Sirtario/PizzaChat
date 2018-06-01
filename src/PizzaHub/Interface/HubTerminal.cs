@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using ACX.ViciOne.TCPLibrary;
 
 namespace PIZZA.Hub.Interface
 {
@@ -11,6 +12,12 @@ namespace PIZZA.Hub.Interface
     {
 
         private Dictionary<string,cmdFunc> _commands = new Dictionary<string,cmdFunc>();
+        private TCPServer _server;
+
+        public HubTerminal(TCPServer server)
+        {
+            _server = server;
+        }
 
         public static void Cout(ConsoleColor color, string txt, bool IsLine = true)
         {
@@ -29,7 +36,8 @@ namespace PIZZA.Hub.Interface
         public void RunListener()
         {
             bool run = true;
-
+            _server.ServerStart();
+            Cout(ConsoleColor.Yellow, "[TCP] Server started...");
             while (run)
             {
                 Cout(ConsoleColor.Gray, "cmd>> ", false);
@@ -50,6 +58,8 @@ namespace PIZZA.Hub.Interface
                 }
                 else Cout(ConsoleColor.Red, $"Command: {cmd[0]} not found.");
             }
+            Cout(ConsoleColor.Yellow, "[TCP] Server Stoped...");
+            _server.Stop();
         }
 
     }
