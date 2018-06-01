@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PIZZA.Chat.Server
 {
-    public class Server :IDisposable
+    public class Server : IDisposable, IServer
     {
         private ITCPServer _tcpServer;
         private ConnectManager _connectManager;
