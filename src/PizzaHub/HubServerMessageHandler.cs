@@ -14,20 +14,21 @@ namespace PIZZA.Hub
     class HubServerMessageHandler
     {
         private HubPizzaServerList _serverlist;
-        private int _serverMaxID = 1;
-        private int _clientMaxID = 1;
+        private int _MaxID = 1;
         private TCPServer _server;
         private HubPizzaClientList _clientlist;
+        private HubRespondingHosts _respondingHost;
 
         private bool IsBitSet(byte b, int bit)
         { return (1 & (b >> bit)) == 1; }
 
-        public HubServerMessageHandler(TCPServer server, HubPizzaServerList serverlist, HubPizzaClientList clientlist)
+        public HubServerMessageHandler(TCPServer server, HubPizzaServerList serverlist, HubPizzaClientList clientlist,HubRespondingHosts respondingHost )
         {
             _server = server;
             _server.TCPMessagereceived += RecievedMessageEventHandler;
             _serverlist = serverlist;
             _clientlist = clientlist;
+            _respondingHost = respondingHost;
         }
 
         private void RecievedMessageEventHandler(object sender, TcpServerMessageReceivedEventArgs e)
@@ -53,22 +54,22 @@ namespace PIZZA.Hub
 
                         if (!_serverlist.ContainsHostInfo(ServerInfo))
                         {
-                            if (_serverlist.ContainsServerID(_serverMaxID))
-                                _serverMaxID++;
+                            if (_serverlist.ContainsServerID(_MaxID))
+                                _MaxID++;
 
-                                _serverlist.AddServer(_serverMaxID, ServerInfo);
+                                _serverlist.AddServer(_MaxID, ServerInfo);
                             
 
                             payload = new byte[] { (byte)HubReturnCodes.ACCEPTED };
-                            payload = payload.Concat(new byte[] { 20 }).Concat(new byte[] { (byte)_serverMaxID }).ToArray();
+                            payload = payload.Concat(new byte[] { 20 }).Concat(new byte[] { (byte)_MaxID }).ToArray();
 
                             pl = HubEnlistAckPayLoad.FromBytes(payload);
 
                             anser = new HubMessage(HubPacketTypes.ENLISTACK, pl);
 
-                            HubTerminal.Cout(ConsoleColor.Green, $"[Server Added] Server with EndPoint {e.Sender} has been added as ID: { _serverMaxID } Hostname: { ServerInfo }");
+                            HubTerminal.Cout(ConsoleColor.Green, $"[Server Added] Server with EndPoint {e.Sender} has been added as ID: { _MaxID } Hostname: { ServerInfo }");
 
-                            _serverMaxID++;
+                            _MaxID++;
                         }
                         else
                         {
@@ -99,13 +100,13 @@ namespace PIZZA.Hub
 
                         if (!_clientlist.ContainsHostInfo(ClientAddress))
                         {
-                            if (_clientlist.ContainsClientID(_clientMaxID))
-                            _clientMaxID++;
+                            if (_clientlist.ContainsClientID(_MaxID))
+                            _MaxID++;
  
-                            _clientlist.AddClient(_clientMaxID, ClientAddress);
+                            _clientlist.AddClient(_MaxID, ClientAddress);
 
                             payload = new byte[] { (byte)HubReturnCodes.ACCEPTED };
-                            payload = payload.Concat(new byte[] { 20 }).Concat(new byte[] {(byte)_clientMaxID}).ToArray();
+                            payload = payload.Concat(new byte[] { 20 }).Concat(new byte[] {(byte)_MaxID}).ToArray();
 
                             pl = HubEnlistAckPayLoad.FromBytes(payload);
 
@@ -125,8 +126,6 @@ namespace PIZZA.Hub
                         _server.Send(e.Sender, anser.GetBytes());
                     }
                     break;
-               // case HubPacketTypes.ENLISTACK:
-                 //   break;
                 case HubPacketTypes.HOSTLISTREQ:
                     {
                         byte flags;
@@ -181,8 +180,6 @@ namespace PIZZA.Hub
                         _server.Send(e.Sender, anser.GetBytes());
                     }
                     break;
-               // case HubPacketTypes.HOSTLISTDAT:
-                 //   break;
                 case HubPacketTypes.HOSTAVAILABLEREQ:
                     {
                         PIZZAString hostname = PIZZAString.FromBytes(message.PayLoad.GetBytes());
@@ -200,12 +197,11 @@ namespace PIZZA.Hub
                         _server.Send(e.Sender, anser.GetBytes());
                     }
                     break;
-              //  case HubPacketTypes.HOSTAVAILABLEDAT:
-                //    break;
                 case HubPacketTypes.UNLISTREQ:
                     {
                         PIZZAString hostname = PIZZAString.FromBytes(message.PayLoad.GetBytes());
                         HubMessage anser;
+                        HubUnlistAckPayLoad pl;
                         byte[] payload = new byte[] { };
 
 
@@ -215,14 +211,28 @@ namespace PIZZA.Hub
                         else if (_clientlist.ContainsHostname(hostname))
                             _clientlist.RemoveClient(_clientlist.GetIdByHostname(hostname));
 
+                        pl = HubUnlistAckPayLoad.FromBytes(payload);
+                        anser = new HubMessage(HubPacketTypes.UNLISTTACK, pl);
 
+                        _server.Send(e.Sender, anser.GetBytes());
                     }
                     break;
-                case HubPacketTypes.UNLISTTACK:
-                    break;
                 case HubPacketTypes.PING:
-                    break;
-                case HubPacketTypes.PINGACK:
+                    {
+                        PIZZAInt hostidentifier = PIZZAInt.FromBytes(message.PayLoad.GetBytes());
+                        HubMessage anser;
+                        HubPingAckPayLoad pl;
+                        byte[] payload = new byte[] { };
+
+                        _respondingHost.SetInterval(hostidentifier.Value, 2);
+
+                        pl = HubPingAckPayLoad.FromBytes(payload);
+
+                        anser = new HubMessage(HubPacketTypes.PINGACK, pl);
+
+                        _server.Send(e.Sender, anser.GetBytes());
+
+                    }
                     break;
                 default:
                     throw new NotImplementedException($"The packet type {message.Header.PacketType} is unknown...");
