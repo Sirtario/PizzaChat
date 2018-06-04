@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using ACX.ViciOne.TCPLibrary;
+using PIZZA.Hub.Core;
 
 namespace PIZZA.Hub.Interface
 {
@@ -36,7 +37,7 @@ namespace PIZZA.Hub.Interface
         public void RunListener()
         {
             bool run = true;
-            _server.ServerStart();
+            _server.ServerStart(Constants.HubStandardPort);
             Cout(ConsoleColor.Yellow, "[TCP] Server started...");
             while (run)
             {

@@ -22,6 +22,8 @@ namespace PIZZA.Hub
 
         public int Count => _clientlist.Count;
 
+        public Dictionary<int, HubHostInfo> GetAllClientInfos() => _clientlist;
+
         public bool ContainsHostname(PIZZAString hostname)
         {
             foreach(KeyValuePair<int,HubHostInfo> hi in _clientlist)

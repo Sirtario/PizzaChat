@@ -22,9 +22,9 @@ namespace PIZZA.Hub
 
         public void LoadPassword()
         {
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\auth.cfg"))
+            if (File.Exists(@"auth.cfg"))
             {
-                _authenticationpassword = File.ReadAllText(Directory.GetCurrentDirectory() + @"\auth.cfg");
+                _authenticationpassword = File.ReadAllText(@"auth.cfg");
                 HubTerminal.Cout(ConsoleColor.Green, "[Authentication] Server Authentication Password loaded...");
                
             }
@@ -50,7 +50,7 @@ namespace PIZZA.Hub
 
             _authenticationpassword = Encoding.UTF8.GetString(hash);
 
-            File.WriteAllText(Directory.GetCurrentDirectory() + @"\auth.cfg", _authenticationpassword);
+            File.WriteAllText(@"auth.cfg", _authenticationpassword);
 
             return 0;
         }

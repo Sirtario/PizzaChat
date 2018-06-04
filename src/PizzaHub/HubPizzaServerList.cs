@@ -24,6 +24,8 @@ namespace PIZZA.Hub
 
         public void RemoveServer(int id) => _serverList.Remove(id);
 
+        public Dictionary<int, HubHostInfo> GetAllServerInfos() => _serverList;
+
         public bool ContainsHostname(PIZZAString hostname)
         {            
             foreach(KeyValuePair<int,HubHostInfo> hi in _serverList)
