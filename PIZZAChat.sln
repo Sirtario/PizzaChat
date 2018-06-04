@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaChatCore", "src\PizzaChatGeneral\PizzaChatCore.csproj", "{FAE2D599-8632-40D4-A1FD-AF101B85B8C1}"
 EndProject
@@ -11,6 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Core\Core.cspro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PIZZA.Hub.Core", "src\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj", "{AC93B995-7638-43C8-83BD-50EF50D0D5DD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaHub", "src\PizzaHub\PizzaHub.csproj", "{A9469388-1C6B-47A8-A301-3F44C1DC4425}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EE560B1D-945E-461E-82D1-A1308363E58D} = {EE560B1D-945E-461E-82D1-A1308363E58D}
+		{546D5D2C-25F0-4973-8A94-3EB4952A658B} = {546D5D2C-25F0-4973-8A94-3EB4952A658B}
+		{AC93B995-7638-43C8-83BD-50EF50D0D5DD} = {AC93B995-7638-43C8-83BD-50EF50D0D5DD}
+	EndProjectSection
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaChatServer", "src\PizzaChatServer\PizzaChatServer.csproj", "{1AA2D6F1-D78A-4BE6-868C-44F9E407CDCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "test\UnitTests\UnitTests.csproj", "{9DAA32E5-1DC3-4D06-844E-8C9827A527B2}"
@@ -18,6 +25,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaServer", "src\PizzaServer\PizzaServer.csproj", "{7D8D6C20-2961-4018-86EC-6EEB56B10381}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PIZZA.Hub.Client", "src\PIZZA.Hub.Client\PIZZA.Hub.Client.csproj", "{36249C51-BFA0-46BA-91CE-B5258D108583}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPizzaHub", "TestPizzaHub\TestPizzaHub.csproj", "{03803A12-364D-4D2B-B8D0-A7CA97A42CE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +49,10 @@ Global
 		{AC93B995-7638-43C8-83BD-50EF50D0D5DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC93B995-7638-43C8-83BD-50EF50D0D5DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC93B995-7638-43C8-83BD-50EF50D0D5DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9469388-1C6B-47A8-A301-3F44C1DC4425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9469388-1C6B-47A8-A301-3F44C1DC4425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9469388-1C6B-47A8-A301-3F44C1DC4425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9469388-1C6B-47A8-A301-3F44C1DC4425}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1AA2D6F1-D78A-4BE6-868C-44F9E407CDCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1AA2D6F1-D78A-4BE6-868C-44F9E407CDCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AA2D6F1-D78A-4BE6-868C-44F9E407CDCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +69,10 @@ Global
 		{36249C51-BFA0-46BA-91CE-B5258D108583}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36249C51-BFA0-46BA-91CE-B5258D108583}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36249C51-BFA0-46BA-91CE-B5258D108583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03803A12-364D-4D2B-B8D0-A7CA97A42CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03803A12-364D-4D2B-B8D0-A7CA97A42CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03803A12-364D-4D2B-B8D0-A7CA97A42CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03803A12-364D-4D2B-B8D0-A7CA97A42CE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
