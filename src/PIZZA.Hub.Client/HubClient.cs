@@ -126,7 +126,7 @@ namespace PIZZA.Hub.Client
             _tcpConnection.Send(message.GetBytes());
         }
 
-        private EnlistResult ListHost(string hostname, bool isServer, string password, string description, string friendlyname, bool passwordRequired)
+        public EnlistResult ListHost(string hostname, bool isServer, string password, string description, string friendlyname, bool passwordRequired)
         {
             HubMessage message;
 

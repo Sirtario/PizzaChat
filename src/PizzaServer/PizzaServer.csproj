@@ -3,9 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Configurations>Debug;Release;Testen</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PIZZA.Hub.Client\PIZZA.Hub.Client.csproj" />
     <ProjectReference Include="..\PizzaChatServer\PizzaChatServer.csproj" />
     <ProjectReference Include="..\TCPLibrary\TCPLibrary.csproj" />
   </ItemGroup>
