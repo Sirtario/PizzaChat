@@ -69,11 +69,6 @@ namespace PIZZA.Client
             return message;
         }
 
-        public void RefreshStatus(List<string> usersInChannel, string channel)
-        {
-            throw new NotImplementedException();
-        }
-
         public void ShowServerlist(List<Tuple<string, string, string>> servers)
         {
             var serverWindow = new ServerList(servers);
@@ -101,11 +96,6 @@ namespace PIZZA.Client
         private void ListServers_Click(object sender, RoutedEventArgs e)
         {
             GetServers?.Invoke();
-        }
-
-        private void Connect_Click(object sender, RoutedEventArgs e)
-        {
-            //Connect?.Invoke();
         }
 
         private void Disconnect_Click(object sender, RoutedEventArgs e)
@@ -149,24 +139,7 @@ namespace PIZZA.Client
             document.parentWindow.scroll(0, 10000000);
         }
 
-        public event Action<string> SendMessage;
-        public event Action<string, string> WhisperMessage;
-        public event Action<string> EnterRoom;
-        public event Action<int> Connect;
-        public event Action Disconnect;
-        public event Action GetServers;
-
-        public void ReceiveMessage(string Message, string sender, bool isWhispered)
-        {
-            throw new NotImplementedException();
-        }
-
         public void RefreshStatus(List<string> usersInChannel, string channel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ShowServerlist(List<Tuple<string, string, string>> servers)
         {
             throw new NotImplementedException();
         }

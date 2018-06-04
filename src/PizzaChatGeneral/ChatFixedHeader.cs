@@ -7,7 +7,7 @@ namespace PIZZA.Chat.Core
 {
     public class ChatFixedHeader
     {
-        private PIZZAInt5 _remainingLength;
+        private PIZZAInt5 _remainingLength = new PIZZAInt5();
 
         public ChatFixedHeader(Packettypes packetType)
         {
@@ -23,7 +23,7 @@ namespace PIZZA.Chat.Core
             PacketType = (Packettypes)list[0];
             list.RemoveAt(0);
 
-            RemainingLength = PIZZAInt5.FromBytes(list.ToArray());
+            _remainingLength = PIZZAInt5.FromBytes(list.ToArray());
         }
 
         public Packettypes PacketType { get; set; }
@@ -58,7 +58,7 @@ namespace PIZZA.Chat.Core
             bytes.AddRange(Protokollname);
             bytes.Add(ProtokollVersion);
             bytes.Add((byte)PacketType);
-            bytes.AddRange(RemainingLength.GetBytes());
+            bytes.AddRange(_remainingLength.GetBytes());
 
             return bytes.ToArray();
         }
