@@ -21,7 +21,7 @@ namespace Pizza.Server
 
             try
             {
-                DeSerializeConfig(Config,"Config.xml");
+                Config = DeSerializeConfig("Config.xml");
             }
             catch (Exception)
             {
@@ -44,16 +44,25 @@ namespace Pizza.Server
 
             _server.Stop();
             _server.Dispose();
+            SerializeConfig(Config,"Config.xml");
 
         }
 
-        private static void DeSerializeConfig(PIZZAChatConfig config, string path)
+        private static PIZZAChatConfig DeSerializeConfig( string path)
         {
             var xmlSerializer = new XmlSerializer(typeof(PIZZAChatConfig));
 
-            using (var stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read))
-                xmlSerializer.Serialize(stream, config);
+            using (var stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                return (PIZZAChatConfig)xmlSerializer.Deserialize(stream);
 
+        }
+
+        private static void SerializeConfig(PIZZAChatConfig config, string path)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(PIZZAChatConfig));
+
+            using (var stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                xmlSerializer.Serialize(stream, config);
         }
 
         private static void SetBasicConfig()
