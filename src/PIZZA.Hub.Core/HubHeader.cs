@@ -6,7 +6,7 @@ using PIZZA.Core;
 
 namespace PIZZA.Hub.Core
 {
-    class HubHeader
+    public class HubHeader
     {
         private byte[] _protocollName;
 
@@ -20,9 +20,9 @@ namespace PIZZA.Hub.Core
 
         public byte ProtocollVersion => _protocollVersion;
 
-        public HubPacketTypes PacketTypes => _packetType;
+        public HubPacketTypes PacketType => _packetType;
 
-        public PIZZAInt3 PayloadLegnth => _payloadLength;
+        public PIZZAInt3 PayloadLength => _payloadLength;
 
         private HubHeader(byte[] bytes)
         {
@@ -37,6 +37,18 @@ namespace PIZZA.Hub.Core
             tmp.Clear();
         }
 
+        internal byte[] GetBytes(int payloadLength)
+        {
+            var bytes = _protocollName;
+
+            bytes = bytes.Concat(new byte[] { _protocollVersion })
+                .Concat(new byte[] { (byte)_packetType })
+                .Concat(new byte[] { (byte)payloadLength })
+                .ToArray();
+
+            return bytes;
+        }
+
         public HubHeader(byte protocollversion, HubPacketTypes type, PIZZAInt3 payloadlength)
         {
             _protocollName = Encoding.UTF8.GetBytes("PIZZAH");
@@ -47,7 +59,8 @@ namespace PIZZA.Hub.Core
 
         public static HubHeader FromBytes(byte[] bytes)
         {
-            HubHeader result = new HubHeader(bytes);
+            var result = new HubHeader(bytes);
+
             return result;
         }
     }

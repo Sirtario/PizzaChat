@@ -12,7 +12,7 @@ namespace PIZZA.Hub.Core
             switch (type)
             {
                 case HubPacketTypes.SERVERENLISTREQ:
-                    return new HubMessage(HubPacketTypes.SERVERENLISTREQ, new HubServerunlistreqPayLoad());
+                    return new HubMessage(HubPacketTypes.SERVERENLISTREQ, new HubServerenlistreqPayLoad());
                 case HubPacketTypes.CLIENTENLISTREQ:
                     return new HubMessage(HubPacketTypes.CLIENTENLISTREQ, new HubClientEnlistReqPayLoad());
                 case HubPacketTypes.ENLISTACK:
@@ -27,8 +27,8 @@ namespace PIZZA.Hub.Core
                     return new HubMessage(HubPacketTypes.HOSTAVAILABLEDAT, new HubHostavailableDatPayLoad());
                 case HubPacketTypes.UNLISTREQ:
                     return new HubMessage(HubPacketTypes.UNLISTREQ, new HubUnlistReqPayLoad());
-                case HubPacketTypes.UNLISTTACK:
-                    return new HubMessage(HubPacketTypes.UNLISTTACK, new HubUnlistAckPayLoad());
+                case HubPacketTypes.UNLISTACK:
+                    return new HubMessage(HubPacketTypes.UNLISTACK, new HubUnlistAckPayLoad());
                 case HubPacketTypes.PING:
                     return new HubMessage(HubPacketTypes.PING, new HubPingPayLoad());
                 case HubPacketTypes.PINGACK:
@@ -38,12 +38,14 @@ namespace PIZZA.Hub.Core
             }
         }
 
-        public static HubMessage GetMessage(HubPacketTypes type , byte[] bytes)
+        public static HubMessage GetMessage(byte[] bytes)
         {
-            switch (type)
+            var header = HubHeader.FromBytes(bytes);
+
+            switch (header.PacketType)
             {
                 case HubPacketTypes.SERVERENLISTREQ:
-                    return new HubMessage(HubPacketTypes.SERVERENLISTREQ, HubServerunlistreqPayLoad.FromBytes(bytes));
+                    return new HubMessage(HubPacketTypes.SERVERENLISTREQ, HubServerenlistreqPayLoad.FromBytes(bytes));
                 case HubPacketTypes.CLIENTENLISTREQ:
                     return new HubMessage(HubPacketTypes.CLIENTENLISTREQ, HubClientEnlistReqPayLoad.FromBytes(bytes));
                 case HubPacketTypes.ENLISTACK:
@@ -58,14 +60,14 @@ namespace PIZZA.Hub.Core
                     return new HubMessage(HubPacketTypes.HOSTAVAILABLEDAT, HubHostavailableDatPayLoad.FromBytes(bytes));
                 case HubPacketTypes.UNLISTREQ:
                     return new HubMessage(HubPacketTypes.UNLISTREQ, HubUnlistReqPayLoad.FromBytes(bytes));
-                case HubPacketTypes.UNLISTTACK:
-                    return new HubMessage(HubPacketTypes.UNLISTTACK, HubUnlistAckPayLoad.FromBytes(bytes));
+                case HubPacketTypes.UNLISTACK:
+                    return new HubMessage(HubPacketTypes.UNLISTACK, HubUnlistAckPayLoad.FromBytes(bytes));
                 case HubPacketTypes.PING:
                     return new HubMessage(HubPacketTypes.PING, HubPingPayLoad.FromBytes(bytes));
                 case HubPacketTypes.PINGACK:
                     return new HubMessage(HubPacketTypes.PINGACK, HubPingAckPayLoad.FromBytes(bytes));
                 default:
-                    throw new NotSupportedException($"Unknown packet type {type.ToString()} couldn't create HubMessage!");
+                    throw new NotSupportedException($"Unknown packet type {header.PacketType.ToString()} couldn't create HubMessage!");
             }
         }
     }

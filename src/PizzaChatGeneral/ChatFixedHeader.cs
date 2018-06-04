@@ -26,7 +26,7 @@ namespace PIZZA.Chat.Core
             PacketType = (Packettypes)list[0];
             list.RemoveAt(0);
 
-            _remainingLength = PIZZAInt5.FromBytes(list.GetRange(0,5).ToArray());
+            _remainingLength = PIZZAInt5.FromBytes(list.ToArray());
         }
 
         public Packettypes PacketType { get; set; }
