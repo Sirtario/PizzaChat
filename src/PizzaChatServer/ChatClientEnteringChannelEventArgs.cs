@@ -9,15 +9,17 @@ namespace PIZZA.Chat.Server
 
     public class ChatClientEnteringChannelEventArgs
     {
-        public ChatClientEnteringChannelEventArgs(string clientID, string password, ChatEnterChannelReturnCode returnCode)
+        public ChatClientEnteringChannelEventArgs(string clientID, string password,string channel, ChatEnterChannelReturnCode returnCode)
         {
             ClientID = clientID;
             Password = password;
+            Channel = channel;
             ReturnCode = returnCode;
         }
 
         public string ClientID { get; private set; }
         public string Password { get; private set; }
+        public string Channel { get; private set; }
         public ChatEnterChannelReturnCode ReturnCode { get; set; }
     }
 }
