@@ -12,7 +12,7 @@ namespace PIZZA.Hub.Core
             switch (type)
             {
                 case HubPacketTypes.SERVERENLISTREQ:
-                    return new HubMessage(HubPacketTypes.SERVERENLISTREQ, new HubServerunlistreqPayLoad());
+                    return new HubMessage(HubPacketTypes.SERVERENLISTREQ, new HubServerenlistreqPayLoad());
                 case HubPacketTypes.CLIENTENLISTREQ:
                     return new HubMessage(HubPacketTypes.CLIENTENLISTREQ, new HubClientEnlistReqPayLoad());
                 case HubPacketTypes.ENLISTACK:
@@ -45,7 +45,7 @@ namespace PIZZA.Hub.Core
             switch (header.PacketType)
             {
                 case HubPacketTypes.SERVERENLISTREQ:
-                    return new HubMessage(HubPacketTypes.SERVERENLISTREQ, HubServerunlistreqPayLoad.FromBytes(bytes));
+                    return new HubMessage(HubPacketTypes.SERVERENLISTREQ, HubServerenlistreqPayLoad.FromBytes(bytes));
                 case HubPacketTypes.CLIENTENLISTREQ:
                     return new HubMessage(HubPacketTypes.CLIENTENLISTREQ, HubClientEnlistReqPayLoad.FromBytes(bytes));
                 case HubPacketTypes.ENLISTACK:

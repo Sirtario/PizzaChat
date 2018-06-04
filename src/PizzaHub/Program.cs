@@ -17,6 +17,7 @@ namespace PIZZA.Hub
             HubPizzaServerList ServerList = new HubPizzaServerList();
             HubPizzaClientList ClientList = new HubPizzaClientList();
             HubRespondingHosts respondinghosts = new HubRespondingHosts();
+            HubServerAuthentication ServerAuthentication = new HubServerAuthentication();
 
             TCPServer server = new TCPServer(IsPackageCompleteHb);
             HubTerminal term = new HubTerminal(server);
@@ -27,6 +28,8 @@ namespace PIZZA.Hub
             HubResponseTimer timer = new HubResponseTimer(respondinghosts, ClientList, ServerList);
 
             term.CommandAdd("test", HubTerminalCommands.testCmd);
+            term.CommandAdd("setpass", ServerAuthentication.SetPassword);
+            term.CommandAdd("showpass", ServerAuthentication.ShowPassword);
             
             listener.Start();
 

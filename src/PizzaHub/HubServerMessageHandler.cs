@@ -18,11 +18,12 @@ namespace PIZZA.Hub
         private TCPServer _server;
         private HubPizzaClientList _clientlist;
         private HubRespondingHosts _respondingHost;
+        private HubServerAuthentication _serverAuthentication;
 
         private bool IsBitSet(byte b, int bit)
         { return (1 & (b >> bit)) == 1; }
 
-        public HubServerMessageHandler(TCPServer server, HubPizzaServerList serverlist, HubPizzaClientList clientlist,HubRespondingHosts respondingHost )
+        public HubServerMessageHandler(TCPServer server, HubPizzaServerList serverlist, HubPizzaClientList clientlist,HubRespondingHosts respondingHost /*,HubServerAuthentication authentication*/ )
         {
             _server = server;
             _server.TCPMessagereceived += RecievedMessageEventHandler;
@@ -43,8 +44,11 @@ namespace PIZZA.Hub
                         byte[] payload;
                         HubEnlistAckPayLoad pl;
                         HubMessage anser;
+                        PIZZAInt hostid;
 
                         HubHostInfo ServerInfo = HubHostInfo.FromBytes(message.PayLoad.GetBytes());
+
+                        
 
                         if (ServerInfo.Hostname.Value == String.Empty)
                         {
@@ -58,10 +62,10 @@ namespace PIZZA.Hub
                                 _MaxID++;
 
                                 _serverlist.AddServer(_MaxID, ServerInfo);
-                            
 
+                            hostid = new PIZZAInt() { Value = _MaxID };
                             payload = new byte[] { (byte)HubReturnCodes.ACCEPTED };
-                            payload = payload.Concat(new byte[] { 20 }).Concat(new byte[] { (byte)_MaxID }).ToArray();
+                            payload = payload.Concat(new byte[] { 20 }).Concat(hostid.GetBytes()).ToArray();
 
                             pl = HubEnlistAckPayLoad.FromBytes(payload);
 
@@ -73,8 +77,9 @@ namespace PIZZA.Hub
                         }
                         else
                         {
+                            hostid = new PIZZAInt() { Value = 0 };
                             payload = new byte[] { (byte)HubReturnCodes.DENIED_ALREDY_LISTED };
-                            payload = payload.Concat(new byte[] { 0 }).Concat(new byte[] { 0 }).ToArray();
+                            payload = payload.Concat(new byte[] { 0 }).Concat(hostid.GetBytes()).ToArray();
 
                             pl = HubEnlistAckPayLoad.FromBytes(payload);
 
@@ -92,6 +97,7 @@ namespace PIZZA.Hub
                         byte[] payload;
                         HubEnlistAckPayLoad pl;
                         HubMessage anser;
+                        PIZZAInt hostid;
 
                         HubHostInfo ClientAddress = HubHostInfo.FromBytes(e.Message);
 
@@ -105,8 +111,10 @@ namespace PIZZA.Hub
  
                             _clientlist.AddClient(_MaxID, ClientAddress);
 
+                            hostid = new PIZZAInt() { Value = _MaxID };
+
                             payload = new byte[] { (byte)HubReturnCodes.ACCEPTED };
-                            payload = payload.Concat(new byte[] { 20 }).Concat(new byte[] {(byte)_MaxID}).ToArray();
+                            payload = payload.Concat(new byte[] { 20 }).Concat(hostid.GetBytes()).ToArray();
 
                             pl = HubEnlistAckPayLoad.FromBytes(payload);
 
@@ -114,8 +122,9 @@ namespace PIZZA.Hub
                         }
                         else
                         {
+                            hostid = new PIZZAInt() { Value = 0 };
                             payload = new byte[] { (byte)HubReturnCodes.DENIED_ALREDY_LISTED };
-                            payload = payload.Concat(new byte[] { 0 }).Concat(new byte[] { 0 }).ToArray();
+                            payload = payload.Concat(new byte[] { 0 }).Concat(hostid.GetBytes()).ToArray();
 
                             pl = HubEnlistAckPayLoad.FromBytes(payload);
 

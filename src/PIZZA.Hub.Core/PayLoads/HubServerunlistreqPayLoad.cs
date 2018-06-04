@@ -6,17 +6,17 @@ using PIZZA.Core;
 
 namespace PIZZA.Hub.Core.PayLoads
 {
-    class HubServerunlistreqPayLoad : HubPayLoad
+    class HubServerenlistreqPayLoad : HubPayLoad
     {
         private PIZZAString _hostname = new PIZZAString();
         private PIZZAString _friendlyname = new PIZZAString();
         private PIZZAString _description = new PIZZAString();
         private byte   _flags = new byte();
 
-        public HubServerunlistreqPayLoad()
+        public HubServerenlistreqPayLoad()
         { }
 
-        private HubServerunlistreqPayLoad(byte[] bytes)
+        private HubServerenlistreqPayLoad(byte[] bytes)
         {
              List<byte> tmp = bytes.ToList();
             _hostname = PIZZAString.FromBytes(tmp.ToArray());
@@ -37,9 +37,9 @@ namespace PIZZA.Hub.Core.PayLoads
         }
 
 
-        public static HubServerunlistreqPayLoad FromBytes(byte[] bytes)
+        public static HubServerenlistreqPayLoad FromBytes(byte[] bytes)
         {
-            HubServerunlistreqPayLoad result = new HubServerunlistreqPayLoad(bytes);
+            HubServerenlistreqPayLoad result = new HubServerenlistreqPayLoad(bytes);
             return result;
         }
 
