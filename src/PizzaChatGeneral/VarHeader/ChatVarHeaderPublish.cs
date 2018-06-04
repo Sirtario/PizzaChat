@@ -11,6 +11,7 @@ namespace PIZZA.Chat.Core
     {
         private PIZZAString _whisperTarget;
         private PIZZAInt _datatype;
+        private PIZZAString _sendername;
 
         public ChatVarHeaderPublish()
         {
@@ -20,11 +21,13 @@ namespace PIZZA.Chat.Core
         {
             var list = bytes.ToList();
 
-            Lenght = PIZZAInt5.FromBytes(list.ToArray());
             list.RemoveRange(0, 5);
 
             _datatype = PIZZAInt.FromBytes(list.ToArray());
             list.RemoveRange(0, 2);
+
+            _sendername = PIZZAString.FromBytes(list.ToArray());
+            list.RemoveRange(0, _sendername.Length.Value);
 
             _whisperTarget = PIZZAString.FromBytes(list.ToArray());
             list.RemoveRange(0, _whisperTarget.Length.Value);
@@ -55,6 +58,15 @@ namespace PIZZA.Chat.Core
         }
 
         /// <summary>
+        /// name of the Sender Has to be the same as ClientID
+        /// </summary>
+        public string SenderName
+        {
+            get { return _sendername.Value; }
+            set { _sendername.Value = value; }
+        }
+
+        /// <summary>
         /// Returns the variable header from th byte[]
         /// </summary>
         /// <param name="bytes"></param>
@@ -74,6 +86,7 @@ namespace PIZZA.Chat.Core
 
             bytes.AddRange(Lenght.GetBytes());
             bytes.AddRange(_datatype.GetBytes());
+            bytes.AddRange(_sendername.GetBytes());
             bytes.AddRange(_whisperTarget.GetBytes());
 
             return bytes.ToArray();

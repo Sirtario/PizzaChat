@@ -53,6 +53,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{EE560B1D-945E-461E-82D1-A1308363E58D}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj">
       <Project>{ac93b995-7638-43c8-83bd-50ef50d0d5dd}</Project>
       <Name>PIZZA.Hub.Core</Name>

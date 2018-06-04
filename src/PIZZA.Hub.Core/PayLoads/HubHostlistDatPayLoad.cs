@@ -6,9 +6,11 @@ using PIZZA.Core;
 
 namespace PIZZA.Hub.Core.PayLoads
 {
-    class HubHostlistDatPayLoad : HubPayLoad
+    public class HubHostlistDatPayLoad : HubPayLoad
     {
         private List<HubHostInfo> _hosts = new List<HubHostInfo>();
+
+        public IEnumerable<HubHostInfo> Hosts => _hosts;
 
         public HubHostlistDatPayLoad()
         { }

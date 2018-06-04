@@ -18,7 +18,6 @@ namespace PIZZA.Chat.Core
         {
             var list = bytes.ToList();
 
-            Lenght = PIZZAInt5.FromBytes(list.ToArray());
             list.RemoveRange(0, 5);
 
             _courentChannel = PIZZAString.FromBytes(list.ToArray());
@@ -42,22 +41,22 @@ namespace PIZZA.Chat.Core
         /// <summary>
         /// Talkpower the Client has in the Courent Cannel
         /// </summary>
-        public byte ChannelPower { get; private set; }
+        public byte ChannelPower { get;  set; }
 
         /// <summary>
         /// Returns the number of Clients that are connected in the Courent Channel
         /// </summary>
-        public byte ClientCount { get; private set; }
+        public byte ClientCount { get;  set; }
 
         /// <summary>
         /// the number of channels oh the server
         /// </summary>
-        public byte ChannelCount { get; private set; }
+        public byte ChannelCount { get;  set; }
 
         /// <summary>
         /// Name of the Courent Channel
         /// </summary>
-        public string CourentChannel {
+        public string CurrentChannel {
             get
             {
                 return _courentChannel.Value;

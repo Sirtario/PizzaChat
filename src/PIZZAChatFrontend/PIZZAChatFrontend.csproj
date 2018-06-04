@@ -119,6 +119,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Test.html" />
+    <ProjectReference Include="..\PizzaChatGeneral\PizzaChatCore.csproj">
+      <Project>{fae2d599-8632-40d4-a1fd-af101b85b8c1}</Project>
+      <Name>PizzaChatCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

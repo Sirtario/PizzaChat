@@ -16,7 +16,6 @@ namespace PIZZA.Chat.Core
         {
             var list = bytes.ToList();
 
-            Lenght = PIZZAInt5.FromBytes(list.ToArray());
             list.RemoveRange(0, 5);
 
             Returncode = (ChatConnectReturncode)list[0];
@@ -34,9 +33,9 @@ namespace PIZZA.Chat.Core
             }
         }
 
-        public ChatConnectReturncode Returncode { get; private set; }
-        public byte CommunicationMode { get; private set; }
-        public byte PingIntervall { get; private set; }
+        public ChatConnectReturncode Returncode { get;  set; }
+        public byte CommunicationMode { get; set; }
+        public byte PingIntervall { get;  set; }
 
         public override byte[] GetBytes()
         {
