@@ -29,10 +29,10 @@ namespace PIZZA.Hub.Interface
 
                 foreach (KeyValuePair<int, HubHostInfo> p in _serverlist.GetAllServerInfos())
                 {
-                    HubTerminal.Cout(ConsoleColor.Yellow, $"================{p.Value.Hostname.Value}================");
+                    HubTerminal.Cout(ConsoleColor.Yellow, $"================{p.Value.Hostname}================");
                     HubTerminal.Cout(ConsoleColor.White, $"Hostidentifier: {p.Key}");
-                    HubTerminal.Cout(ConsoleColor.White, $"Friendlyname: {p.Value.Friendlyname.Value}");
-                    HubTerminal.Cout(ConsoleColor.White, $"Description: {p.Value.Description.Value}\n");
+                    HubTerminal.Cout(ConsoleColor.White, $"Friendlyname: {p.Value.Friendlyname}");
+                    HubTerminal.Cout(ConsoleColor.White, $"Description: {p.Value.Description}\n");
                 }
             }
             else HubTerminal.Cout(ConsoleColor.Red, "[ServerList] No servers found...");
@@ -48,10 +48,10 @@ namespace PIZZA.Hub.Interface
 
                 foreach (KeyValuePair<int, HubHostInfo> p in _clientlist.GetAllClientInfos())
                 {
-                    HubTerminal.Cout(ConsoleColor.Yellow, $"================{p.Value.Hostname.Value}================");
+                    HubTerminal.Cout(ConsoleColor.Yellow, $"================{p.Value.Hostname}================");
                     HubTerminal.Cout(ConsoleColor.White, $"Hostidentifier: {p.Key}");
-                    HubTerminal.Cout(ConsoleColor.White, $"Friendlyname: {p.Value.Friendlyname.Value}");
-                    HubTerminal.Cout(ConsoleColor.White, $"Description: {p.Value.Description.Value}\n");
+                    HubTerminal.Cout(ConsoleColor.White, $"Friendlyname: {p.Value.Friendlyname}");
+                    HubTerminal.Cout(ConsoleColor.White, $"Description: {p.Value.Description}\n");
                 }
 
             }

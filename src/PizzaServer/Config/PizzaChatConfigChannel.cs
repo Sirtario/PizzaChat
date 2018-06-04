@@ -4,8 +4,14 @@ using System.Text;
 
 namespace Pizza.Server
 {
-    class PizzaChatConfigChannel
+    public class PizzaChatConfigChannel
     {
+        public PizzaChatConfigChannel()
+        {
+            Channelname = "Home";
+            Password = string.Empty;
+        }
+
         public string Channelname { get; }
         public string Password{get;}
     }

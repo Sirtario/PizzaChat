@@ -104,7 +104,7 @@ namespace Tests
             varheader.ChannelCount = 1;
             varheader.ChannelPower = 2;
             varheader.ClientCount = 1;
-            varheader.CourentChannel = "Default";
+            varheader.CurrentChannel = "Default";
 
             payload.AddChannel(new PIZZAChannel(new PIZZA.Core.PIZZAString() { Value = "Default" }, 1));
             payload.AddUser("User");

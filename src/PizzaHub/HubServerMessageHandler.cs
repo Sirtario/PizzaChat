@@ -50,9 +50,9 @@ namespace PIZZA.Hub
 
                         
 
-                        if (ServerInfo.Hostname.Value == String.Empty)
+                        if (ServerInfo.Hostname == String.Empty)
                         {
-                            ServerInfo.Hostname.Value = e.Sender.ToString();
+                            ServerInfo.Hostname = e.Sender.ToString();
                             HubTerminal.Cout(ConsoleColor.Yellow, $"[Hub Info] Hostname was empty using EndPoint: {e.Sender.ToString()} as Hostname...");
                         }
 
@@ -101,8 +101,8 @@ namespace PIZZA.Hub
 
                         HubHostInfo ClientAddress = HubHostInfo.FromBytes(e.Message);
 
-                        if (ClientAddress.Hostname.Value == String.Empty)
-                            ClientAddress.Hostname.Value = e.Sender.ToString();
+                        if (ClientAddress.Hostname == String.Empty)
+                            ClientAddress.Hostname = e.Sender.ToString();
 
                         if (!_clientlist.ContainsHostInfo(ClientAddress))
                         {
@@ -163,7 +163,7 @@ namespace PIZZA.Hub
                                 {
                                     try
                                     {
-                                        if (_serverlist.GetHostInfo(i).RequiresPassword == 0)
+                                        if (_serverlist.GetHostInfo(i).RequiresPassword == false)
                                             payload = payload.Concat(_serverlist.GetHostInfo(i).GetBytes()).ToArray();
                                     }
                                     catch { }
@@ -221,7 +221,7 @@ namespace PIZZA.Hub
                             _clientlist.RemoveClient(_clientlist.GetIdByHostname(hostname));
 
                         pl = HubUnlistAckPayLoad.FromBytes(payload);
-                        anser = new HubMessage(HubPacketTypes.UNLISTTACK, pl);
+                        anser = new HubMessage(HubPacketTypes.UNLISTACK, pl);
 
                         _server.Send(e.Sender, anser.GetBytes());
                     }

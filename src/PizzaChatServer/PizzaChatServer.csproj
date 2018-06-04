@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>PIZZA.Chat.Server</RootNamespace>
+    <Configurations>Debug;Release;Testen</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

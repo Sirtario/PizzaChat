@@ -2,8 +2,10 @@
 using PIZZA.Chat.Core;
 using PIZZA.Chat.Server;
 using PIZZA.Core;
+using PIZZA.Hub.Client;
 using System;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace Pizza.Server
@@ -13,6 +15,7 @@ namespace Pizza.Server
         private static ITCPServer _tcpServer;
         private static IServer _server;
         private static PIZZAChatConfig Config;
+        private static HubClient _hub;
 
         static void Main(string[] args)
         {
@@ -25,10 +28,30 @@ namespace Pizza.Server
             }
             catch (Exception)
             {
-                
+                Config = new PIZZAChatConfig();
 
             }
 
+            //Hub stuff
+            Console.WriteLine("Enlisting in Hub");
+            try
+            {
+                _hub = new HubClient();
+                _hub.Connect(Config.HubIPAdress, Config.HubPort);
+                var Hubres = _hub.ListHost(Config.Hostname, true, Config.HubPass, string.Empty, "Pedo", false);
+                if (Hubres.Returncode!= PIZZA.Hub.Core.Enumerationen.HubReturnCodes.ACCEPTED)
+                {
+                    throw new Exception($"{Hubres.Returncode.ToString()}");
+                }
+                _hub.StartPing(Hubres.HostIdentifier,Hubres.Pinginterval);
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine($"unable to connect to hub: {ex.Message}");
+            }
+            
             Console.WriteLine("Starting Server");
             _tcpServer = new TCPServer(TcpDelegate.IsPIZZAChatMessageComplete);
             _server = new ServerLib(_tcpServer);
@@ -42,8 +65,9 @@ namespace Pizza.Server
 
             Console.ReadLine();
 
-            _server.Stop();
-            _server.Dispose();
+            //TODO: Stop hub connection
+
+            _server?.Dispose();
             SerializeConfig(Config,"Config.xml");
 
         }
@@ -92,6 +116,13 @@ namespace Pizza.Server
 
         private static void _server_ClientConnecting(object sender, ChatConnectApprovalEventArgs e)
         {
+            //if (Config.Users.Any(c => c.ClientID == e.ClientID)
+            //{
+
+            //}
+
+            Console.WriteLine($"client {e.ClientID} connects");
+
             e.CommunicationMode = 1;
             e.ConnectReturncode = ChatConnectReturncode.ACCEPTED;
             e.PingIntervall = 60;

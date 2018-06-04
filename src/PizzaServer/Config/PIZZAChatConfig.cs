@@ -1,15 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using PIZZA.Hub.Client;
+using System.Collections.Generic;
+using System.Net;
 
 namespace Pizza.Server
 {
-    internal class PIZZAChatConfig
+    public class PIZZAChatConfig
     {
-        private readonly List<PizzaChatConfigChannel> _channels;
-        private readonly string _defaultChannel;
-        private readonly List<PIZZAChatConfigUser> _users;
+        public PIZZAChatConfig()
+        {
+            DefaultChannel = "Home";
+            Hostname = "PIZZA!";
+            Channels = new List<PizzaChatConfigChannel>();
+            Users = new List<PIZZAChatConfigUser>();
+            HubIPAdress = "127.0.0.1";
+            HubPort = 56602;
+            HubPass = string.Empty;
 
-        public string DefaultChannel => _defaultChannel;
-        public List<PizzaChatConfigChannel> Channels => _channels;
-        public List<PIZZAChatConfigUser> Users => _users;
+            Users.Add(new PIZZAChatConfigUser());
+            Channels.Add(new PizzaChatConfigChannel());
+        }
+
+        public string DefaultChannel { get; set; }
+        public string Hostname { get;  set; }
+
+        public List<PizzaChatConfigChannel> Channels { get; set; }
+        public List<PIZZAChatConfigUser> Users { get; set; }
+
+        public string HubIPAdress { get; set; }
+        public int HubPort { get; set; }
+        public string HubPass { get;  set; }
     }
 }

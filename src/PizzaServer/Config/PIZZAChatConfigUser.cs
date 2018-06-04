@@ -4,10 +4,16 @@ using System.Text;
 
 namespace Pizza.Server
 {
-    class PIZZAChatConfigUser
+    public class PIZZAChatConfigUser
     {
-        public string ClientID { get; }
-        public string Password { get; }
+        public PIZZAChatConfigUser()
+        {
+            ClientID = "default";
+            Password = string.Empty;
+        }
+
+        public string ClientID { get; set; }
+        public string Password { get; set; }
 
     }
 }
