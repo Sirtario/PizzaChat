@@ -24,7 +24,6 @@
             </MenuItem>
             <MenuItem Header="Server">
                 <MenuItem Header="Serverliste anzeigen" Click="ListServers_Click"/>
-                <MenuItem Header="Verbinden" Click="Connect_Click"/>
                 <MenuItem Header="Verbindung beenden" Click="Disconnect_Click"/>
             </MenuItem>
         </Menu>

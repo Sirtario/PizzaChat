@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PIZZA.Client;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -15,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PIZZA.Client
+namespace PIZZAChatFrontend
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
