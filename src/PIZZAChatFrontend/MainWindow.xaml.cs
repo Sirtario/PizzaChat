@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PIZZAChatFrontend
+namespace PIZZA.Client
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
@@ -147,6 +147,28 @@ namespace PIZZAChatFrontend
         {
             var document = _browserControl.Document as mshtml.HTMLDocument;
             document.parentWindow.scroll(0, 10000000);
+        }
+
+        public event Action<string> SendMessage;
+        public event Action<string, string> WhisperMessage;
+        public event Action<string> EnterRoom;
+        public event Action<int> Connect;
+        public event Action Disconnect;
+        public event Action GetServers;
+
+        public void ReceiveMessage(string Message, string sender, bool isWhispered)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RefreshStatus(List<string> usersInChannel, string channel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowServerlist(List<Tuple<string, string, string>> servers)
+        {
+            throw new NotImplementedException();
         }
     }
 }
