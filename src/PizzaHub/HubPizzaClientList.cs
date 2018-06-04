@@ -28,7 +28,7 @@ namespace PIZZA.Hub
         {
             foreach(KeyValuePair<int,HubHostInfo> hi in _clientlist)
             {
-                if (hi.Value.Hostname == hostname)
+                if (hi.Value.Hostname.Value == hostname.Value)
                     return true;
             }
             return false;
@@ -38,7 +38,7 @@ namespace PIZZA.Hub
         {
             foreach(KeyValuePair<int,HubHostInfo> hi in _clientlist)
             {
-                if (hi.Value.Hostname == hostname)
+                if (hi.Value.Hostname.Value == hostname.Value)
                     return hi.Key;
             }
             return 0;
