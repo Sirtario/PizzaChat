@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaChatServer", "src\Pizz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "test\UnitTests\UnitTests.csproj", "{9DAA32E5-1DC3-4D06-844E-8C9827A527B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIZZA.Hub.Client", "PIZZA.Hub.Client\PIZZA.Hub.Client.csproj", "{AEE55E11-20DF-4B75-A7FD-328227881589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PIZZA.Hub.Client", "src\PIZZA.Hub.Client\PIZZA.Hub.Client.csproj", "{36249C51-BFA0-46BA-91CE-B5258D108583}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{9DAA32E5-1DC3-4D06-844E-8C9827A527B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DAA32E5-1DC3-4D06-844E-8C9827A527B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DAA32E5-1DC3-4D06-844E-8C9827A527B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AEE55E11-20DF-4B75-A7FD-328227881589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AEE55E11-20DF-4B75-A7FD-328227881589}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEE55E11-20DF-4B75-A7FD-328227881589}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AEE55E11-20DF-4B75-A7FD-328227881589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36249C51-BFA0-46BA-91CE-B5258D108583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36249C51-BFA0-46BA-91CE-B5258D108583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36249C51-BFA0-46BA-91CE-B5258D108583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36249C51-BFA0-46BA-91CE-B5258D108583}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

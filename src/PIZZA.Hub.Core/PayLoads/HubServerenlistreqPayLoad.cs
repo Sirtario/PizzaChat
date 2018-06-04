@@ -6,13 +6,15 @@ using PIZZA.Core;
 
 namespace PIZZA.Hub.Core.PayLoads
 {
-    public class HubClientEnlistReqPayLoad : HubPayLoad
+    public class HubServerenlistreqPayLoad : HubPayLoad
     {
-
         private PIZZAString _hostname = new PIZZAString();
         private PIZZAString _friendlyname = new PIZZAString();
         private PIZZAString _description = new PIZZAString();
-        private byte  _flags = new byte();
+        private byte   _flags = new byte();
+
+        public HubServerenlistreqPayLoad()
+        { }
 
         public string Hostname
         {
@@ -63,16 +65,12 @@ namespace PIZZA.Hub.Core.PayLoads
             }
         }
 
-        public HubClientEnlistReqPayLoad()
-        { }
-
-        private HubClientEnlistReqPayLoad(byte[] bytes)
+        private HubServerenlistreqPayLoad(byte[] bytes)
         {
-            List<byte> tmp = bytes.ToList();
-
+             List<byte> tmp = bytes.ToList();
             _hostname = PIZZAString.FromBytes(tmp.ToArray());
 
-            tmp.RemoveRange(0, _hostname.Length.Value + 2);
+            tmp.RemoveRange(0,_hostname.Length.Value + 2 );
 
             _friendlyname = PIZZAString.FromBytes(tmp.ToArray());
 
@@ -87,9 +85,10 @@ namespace PIZZA.Hub.Core.PayLoads
             tmp.Clear();
         }
 
-        public static HubClientEnlistReqPayLoad FromBytes(byte[] bytes)
+
+        public static HubServerenlistreqPayLoad FromBytes(byte[] bytes)
         {
-            HubClientEnlistReqPayLoad result = new HubClientEnlistReqPayLoad(bytes);
+            HubServerenlistreqPayLoad result = new HubServerenlistreqPayLoad(bytes);
             return result;
         }
 

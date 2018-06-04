@@ -7,10 +7,10 @@ using PIZZA.Hub.Core.Enumerationen;
 
 namespace PIZZA.Hub.Core.PayLoads
 {
-    class HubEnlistAckPayLoad : HubPayLoad
+    public class HubEnlistAckPayLoad : HubPayLoad
     {
         private HubReturnCodes _returncode = new HubReturnCodes();
-        private byte   _pingintervall = new byte();
+        private byte   _pinginterval = new byte();
         private PIZZAInt _hostIdentifier = new PIZZAInt();
 
         public HubEnlistAckPayLoad()
@@ -24,13 +24,49 @@ namespace PIZZA.Hub.Core.PayLoads
 
             tmp.RemoveAt(0);
 
-            _pingintervall = tmp[0];
+            _pinginterval = tmp[0];
 
             tmp.RemoveAt(0);
 
             _hostIdentifier = PIZZAInt.FromBytes(tmp.ToArray());
 
             tmp.Clear();
+        }
+
+        public int HostIdentifier
+        {
+            get
+            {
+                return _hostIdentifier.Value;
+            }
+            set
+            {
+                _hostIdentifier.Value = value;
+            }
+        }
+
+        public int PingInterval
+        {
+            get
+            {
+                return _pinginterval;
+            }
+            set
+            {
+                _pinginterval = (byte)value;
+            }
+        }
+
+        public HubReturnCodes ReturnCode
+        {
+            get
+            {
+                return _returncode;
+            }
+            set
+            {
+                _returncode = value;
+            }
         }
 
         public static HubEnlistAckPayLoad FromBytes(byte[] bytes)
@@ -44,7 +80,7 @@ namespace PIZZA.Hub.Core.PayLoads
         {
             byte[] result = new byte[] { (byte)_returncode };
 
-            return result.Concat(new byte[] { _pingintervall }).Concat(_hostIdentifier.GetBytes()).ToArray();
+            return result.Concat(new byte[] { _pinginterval }).Concat(_hostIdentifier.GetBytes()).ToArray();
 
         }
     }

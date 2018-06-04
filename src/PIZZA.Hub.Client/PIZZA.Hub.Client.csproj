@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj" />
-    <ProjectReference Include="..\src\TCPLibrary\TCPLibrary.csproj" />
+    <ProjectReference Include="..\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj" />
+    <ProjectReference Include="..\TCPLibrary\TCPLibrary.csproj" />
   </ItemGroup>
 
 </Project>

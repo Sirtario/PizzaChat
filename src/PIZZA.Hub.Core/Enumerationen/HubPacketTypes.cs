@@ -12,7 +12,7 @@ namespace PIZZA.Hub.Core
         HOSTAVAILABLEREQ = 6,
         HOSTAVAILABLEDAT = 7,
         UNLISTREQ = 8,
-        UNLISTTACK = 9,
+        UNLISTACK = 9,
         PING = 10,
         PINGACK = 11
     }
