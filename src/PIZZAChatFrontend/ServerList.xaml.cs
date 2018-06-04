@@ -25,7 +25,7 @@ namespace PIZZAChatFrontend
 
         public event Action<int> ConnectTo;
 
-        public ServerList(List<Tuple<string, string, string>> servers)
+        public ServerList(List<Tuple<string, string, string, bool>> servers)
         {
             InitializeComponent();
 
@@ -34,7 +34,7 @@ namespace PIZZAChatFrontend
             SetItems(servers);
         }
 
-        private void SetItems(List<Tuple<string, string, string>> servers)
+        private void SetItems(List<Tuple<string, string, string, bool>> servers)
         {
             _servers = string.Empty;
 

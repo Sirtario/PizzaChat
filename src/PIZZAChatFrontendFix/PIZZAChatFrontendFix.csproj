@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{EE560B1D-945E-461E-82D1-A1308363E58D}</Project>
+      <Project>{ee560b1d-945e-461e-82d1-a1308363e58d}</Project>
       <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj">
@@ -66,11 +66,11 @@
       <Name>PIZZAChatFrontend</Name>
     </ProjectReference>
     <ProjectReference Include="..\PizzaChatGeneral\PizzaChatCore.csproj">
-      <Project>{FAE2D599-8632-40D4-A1FD-AF101B85B8C1}</Project>
+      <Project>{fae2d599-8632-40d4-a1fd-af101b85b8c1}</Project>
       <Name>PizzaChatCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCPLibrary\TCPLibrary.csproj">
-      <Project>{546D5D2C-25F0-4973-8A94-3EB4952A658B}</Project>
+      <Project>{546d5d2c-25f0-4973-8a94-3eb4952a658b}</Project>
       <Name>TCPLibrary</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using PIZZA.Client;
+﻿using PIZZA.Chat.Core;
+using PIZZA.Client;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -42,11 +43,11 @@ namespace PIZZAChatFrontend
         public event Action<string> SendMessage;
         //whisperTarget, message
         public event Action<string, string> WhisperMessage;
-        public event Action<string> EnterRoom;
         //serverindex
         public event Action<int> Connect;
         public event Action Disconnect;
         public event Action GetServers;
+        public event Action<PIZZAChannel> EnterRoom;
 
         public void ReceiveMessage(string message, string sender, bool isWhispered)
         {
@@ -68,15 +69,6 @@ namespace PIZZAChatFrontend
             message = message.Replace("Ü", "&Uuml;").Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;").Replace("ß", "&szlig;");
 
             return message;
-        }
-
-        public void ShowServerlist(List<Tuple<string, string, string>> servers)
-        {
-            var serverWindow = new ServerList(servers);
-
-            serverWindow.ConnectTo += ServerWindow_ConnectTo;
-
-            serverWindow.Show();
         }
 
         private void ServerWindow_ConnectTo(int obj)
@@ -140,7 +132,36 @@ namespace PIZZAChatFrontend
             document.parentWindow.scroll(0, 10000000);
         }
 
-        public void RefreshStatus(List<string> usersInChannel, string channel)
+        public void ShowServerlist(List<Tuple<string, string, string, bool>> servers)
+        {
+            var serverWindow = new ServerList(servers);
+
+            serverWindow.ConnectTo += ServerWindow_ConnectTo;
+
+            serverWindow.Show();
+        }
+
+        public void RefreshStatus(List<string> usersInChannel, List<PIZZAChannel> channels, string channel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetClientId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetPassword(string topic)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowReturncode(ChatConnectReturncode returncode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowEnterChannelReturncode(ChatEnterChannelReturnCode returnCode)
         {
             throw new NotImplementedException();
         }
