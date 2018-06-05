@@ -67,6 +67,7 @@
     <Compile Include="HubMessageTests.cs" />
     <Compile Include="HubFixedHeaderTests.cs" />
     <Compile Include="HubPayloadTests.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -76,9 +77,17 @@
       <Project>{EE560B1D-945E-461E-82D1-A1308363E58D}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\PIZZA.Hub.Client\PIZZA.Hub.Client.csproj">
+      <Project>{36249C51-BFA0-46BA-91CE-B5258D108583}</Project>
+      <Name>PIZZA.Hub.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj">
       <Project>{AC93B995-7638-43C8-83BD-50EF50D0D5DD}</Project>
       <Name>PIZZA.Hub.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\PIZZA.Hub.Server\PIZZA.Hub.Server.csproj">
+      <Project>{86AD50F3-BC83-4300-B529-65C348269171}</Project>
+      <Name>PIZZA.Hub.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\PizzaChatGeneral\PizzaChatCore.csproj">
       <Project>{FAE2D599-8632-40D4-A1FD-AF101B85B8C1}</Project>

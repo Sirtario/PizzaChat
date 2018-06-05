@@ -15,7 +15,7 @@ namespace PIZZA.Hub
     {
         private HubPizzaServerList _serverlist;
         private int _MaxID = 1;
-        private TCPServer _server;
+        private ITCPServer _server;
         private HubPizzaClientList _clientlist;
         private HubRespondingHosts _respondingHost;
         private HubServerAuthentication _serverAuthentication;
@@ -23,7 +23,7 @@ namespace PIZZA.Hub
         private bool IsBitSet(byte b, int bit)
         { return (1 & (b >> bit)) == 1; }
 
-        public HubServerMessageHandler(TCPServer server, HubPizzaServerList serverlist, HubPizzaClientList clientlist, HubRespondingHosts respondingHost /*,HubServerAuthentication authentication*/ )
+        public HubServerMessageHandler(ITCPServer server, HubPizzaServerList serverlist, HubPizzaClientList clientlist, HubRespondingHosts respondingHost /*,HubServerAuthentication authentication*/ )
         {
             _server = server;
             _server.TCPMessagereceived += RecievedMessageEventHandler;
