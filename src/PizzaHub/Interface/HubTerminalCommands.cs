@@ -69,10 +69,12 @@ namespace PIZZA.Hub.Interface
                 if (_serverlist.ContainsServerID(Hostidentifier))
                 {
                     _serverlist.RemoveServer(Hostidentifier);
+                    _respondingHosts.RemoveResponse(Hostidentifier);
                 }
                 else if (_clientlist.ContainsClientID(Hostidentifier))
                 {
                     _clientlist.RemoveClient(Hostidentifier);
+                    _respondingHosts.RemoveResponse(Hostidentifier); 
                 }
                 else HubTerminal.Cout(ConsoleColor.Red, $"There is no Host with ID: {Hostidentifier}");
             }
