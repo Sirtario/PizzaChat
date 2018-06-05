@@ -53,6 +53,7 @@ namespace PIZZAChatFrontend
         public event Action Disconnect;
         public event Action GetServers;
         public event Action<PIZZAChannel> EnterRoom;
+        public event Action<string> ConnectDirectly;
 
         public void ReceiveMessage(string message, string sender, bool isWhispered)
         {
@@ -65,6 +66,8 @@ namespace PIZZAChatFrontend
             }
 
             _messages += $"<p><div class=\"sender\">{sender}</div><div class=\"{htmlClass}\">{message}</div></p>";
+
+            _messages += Environment.NewLine;
 
             ShowInfo();
         }
@@ -156,6 +159,8 @@ namespace PIZZAChatFrontend
             foreach (var user in usersInChannel)
             {
                 _members += $"<div class=\"member\"><a href=\"member|{user}\">{user}</a></div>";
+
+                _members += Environment.NewLine;
             }
 
             foreach (var currentChannel in channels)
@@ -170,9 +175,11 @@ namespace PIZZAChatFrontend
                 {
                     _channels += $"<div class=\"channel\"><a href=\"channel|{currentChannel.Channelname.Value}\">{channelText}</a></div>";
                 }
+
+                _channels += Environment.NewLine;
             }
 
-            _status = $"<div class=\"current-host\">{BeautifyText(hostname)}<div class=\"current-channel\">{BeautifyText(channel)}</div></div>";
+            _status = $"{BeautifyText(hostname)}<div class=\"current-channel\">{BeautifyText(channel)}</div>";
 
             ShowInfo();
         }
@@ -257,6 +264,15 @@ namespace PIZZAChatFrontend
                         break;
                 }
             }
+        }
+
+        private void MenuItemDirectConnect_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new GetText($"Host:", "Direkt verbinden");
+
+            window.ShowDialog();
+
+            ConnectDirectly?.Invoke(window.Value);
         }
     }
 }

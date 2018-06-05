@@ -33,8 +33,17 @@ namespace PIZZA.Client
             frontend.GetServers += Frontend_GetServers;
             frontend.SendMessage += Frontend_SendMessage;
             frontend.WhisperMessage += Frontend_WhisperMessage;
+            frontend.ConnectDirectly += Frontend_ConnectDirectly;
 
             _frontend = frontend;
+        }
+
+        private void Frontend_ConnectDirectly(string obj)
+        {
+            _servers.Clear();
+            _servers.Add(new Tuple<string, string, string, bool>(obj, obj, obj, false));
+
+            Frontend_Connect(0);
         }
 
         private void Frontend_WhisperMessage(string arg1, string arg2)

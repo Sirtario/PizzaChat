@@ -75,6 +75,7 @@ namespace PIZZAChatFrontend_Test
             {
                 host = index;
 
+                window.ShowReturncode(ChatConnectReturncode.ACCEPTED, _exampleServers[index].Item1);
                 window.RefreshStatus(users, channels, "test", _exampleServers[host].Item1);
             };
 

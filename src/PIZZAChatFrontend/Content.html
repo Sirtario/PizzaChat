@@ -5,6 +5,7 @@
 	body
 	{
 		background-color:#EEEEF2;
+        padding:0px;
 	}
     .mainwindow
     {
@@ -19,13 +20,13 @@
 		font-family:Arial;
 		background-color:#E6E7E8;
 		width:100%;
-		position:fixed;
 	}
 	.sidebar
 	{
 		text-decoration:none;
 		float:left;
 		position:fixed;
+        background-position-y:0px;
 		min-width: 200px;
 		/*border-right:1px solid gray;*/
 		height:100%;
@@ -36,34 +37,35 @@
 		color:orange;
 		text-decoration:none;
 		font-family:Arial;
-		height:50%;
+        padding-top:15px;
+        padding-bottom:15px;
 	}
 	.channels 
 	{
-		color:brown;
-		text-decoration:none;
-		font-family:Arial;
-		height:50%;
+		text-decoration: none;
+		font-family: Arial;
+        height: 100%;
 	}
 	.member 
 	{
 
 	}
-    .channel
+    .channel :link
     {
-
+        color:#050505;
+        text-decoration:none;
     }
     .current-channel 
     {
 
     }
-    .current-channel-channellist .current-host 
+    .current-channel-channellist
     {
-
+        color:#4b4b4b;
     }
-    .system-message
+    .system-message 
     {
-        color:#b5b5b5;
+        color: #b5b5b5;
     }
     .messages 
     {
@@ -90,18 +92,18 @@
   </style>
   </head>
   <body>
-  <div class="sidebar">
-		<div class="members">
-			__MEMBER__
-		</div>
-		<div class="channels">
-			__CHANNEL__
-		</div>
-	</div>
-	<div class="mainwindow">
-		<div class="status">
-			__STATUS__
-		</div>
+    <div class="sidebar">
+        <div class="status">
+            __STATUS__
+        </div>
+        <div class="members">
+            __MEMBER__
+        </div>
+        <div class="channels">
+            __CHANNEL__
+        </div>
+    </div>
+	<div class="mainwindow">		
 		<div class="messages">
 			__MESSAGES__
 		</div>

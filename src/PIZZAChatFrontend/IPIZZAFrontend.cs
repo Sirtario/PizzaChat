@@ -19,6 +19,7 @@ namespace PIZZA.Client
         event Action<int> Connect;
         event Action Disconnect;
         event Action GetServers;
+        event Action<string> ConnectDirectly;
 
         int HubPort { get; }
         string HubHostname { get; }
