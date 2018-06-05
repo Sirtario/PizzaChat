@@ -17,8 +17,11 @@ namespace PIZZA.Chat.Core
         private ChatFixedHeader(byte[] bytes)
         {
             var list = new List<byte>(bytes);
+            Protokollname = list.GetRange(0, 6).ToArray();
+            list.RemoveRange(0, 6);
 
-            list.RemoveRange(0, 7);
+            ProtokollVersion = list[0];
+            list.RemoveAt(0);
 
             PacketType = (Packettypes)list[0];
             list.RemoveAt(0);
@@ -35,7 +38,7 @@ namespace PIZZA.Chat.Core
         /// <summary>
         /// Version of PIZZAChat Protokoll
         /// </summary>
-        public byte ProtokollVersion { get; } = 1;
+        public byte ProtokollVersion { get; private set; } = 1;
 
         /// <summary>
         /// returns a new Fixedheader from teh bytearray
@@ -51,8 +54,10 @@ namespace PIZZA.Chat.Core
         /// returns the Fixed Header as bytearray
         /// </summary>
         /// <returns></returns>
-        public byte[] GetBytes()
+        public byte[] GetBytes(int remainingLength)
         {
+            _remainingLength.Value = remainingLength;
+
             var bytes = new List<byte>();
 
             bytes.AddRange(Protokollname);

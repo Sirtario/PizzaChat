@@ -46,11 +46,10 @@ namespace PIZZA.Chat.Core
         /// gets the byte[] that resembles the Var header
         /// </summary>
         /// <returns></returns>
-        public override byte[] GetBytes()
+        protected override byte[] GetBytes()
         {
             var bytes = new List<byte>();
 
-            bytes.AddRange(Lenght.GetBytes());
             bytes.Add((byte)ReturnCode);
 
             return bytes.ToArray();

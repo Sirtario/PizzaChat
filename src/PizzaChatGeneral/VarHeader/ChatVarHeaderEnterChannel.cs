@@ -8,8 +8,8 @@ namespace PIZZA.Chat.Core
 {
     public class ChatVarHeaderEnterChannel : ChatVariableHeader
     {
-        private PIZZAString _channel;
-        private PIZZAString _password;
+        private PIZZAString _channel = new PIZZAString();
+        private PIZZAString _password = new PIZZAString();
 
         public ChatVarHeaderEnterChannel()
         {
@@ -22,10 +22,10 @@ namespace PIZZA.Chat.Core
             list.RemoveRange(0, 5);
 
             _channel = PIZZAString.FromBytes(list.ToArray());
-            list.RemoveRange(0, _channel.Length.Value);
+            list.RemoveRange(0, _channel.GetBytes().Length);
 
             _password = PIZZAString.FromBytes(list.ToArray());
-            list.RemoveRange(0, _password.Length.Value);
+            list.RemoveRange(0, _password.GetBytes().Length);
 
             if (list.Count != 0)
             {
@@ -77,11 +77,10 @@ namespace PIZZA.Chat.Core
         /// Gets a byte[] that contains the Variable header
         /// </summary>
         /// <returns></returns>
-        public override byte[] GetBytes()
+        protected override byte[] GetBytes()
         {
             var bytes = new List<byte>();
 
-            bytes.AddRange(Lenght.GetBytes());
             bytes.AddRange(_channel.GetBytes());
             bytes.AddRange(_password.GetBytes());
 

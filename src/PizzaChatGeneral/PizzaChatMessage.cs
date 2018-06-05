@@ -28,12 +28,12 @@ namespace PIZZA.Chat.Core
                 case Packettypes.STATUS:
                     FixedHeader = new ChatFixedHeader(type);
                     VariableHeader = new ChatVarHeaderStatus();
-                    Payload = new ChatPayload();
+                    Payload = new ChatPayloadStatus();
                     break;
                 case Packettypes.PING:
                     FixedHeader = new ChatFixedHeader(type);
                     VariableHeader = new ChatVariableHeader();
-                    Payload = new ChatPayloadStatus();
+                    Payload = new ChatPayload();
                     break;
                 case Packettypes.PINGRESP:
                     FixedHeader = new ChatFixedHeader(type);
@@ -58,7 +58,7 @@ namespace PIZZA.Chat.Core
                 case Packettypes.PUBLISH:
                     FixedHeader = new ChatFixedHeader(type);
                     VariableHeader = new ChatVarHeaderPublish();
-                    Payload = new ChatPayload();
+                    Payload = new ChatPayloadPublish();
                     break;
                 default:
                     throw new NotImplementedException($"unknown Packettype {type.ToString()}");
@@ -69,7 +69,7 @@ namespace PIZZA.Chat.Core
         {
             var list = bytes.ToList();
 
-            FixedHeader = ChatFixedHeader.FromBytes(list.ToArray());
+            FixedHeader = ChatFixedHeader.FromBytes(list.GetRange(0,13).ToArray());
             list.RemoveRange(0, 13);
 
             switch (FixedHeader.PacketType)
@@ -151,7 +151,7 @@ namespace PIZZA.Chat.Core
         {
             var bytes = new List<byte>();
 
-            bytes.AddRange(FixedHeader.GetBytes());
+            bytes.AddRange(FixedHeader.GetBytes(VariableHeader.GetBytes().Length+ Payload.GetBytes().Length));
             bytes.AddRange(VariableHeader.GetBytes());
             bytes.AddRange(Payload.GetBytes());
 

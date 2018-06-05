@@ -24,7 +24,7 @@ namespace PIZZA.Core
        
             for (int i = 0; i < bytes.Length; i++)
             {
-                result += bytes[i] * Convert.ToInt64(Math.Pow(Convert.ToDouble(256), Convert.ToDouble(i)));
+                result += bytes[bytes.Length - i - 1] * Convert.ToInt64(Math.Pow(Convert.ToDouble(256), Convert.ToDouble(i)));
             }
 
             return result;
@@ -36,7 +36,7 @@ namespace PIZZA.Core
 
             for (int i = 0; i < bytes; i++)
             {
-                result[i] = (byte)(value >> i * 8);
+                result[bytes - i - 1] = (byte)(value >> i * 8);
             }
 
             return result;

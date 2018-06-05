@@ -37,11 +37,10 @@ namespace PIZZA.Chat.Core
         public byte CommunicationMode { get; set; }
         public byte PingIntervall { get;  set; }
 
-        public override byte[] GetBytes()
+        protected override byte[] GetBytes()
         {
             var bytes = new List< byte>();
 
-            bytes.AddRange(Lenght.GetBytes());
             bytes.Add((byte)Returncode);
             bytes.Add(CommunicationMode);
             bytes.Add(PingIntervall);

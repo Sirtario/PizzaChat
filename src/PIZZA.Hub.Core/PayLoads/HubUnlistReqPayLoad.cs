@@ -9,6 +9,18 @@ namespace PIZZA.Hub.Core.PayLoads
     {
         private PIZZAInt _hostIdentifier = new PIZZAInt();
 
+        public int Hostidentifier
+        {
+            get
+            {
+                return _hostIdentifier.Value;
+            }
+            set
+            {
+                _hostIdentifier.Value = value;
+            }
+        }
+
         public HubUnlistReqPayLoad()
         { }
 

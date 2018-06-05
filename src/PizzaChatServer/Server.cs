@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PIZZA.Chat.Server
 {
-    public class Server :IDisposable
+    public class ServerLib : IDisposable, IServer
     {
         private ITCPServer _tcpServer;
         private ConnectManager _connectManager;
@@ -19,9 +19,13 @@ namespace PIZZA.Chat.Server
         public event ChatClientConnectionApprovalEventHandler ClientConnecting;
         public event ChatClientEnteringChannelEventHandler ClientEnteringChannel;
 
-        public Server(ITCPServer server)
+        public ServerLib(ITCPServer server)
         {
             _tcpServer = server ?? throw new ArgumentNullException();
+
+            DefaultChannel = "home";
+            Channels = new List<PIZZAChannel>();
+            Channels.Add(new PIZZAChannel(new PIZZA.Core.PIZZAString() { Value = "home" }, 0));
 
             _tcpServer.TCPMessagereceived += _tcpServer_TCPMessagereceived;
             _connectManager = new ConnectManager();
@@ -29,21 +33,22 @@ namespace PIZZA.Chat.Server
             _connectManager.SendMessage += SendMessage;
             _connectManager.ClientConnectionApprove += _connectManager_ClientConnectionApprove;
 
+            _statusManager = new StatusManager();
             _statusManager.SendMessage += SendMessage;
 
+            _publishManager = new PublishManager();
             _publishManager.SendMessage += SendMessage;
 
+            _channelmanager = new ChannelManager();
             _channelmanager.SendMessage += SendMessage;
             _channelmanager.ClientEnteringChannel += _channelmanager_ClientEnteringChannel;
         }
-
-
 
         /// <summary>
         /// conntains all PIZZAChat Connections
         /// </summary>
         public List<ChatClientConnection> Connections { get; private set; }
-       
+
         /// <summary>
         /// The Channel All new clients connect to
         /// </summary>

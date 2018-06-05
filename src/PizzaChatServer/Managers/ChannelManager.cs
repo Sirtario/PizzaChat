@@ -15,7 +15,7 @@ namespace PIZZA.Chat.Server
         internal void RecieveEnterChannel(PizzaChatMessage message, ChatClientConnection connection, List<PIZZAChannel> channels)
         {
             var varheader = message.VariableHeader as ChatVarHeaderEnterChannel;
-            var eventargs = new ChatClientEnteringChannelEventArgs(connection.ClientID,varheader.Password, ChatEnterChannelReturnCode.Denied);
+            var eventargs = new ChatClientEnteringChannelEventArgs(connection.ClientID,varheader.Password,varheader.Channel, ChatEnterChannelReturnCode.Denied);
 
             if (!channels.Any(c => c.Channelname.Value == varheader.Channel))
             {

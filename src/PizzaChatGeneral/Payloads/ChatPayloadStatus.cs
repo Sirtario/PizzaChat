@@ -9,8 +9,8 @@ namespace PIZZA.Chat.Core
 {
     public class ChatPayloadStatus : ChatPayload
     {
-        private List<PIZZAString> _clientsInCurrentChannel;
-        private List<PIZZAChannel> _channels;
+        private List<PIZZAString> _clientsInCurrentChannel = new List<PIZZAString>();
+        private List<PIZZAChannel> _channels = new List<PIZZAChannel>();
 
         public ChatPayloadStatus()
         {

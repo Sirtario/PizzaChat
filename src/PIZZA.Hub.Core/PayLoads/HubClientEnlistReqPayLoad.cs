@@ -12,7 +12,56 @@ namespace PIZZA.Hub.Core.PayLoads
         private PIZZAString _hostname = new PIZZAString();
         private PIZZAString _friendlyname = new PIZZAString();
         private PIZZAString _description = new PIZZAString();
-        private byte      _flags = new byte();
+        private byte  _flags = new byte();
+
+        public string Hostname
+        {
+            get
+            {
+                return _hostname.Value;
+            }
+            set
+            {
+                _hostname.Value = value;
+            }
+        }
+
+        public string Friendlyname
+        {
+            get
+            {
+                return _friendlyname.Value;
+            }
+            set
+            {
+                _friendlyname.Value = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return _description.Value;
+            }
+            set
+            {
+                _description.Value = value;
+            }
+        }
+
+        public bool PasswordRequired
+        {
+            get
+            {
+                return (_flags & 1) == 1;
+            }
+            set
+            {
+                _flags = (byte)(_flags & 254);
+                _flags |= (byte)(value ? 1 : 0);
+            }
+        }
 
         public HubClientEnlistReqPayLoad()
         { }

@@ -7,7 +7,13 @@ namespace PIZZA.Chat.Core
 {
     public class PIZZAChannel
     {
-        public PIZZAChannel(byte[] bytes)
+        public PIZZAChannel(PIZZAString channelname, byte hasPassword)
+        {
+            Channelname = channelname;
+            HasPassword = hasPassword;
+        }
+
+        private PIZZAChannel(byte[] bytes)
         {
             var list = bytes.ToList();
 

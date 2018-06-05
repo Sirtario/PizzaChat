@@ -15,7 +15,10 @@ namespace PIZZA.Core
         {
             var valueList = value.ToList();
 
+            Length = PIZZAInt.FromBytes(valueList.ToArray());
+
             valueList.RemoveRange(0, 2);
+            valueList.RemoveRange(Length.Value, valueList.Count - Length.Value);
 
             Value = Encoding.UTF8.GetString(valueList.ToArray());
         }
