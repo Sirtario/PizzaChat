@@ -8,21 +8,16 @@ namespace PIZZA.Hub.Core
 {
     public class HubHeader
     {
-        private byte[] _protocollName;
-
-        private byte _protocollVersion;
-
+        private PIZZAInt3 _payloadLength = new PIZZAInt3();
+        private byte[] _protocollName = new byte[] { 0x50, 0x49, 0x5a, 0x5a, 0x41, 0x48};
+        private byte _protocollVersion = 1;
         private HubPacketTypes _packetType;
 
-        private PIZZAInt3 _payloadLength;
-
-        public byte[] ProtocollName => _protocollName;
-
-        public byte ProtocollVersion => _protocollVersion;
-
-        public HubPacketTypes PacketType => _packetType;
-
-        public PIZZAInt3 PayloadLength => _payloadLength;
+        public HubHeader( HubPacketTypes type)
+        {
+            _packetType = type;
+           
+        }
 
         private HubHeader(byte[] bytes)
         {
@@ -33,28 +28,36 @@ namespace PIZZA.Hub.Core
             tmp.RemoveAt(0);
             _packetType = (HubPacketTypes) tmp[0];
             tmp.RemoveAt(0);
-            _payloadLength = PIZZAInt3.FromBytes(tmp.GetRange(0, 3).ToArray());
+            _payloadLength = PIZZAInt3.FromBytes(tmp.ToArray());
             tmp.Clear();
         }
 
-        internal byte[] GetBytes(int payloadLength)
-        {
-            var bytes = _protocollName;
+        public byte[] ProtocollName => _protocollName;
 
-            bytes = bytes.Concat(new byte[] { _protocollVersion })
-                .Concat(new byte[] { (byte)_packetType })
-                .Concat(new byte[] { (byte)payloadLength })
+        public byte ProtocollVersion => _protocollVersion;
+
+        public HubPacketTypes PacketType => _packetType;
+
+        public int PayloadLength
+        {
+            get
+            {
+                return _payloadLength.Value;
+            }
+        }
+
+        public byte[] GetBytes(int payloadLength)
+        {
+            var bytes = ProtocollName;
+
+            _payloadLength.Value = payloadLength;
+
+            bytes = bytes.Concat(new byte[] { ProtocollVersion })
+                .Concat(new byte[] { (byte)PacketType })
+                .Concat(_payloadLength.GetBytes())
                 .ToArray();
 
             return bytes;
-        }
-
-        public HubHeader(byte protocollversion, HubPacketTypes type, PIZZAInt3 payloadlength)
-        {
-            _protocollName = Encoding.UTF8.GetBytes("PIZZAH");
-            _protocollVersion = protocollversion;
-            _packetType = type;
-            _payloadLength = payloadlength;
         }
 
         public static HubHeader FromBytes(byte[] bytes)

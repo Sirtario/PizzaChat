@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +18,9 @@ namespace Tests
 
             for (int i = 0; i < a.Length; i++)
             {
-                if (a[i]!=b[i])
-                {
-                    return false;
-                }
+                Assert.IsTrue(a[i] == b[i]);
             }
-
             return true;
         }
-
     }
 }
