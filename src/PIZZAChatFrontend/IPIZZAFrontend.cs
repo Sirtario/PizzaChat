@@ -20,6 +20,9 @@ namespace PIZZA.Client
         event Action Disconnect;
         event Action GetServers;
 
+        int HubPort { get; }
+        string HubHostname { get; }
+
         void ReceiveMessage(string Message, string sender, bool isWhispered);
 
         /// <summary>

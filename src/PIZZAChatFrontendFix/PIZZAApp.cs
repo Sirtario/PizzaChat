@@ -9,17 +9,16 @@ using PIZZA.Hub.Core.PayLoads;
 using PIZZA.ChatCore;
 using PIZZA.Chat.Core;
 using System.Timers;
+using PIZZA.Hub.Client;
 
 namespace PIZZA.Client
 {
     public class PIZZAApp
     {
         private TCPClient _tcpClientChat;
-        private TCPClient _tcpClientHub;
+        private HubClient _hubClient;
 
         private Timer _pingTimer;
-
-        public string HubHostName { get; set; }
 
         private List<Tuple<string, string, string, bool>> _servers;
         private IPIZZAFrontend _frontend;
@@ -55,7 +54,6 @@ namespace PIZZA.Client
             var payload = message.Payload as ChatPayloadPublish;
 
             varheader.Datatype = ChatPayloadDatatypes.Text;
-
             payload.Payload = Encoding.UTF8.GetBytes(str);
 
             return message;
@@ -70,52 +68,14 @@ namespace PIZZA.Client
 
         private void Frontend_GetServers()
         {
-            if(_tcpClientHub == null || !_tcpClientHub.IsAlive)
+            if(_hubClient != null)
             {
-                _tcpClientHub = new TCPClient(Hub.Core.TcpDelegate.IsPIZZAHubMessageComplete);
+                _hubClient.Stop();
             }
 
-            _tcpClientHub.TCPMessageReceived += _tcpClientHub_TCPMessageReceived;
+            _hubClient = new HubClient();
 
-            _tcpClientHub.Connect(HubHostName);
-
-            var message = HubMessageFactory.GetMessage(HubPacketTypes.HOSTLISTREQ);
-
-            _tcpClientHub.Send(message.GetBytes());
-        }
-
-        private void _tcpClientHub_TCPMessageReceived(object sender, TcpMessageReceivedEventArgs e)
-        {
-            var message = HubMessageFactory.GetMessage(e.Message);
-
-            switch (message.Header.PacketType)
-            {
-                //case HubPacketTypes.SERVERENLISTREQ:
-                //    break;
-                //case HubPacketTypes.CLIENTENLISTREQ:
-                //    break;
-                case HubPacketTypes.ENLISTACK:
-                    break;
-                //case HubPacketTypes.HOSTLISTREQ:
-                //    break;
-                case HubPacketTypes.HOSTLISTDAT:
-                    ShowServerlist(message.PayLoad as HubHostlistDatPayLoad);
-                    break;
-                //case HubPacketTypes.HOSTAVAILABLEREQ:
-                //    break;
-                case HubPacketTypes.HOSTAVAILABLEDAT:
-                    break;
-                //case HubPacketTypes.UNLISTREQ:
-                //    break;
-                case HubPacketTypes.UNLISTTACK:
-                    break;
-                //case HubPacketTypes.PING:
-                //    break;
-                case HubPacketTypes.PINGACK:
-                    break;
-                //default:
-                //    break;
-            }
+            _hubClient.Connect(_frontend.HubHostname, _frontend.HubPort);
         }
 
         private void ShowServerlist(HubHostlistDatPayLoad hubHostlistDatPayLoad)
@@ -184,7 +144,7 @@ namespace PIZZA.Client
             
             _tcpClientChat.TCPMessageReceived += TcpClientChat_TCPMessageReceived;
 
-            var port = Constants.DefaultPort;
+            var port = ChatCore.Constants.DefaultPort;
 
             if (hostname.Contains(':'))
             {

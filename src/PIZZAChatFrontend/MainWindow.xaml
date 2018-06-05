@@ -15,7 +15,7 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="327*"/>
         </Grid.RowDefinitions>
-        <WebBrowser x:Name="_browserControl" Margin="0,13,0,44" Grid.Row="1" Grid.ColumnSpan="2" LoadCompleted="BrowserControl_LoadCompleted"/>
+        <WebBrowser x:Name="_browserControl" Margin="0,13,0,44" Grid.Row="1" Grid.ColumnSpan="2" LoadCompleted="BrowserControl_LoadCompleted" Navigating="BrowserControl_Navigating"/>
         <Button Content="Senden" Click="SendMessage_Click" Grid.Row="1" Height="44" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Grid.Column="1"/>
 
         <Menu Height="26" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="2">

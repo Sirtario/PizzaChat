@@ -57,6 +57,8 @@ namespace PIZZAChatFrontend
                 e.Cancel = true;
 
                 ConnectTo?.Invoke(index);
+
+                Close();
             }
         }
     }

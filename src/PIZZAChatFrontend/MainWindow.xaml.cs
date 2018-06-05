@@ -1,5 +1,6 @@
 ﻿using PIZZA.Chat.Core;
 using PIZZA.Client;
+using PIZZA.Client.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -30,6 +31,10 @@ namespace PIZZAChatFrontend
         private string _channels = string.Empty;
         private string _peoples = string.Empty;
         private string _mainHtml;
+        private List<PIZZAChannel> _allChannels;
+
+        public int HubPort => Settings.Default.HubPort;
+        public string HubHostname => Settings.Default.HubHostname;
 
         public MainWindow()
         {
@@ -143,14 +148,19 @@ namespace PIZZAChatFrontend
 
         public void RefreshStatus(List<string> usersInChannel, List<PIZZAChannel> channels, string channel, string hostname)
         {
+            _allChannels = channels;
+
+            _members = string.Empty;
+            _channels = string.Empty;
+
             foreach (var user in usersInChannel)
             {
-                _members += $"<div class=\"member\">{user}</div>";
+                _members += $"<div class=\"member\"><a href=\"member|{user}\">{user}</a></div>";
             }
 
             foreach (var currentChannel in channels)
             {
-                _channels += $"<div class=\"channel\">{BeautifyText(currentChannel.Channelname.Value)}</div>";
+                _channels += $"<div class=\"channel\"><a href=\"channel|{currentChannel.Channelname.Value}\">{BeautifyText(currentChannel.Channelname.Value)}</a></div>";
             }
 
             _status = $"<div class=\"current-host\">{BeautifyText(hostname)}<div class=\"current-channel\">{BeautifyText(channel)}</div></div>";
@@ -202,6 +212,42 @@ namespace PIZZAChatFrontend
             _messages += $"<div class=\"system-message\">{text}</div>";
 
             ShowInfo();
+        }
+
+        private void BrowserControl_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            if(e.Uri == null)
+            {
+                return;
+            }
+
+            var splitLink = e.Uri.AbsolutePath.Split(new string[] { "%7C" }, StringSplitOptions.None);
+
+            if(splitLink.Length >= 2)
+            {
+                e.Cancel = true;
+
+                switch (splitLink[0])
+                {
+                    case "channel":
+
+                        var channel = _allChannels.Find(c => c.Channelname.Value == splitLink[1]);
+
+                        if(channel == null)
+                        {
+                            return;
+                        }
+
+                        EnterRoom?.Invoke(channel);
+
+                        break;
+                    case "member":
+
+                        //TODO: whisper to client
+
+                        break;
+                }
+            }
         }
     }
 }
