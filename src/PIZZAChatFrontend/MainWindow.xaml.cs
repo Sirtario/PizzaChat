@@ -160,7 +160,16 @@ namespace PIZZAChatFrontend
 
             foreach (var currentChannel in channels)
             {
-                _channels += $"<div class=\"channel\"><a href=\"channel|{currentChannel.Channelname.Value}\">{BeautifyText(currentChannel.Channelname.Value)}</a></div>";
+                var channelText = BeautifyText(currentChannel.Channelname.Value);
+
+                if(currentChannel.Channelname.Value == channel)
+                {
+                    _channels += $"<div class=\"current-channel-channellist\">{channelText}</div>";
+                }
+                else
+                {
+                    _channels += $"<div class=\"channel\"><a href=\"channel|{currentChannel.Channelname.Value}\">{channelText}</a></div>";
+                }
             }
 
             _status = $"<div class=\"current-host\">{BeautifyText(hostname)}<div class=\"current-channel\">{BeautifyText(channel)}</div></div>";
