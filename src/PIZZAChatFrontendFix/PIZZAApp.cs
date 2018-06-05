@@ -23,6 +23,8 @@ namespace PIZZA.Client
 
         private List<Tuple<string, string, string, bool>> _servers;
         private IPIZZAFrontend _frontend;
+        private PIZZAChannel _enteringChannel;
+        private int _hostIndex;
 
         public void Prepare(IPIZZAFrontend frontend)
         {
@@ -135,6 +137,8 @@ namespace PIZZA.Client
                 varheader.Password = _frontend.GetPassword(obj.Channelname.Value);
             }
 
+            _enteringChannel = obj;
+
             _tcpClientChat.Send(message.GetBytes());
         }
 
@@ -152,6 +156,8 @@ namespace PIZZA.Client
                 return;
             }
 
+            _hostIndex = obj;
+
             var hostname = _servers[obj].Item3;
 
             InitChatTcpConnection(hostname);
@@ -159,7 +165,7 @@ namespace PIZZA.Client
             var message = new PizzaChatMessage(Packettypes.CONNECT);
             var varheader = message.VariableHeader as ChatVarHeaderConnect;
 
-            varheader.ClientID = _frontend.GetClientId();
+            varheader.ClientID = _frontend.GetClientId(_servers[_hostIndex].Item1);
 
             if(_servers[obj].Item4)
             {
@@ -234,21 +240,21 @@ namespace PIZZA.Client
             var varheader = message.VariableHeader as ChatVarHeaderStatus;
             var payload = message.Payload as ChatPayloadStatus;
 
-            _frontend.RefreshStatus(payload.ClientsInCurrentChannel.ToList(), payload.Channels.ToList(), varheader.CurrentChannel);
+            _frontend.RefreshStatus(payload.ClientsInCurrentChannel.ToList(), payload.Channels.ToList(), varheader.CurrentChannel, _servers[_hostIndex].Item1);
         }
 
         private void ReceiveEnterChannelAck(PizzaChatMessage message)
         {
             var varheader = message.VariableHeader as ChatVarHeaderEnterChannelAck;
 
-            _frontend.ShowEnterChannelReturncode(varheader.ReturnCode);
+            _frontend.ShowEnterChannelReturncode(varheader.ReturnCode, _enteringChannel.Channelname.Value);
         }
 
         private void ConnectionAccepted(PizzaChatMessage message)
         {
             var varheader = message.VariableHeader as ChatVarHeaderConnAck;
 
-            _frontend.ShowReturncode(varheader.Returncode);
+            _frontend.ShowReturncode(varheader.Returncode, _servers[_hostIndex].Item1);
 
             if(varheader.Returncode != ChatConnectReturncode.ACCEPTED)
             {

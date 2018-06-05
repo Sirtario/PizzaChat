@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,9 +52,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Core\Core.csproj">
+      <Project>{EE560B1D-945E-461E-82D1-A1308363E58D}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\PIZZAChatFrontend\PIZZAChatFrontend.csproj">
       <Project>{9209C287-4623-4351-BDFF-F23E8AF17342}</Project>
       <Name>PIZZAChatFrontend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\PizzaChatGeneral\PizzaChatCore.csproj">
+      <Project>{FAE2D599-8632-40D4-A1FD-AF101B85B8C1}</Project>
+      <Name>PizzaChatCore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

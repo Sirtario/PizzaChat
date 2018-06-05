@@ -25,9 +25,9 @@ namespace PIZZAChatFrontend
     public partial class MainWindow : Window, IPIZZAFrontend
     {
         private string _messages = string.Empty;
-        private string _status = "Hier koennte Ihr Status stehen!";
-        private string _members = "Member";
-        private string _channels = "Channel";
+        private string _status = string.Empty;
+        private string _members = string.Empty;
+        private string _channels = string.Empty;
         private string _peoples = string.Empty;
         private string _mainHtml;
 
@@ -52,7 +52,7 @@ namespace PIZZAChatFrontend
         public void ReceiveMessage(string message, string sender, bool isWhispered)
         {
             var htmlClass = "message";
-            message = BeautifullText(message);
+            message = BeautifyText(message);
 
             if (isWhispered)
             {
@@ -64,7 +64,7 @@ namespace PIZZAChatFrontend
             ShowInfo();
         }
 
-        private string BeautifullText(string message)
+        private string BeautifyText(string message)
         {
             message = message.Replace("Ü", "&Uuml;").Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;").Replace("ß", "&szlig;");
 
@@ -141,29 +141,67 @@ namespace PIZZAChatFrontend
             serverWindow.Show();
         }
 
-        public void RefreshStatus(List<string> usersInChannel, List<PIZZAChannel> channels, string channel)
+        public void RefreshStatus(List<string> usersInChannel, List<PIZZAChannel> channels, string channel, string hostname)
         {
-            throw new NotImplementedException();
+            foreach (var user in usersInChannel)
+            {
+                _members += $"<div class=\"member\">{user}</div>";
+            }
+
+            foreach (var currentChannel in channels)
+            {
+                _channels += $"<div class=\"channel\">{BeautifyText(currentChannel.Channelname.Value)}</div>";
+            }
+
+            _status = $"<div class=\"current-host\">{BeautifyText(hostname)}<div class=\"current-channel\">{BeautifyText(channel)}</div></div>";
+
+            ShowInfo();
         }
 
-        public string GetClientId()
+        public string GetClientId(string hostname)
         {
-            throw new NotImplementedException();
+            var window = new GetText($"ClientId:", $"server: {BeautifyText(hostname)}");
+
+            window.ShowDialog();
+
+            return window.Value;
         }
 
         public string GetPassword(string topic)
         {
-            throw new NotImplementedException();
+            var window = new GetText($"Password:", topic);
+
+            window.ShowDialog();
+
+            return window.Value;
         }
 
-        public void ShowReturncode(ChatConnectReturncode returncode)
+        public void ShowReturncode(ChatConnectReturncode returncode, string hostname)
         {
-            throw new NotImplementedException();
+            var text = $"connect to server: {BeautifyText(hostname)}";
+
+            if (returncode != ChatConnectReturncode.ACCEPTED)
+            {
+                text = $"failed to connect: {BeautifyText(returncode.ToString())}";
+            }
+
+            _messages += $"<div class=\"system-message\">{text}</div>";
+
+            ShowInfo();
         }
 
-        public void ShowEnterChannelReturncode(ChatEnterChannelReturnCode returnCode)
+        public void ShowEnterChannelReturncode(ChatEnterChannelReturnCode returncode, string channel)
         {
-            throw new NotImplementedException();
+            var text = $"enter channel {BeautifyText(channel)}";
+
+            if (returncode != ChatEnterChannelReturnCode.Accepted)
+            {
+                text = $"failed to enter channel: {returncode.ToString()}";
+            }
+
+            _messages += $"<div class=\"system-message\">{text}</div>";
+
+            ShowInfo();
         }
     }
 }

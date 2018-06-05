@@ -1,0 +1,14 @@
+﻿<Window x:Class="PIZZA.Client.GetText"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PIZZA.Client"
+        mc:Ignorable="d" Height="104.83" Width="300">
+    <Grid>
+        <Label x:Name="_label" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="_textBox" Height="23" Margin="124,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="TextBox_KeyDown"/>
+        <Button Content="OK" Margin="0,0,10,11" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" Click="Button_Click"/>
+
+    </Grid>
+</Window>

@@ -57,9 +57,16 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetText.xaml.cs">
+      <DependentUpon>GetText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServerList.xaml.cs">
       <DependentUpon>ServerList.xaml</DependentUpon>
     </Compile>
+    <Page Include="GetText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,6 +98,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -101,9 +109,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -112,15 +117,16 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\pizza_client_32x32.ico" />
-    <Content Include="ServerList.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="ServerList.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Test.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{EE560B1D-945E-461E-82D1-A1308363E58D}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PizzaChatGeneral\PizzaChatCore.csproj">
       <Project>{fae2d599-8632-40d4-a1fd-af101b85b8c1}</Project>
       <Name>PizzaChatCore</Name>

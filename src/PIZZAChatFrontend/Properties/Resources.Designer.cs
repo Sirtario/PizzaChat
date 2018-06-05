@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PIZZAChatFrontend.Properties {
+namespace PIZZA.Client.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace PIZZAChatFrontend.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PIZZAChatFrontend.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PIZZA.Client.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,52 +61,42 @@ namespace PIZZAChatFrontend.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
-        /// </summary>
-        internal static string Content {
-            get {
-                return ResourceManager.GetString("Content", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die &lt;!doctype html&gt;
         ///&lt;html&gt;
         ///  &lt;head&gt;
         ///    &lt;style&gt;
         ///	body
         ///	{
-        ///		background-color:#F2F2F2;
+        ///		background-color:#EEEEF2;
         ///	}
         ///	.mainwindow
         ///	{
-        ///		height:100%%;
+        ///		height:100%;
+        ///		padding-left:200px;
         ///	}
         ///	.status 
         ///	{
         ///		color:gray;
         ///		text-decoration:none;
         ///		font-family:Arial;
-        ///		float:top;
+        ///		background-color:#E6E7E8;
+        ///		width:100%;
         ///		position:fixed;
-        ///		height: 20px;
-        ///		padding-left:215px;
         ///	}
         ///	.sidebar
         ///	{
         ///		text-decoration:none;
         ///		float:left;
         ///		position:fixed;
-        ///		padding-top: 20px;
         ///		min-width: 200px;
-        ///		border-right:2px solid black;
+        ///		border-right:1px solid gray;
         ///		height:100%;
+        ///		background-color:#E6E7E8;
         ///	}
         ///	.members
         ///	{
         ///		color:orange;
-        ///		text-decoration:none;
-        /// [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///		text- [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         internal static string Content1 {
             get {
@@ -170,19 +160,6 @@ namespace PIZZAChatFrontend.Properties {
         internal static string ServerList {
             get {
                 return ResourceManager.GetString("ServerList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die a 
-        ///{
-        ///	color:black;
-        ///	text-decoration:none;
-        ///} ähnelt.
-        /// </summary>
-        internal static string ServerList1 {
-            get {
-                return ResourceManager.GetString("ServerList1", resourceCulture);
             }
         }
     }
