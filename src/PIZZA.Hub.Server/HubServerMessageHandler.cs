@@ -11,7 +11,7 @@ using PIZZA.Hub.Interface;
 
 namespace PIZZA.Hub
 {
-    class HubServerMessageHandler
+    public class HubServerMessageHandler
     {
         private HubPizzaServerList _serverlist;
         private int _MaxID = 1;

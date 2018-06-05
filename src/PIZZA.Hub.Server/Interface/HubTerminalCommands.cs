@@ -7,7 +7,7 @@ using PIZZA.Hub.Core;
 
 namespace PIZZA.Hub.Interface
 {
-    class HubTerminalCommands
+    public class HubTerminalCommands
     {
         private HubPizzaServerList _serverlist;
         private HubPizzaClientList _clientlist;

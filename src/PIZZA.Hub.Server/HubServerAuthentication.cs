@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PIZZA.Hub
 {
-    class HubServerAuthentication
+    public class HubServerAuthentication
     {
         private string _authenticationpassword;
         private MD5 _md5;

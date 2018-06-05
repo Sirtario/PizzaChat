@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PIZZA.Hub
 {
-    class HubRespondingHosts
+    public class HubRespondingHosts
     {
         private Dictionary<int, int> _respondinghosts;
 

@@ -8,7 +8,7 @@ using PIZZA.Hub.Core;
 
 namespace PIZZA.Hub
 {
-    class HubPizzaServerList
+    public class HubPizzaServerList
     {
         private Dictionary<int, HubHostInfo> _serverList;
 

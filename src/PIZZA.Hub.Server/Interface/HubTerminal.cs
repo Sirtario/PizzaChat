@@ -7,9 +7,9 @@ using PIZZA.Hub.Core;
 
 namespace PIZZA.Hub.Interface
 {
-    delegate int cmdFunc(string[] T);
+    public delegate int cmdFunc(string[] T);
 
-    class HubTerminal
+   public class HubTerminal
     {
 
         private Dictionary<string,cmdFunc> _commands = new Dictionary<string,cmdFunc>();

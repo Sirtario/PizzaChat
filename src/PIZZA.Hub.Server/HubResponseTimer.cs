@@ -7,7 +7,7 @@ using PIZZA.Hub;
 
 namespace PIZZA.Hub
 {
-    class HubResponseTimer
+    public class HubResponseTimer
     {
         private int _intervalTime = 15000;
 

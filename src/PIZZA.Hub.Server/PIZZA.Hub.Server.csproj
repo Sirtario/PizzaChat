@@ -1,16 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <ApplicationIcon />
-    <StartupObject />
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj" />
-    <ProjectReference Include="..\PIZZA.Hub.Server\PIZZA.Hub.Server.csproj" />
     <ProjectReference Include="..\TCPLibrary\TCPLibrary.csproj" />
   </ItemGroup>
 

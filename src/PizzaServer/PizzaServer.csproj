@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PIZZA.Hub.Client\PIZZA.Hub.Client.csproj" />
+    <ProjectReference Include="..\PIZZA.Hub.Server\PIZZA.Hub.Server.csproj" />
     <ProjectReference Include="..\PizzaChatServer\PizzaChatServer.csproj" />
     <ProjectReference Include="..\TCPLibrary\TCPLibrary.csproj" />
   </ItemGroup>
