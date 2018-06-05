@@ -19,7 +19,7 @@ namespace PIZZA.Hub.Core
                 return false;
             }
 
-            return message.Header.PayloadLength.Value >= message.PayLoad.GetBytes().Length;
+            return message.Header.PayloadLength >= message.PayLoad.GetBytes().Length;
         }
     }
 }

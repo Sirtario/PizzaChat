@@ -17,7 +17,7 @@ namespace PIZZA.Hub.Core
 
             PIZZAInt3 payLoadLength = new PIZZAInt3() { Value = this.PayLoad.GetBytes().Length };
 
-            Header = new HubHeader(1 ,type, payLoadLength); 
+            Header = new HubHeader(type); 
         }
 
         public byte[] GetBytes()
