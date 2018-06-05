@@ -66,6 +66,7 @@
     <Compile Include="ChatFixedHeaderTest.cs" />
     <Compile Include="HubMessageTests.cs" />
     <Compile Include="HubFixedHeaderTests.cs" />
+    <Compile Include="HubPayloadTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
