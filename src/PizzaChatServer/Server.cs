@@ -1,5 +1,6 @@
 ﻿using ACX.ViciOne.TCPLibrary;
 using PIZZA.Chat.Core;
+using PIZZA.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace PIZZA.Chat.Server
             _tcpServer = server ?? throw new ArgumentNullException();
 
             DefaultChannel = "home";
+            Connections = new List<ChatClientConnection>();
             Channels = new List<PIZZAChannel>();
             Channels.Add(new PIZZAChannel(new PIZZA.Core.PIZZAString() { Value = "home" }, 0));
 
@@ -47,7 +49,7 @@ namespace PIZZA.Chat.Server
         /// <summary>
         /// conntains all PIZZAChat Connections
         /// </summary>
-        public List<ChatClientConnection> Connections { get; private set; }
+        public List<ChatClientConnection> Connections { get; private set; } 
 
         /// <summary>
         /// The Channel All new clients connect to
@@ -71,19 +73,21 @@ namespace PIZZA.Chat.Server
         }
 
         private void _connectManager_ClientConnected(ChatClientConnection obj)
+
         {
             obj.CourentChannel = DefaultChannel;
-            obj.PingTimer.Elapsed += PingTimer_Elapsed;
+            obj.PingTimer.Elapsed += (s,e) =>{
+                if (_tcpServer.ConnectedClients.Any(c => c == obj.ClientIP))
+                {
+                    _tcpServer.DisconnectClient(obj.ClientIP);
+                }
+            };
             Connections.Add(obj);
 
             _statusManager.SendStatus(obj, Connections.FindAll(c=>c.CourentChannel== obj.CourentChannel),Channels );
         }
 
-        private void PingTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            _tcpServer.DisconnectClient((sender as ChatClientConnection).ClientIP);
-        }
-
+        //does the main logic
         private void _tcpServer_TCPMessagereceived(object sender, TcpServerMessageReceivedEventArgs e)
         {
             PizzaChatMessage message;
@@ -94,12 +98,11 @@ namespace PIZZA.Chat.Server
             }
             catch (Exception)
             {
-
                 throw;
             }
 
             // check message header
-            if (message.FixedHeader.Protokollname != Encoding.UTF8.GetBytes("PIZZAC")) 
+            if (!message.FixedHeader.Protokollname.CompareMenberwise(new byte[] { 0x50, 0x49, 0x5a, 0x5a, 0x41, 0x43 }) )
             {
                 throw new Exception("False Protokoll or malformed Packet!");
             }
@@ -109,19 +112,15 @@ namespace PIZZA.Chat.Server
                 throw new Exception("False Protokoll or malformed Packet!");
             }
 
-            if (message.FixedHeader.RemainingLength != message.GetBytes().Length -13)
-            {
-                throw new Exception("False Protokoll or malformed Packet!");
-            }
-
             var myconnection = Connections.Find(prop => prop.ClientIP == e.Sender);
+            
             var usersInMyChannel = Connections.FindAll(prop => prop.CourentChannel == myconnection.CourentChannel);
 
-            //dipatches the message to the managers 
+            //dispatches the message to the managers 
             switch (message.FixedHeader.PacketType)
             {
                 case Packettypes.CONNECT:
-                    _connectManager.RecieveConnect(message, myconnection);
+                    _connectManager.RecieveConnect(message, e.Sender);
                     break;
                 case Packettypes.GETSTATUS:
                     _statusManager.RecieveGetStatus( myconnection, usersInMyChannel, Channels);

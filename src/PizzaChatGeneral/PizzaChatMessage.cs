@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace PIZZA.Chat.Core
 {
@@ -70,6 +71,7 @@ namespace PIZZA.Chat.Core
             var list = bytes.ToList();
 
             FixedHeader = ChatFixedHeader.FromBytes(list.GetRange(0,13).ToArray());
+
             list.RemoveRange(0, 13);
 
             switch (FixedHeader.PacketType)
@@ -151,10 +153,13 @@ namespace PIZZA.Chat.Core
         {
             var bytes = new List<byte>();
 
-            bytes.AddRange(FixedHeader.GetBytes(VariableHeader.GetBytes().Length+ Payload.GetBytes().Length));
             bytes.AddRange(VariableHeader.GetBytes());
             bytes.AddRange(Payload.GetBytes());
 
+            FixedHeader.RemainingLength = bytes.Count;
+
+            bytes.InsertRange(0, FixedHeader.GetBytes(bytes.Count));
+            
             return bytes.ToArray();
         }
     }

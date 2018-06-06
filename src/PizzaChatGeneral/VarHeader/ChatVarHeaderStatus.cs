@@ -31,11 +31,6 @@ namespace PIZZA.Chat.Core
 
             ChannelCount = list[0];
             list.RemoveAt(0);
-
-            if (list.Count != 0)
-            {
-                throw new Exception();
-            }
         }
 
         /// <summary>
