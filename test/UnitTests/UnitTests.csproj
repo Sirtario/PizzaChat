@@ -67,7 +67,7 @@
     <Compile Include="HubMessageTests.cs" />
     <Compile Include="HubFixedHeaderTests.cs" />
     <Compile Include="HubPayloadTests.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="HubIntegrationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

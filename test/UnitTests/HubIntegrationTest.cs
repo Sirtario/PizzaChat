@@ -9,7 +9,7 @@ using Tests.Mocks;
 namespace Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class HubIntegrationTest
     {
         [TestMethod]
         public void TestMethod1()
