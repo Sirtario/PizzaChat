@@ -8,18 +8,14 @@ namespace PIZZA.Chat.Core
     {
         public static bool IsPIZZAChatMessageComplete(byte[] bytes)
         {
-            PizzaChatMessage message;
-
-            try
-            {
-                message = PizzaChatMessage.FromBytes(bytes);
-            }
-            catch
+            if(bytes.Length < 13)
             {
                 return false;
             }
 
-            return message.FixedHeader.RemainingLength >= message.Payload.GetBytes().Length + message.VariableHeader.GetBytes().Length;
+            var fixedHeader = ChatFixedHeader.FromBytes(bytes);
+
+            return fixedHeader.RemainingLength >= bytes.Length + 13;
         }
     }
 }

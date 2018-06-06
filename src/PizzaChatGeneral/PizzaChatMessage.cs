@@ -153,10 +153,13 @@ namespace PIZZA.Chat.Core
         {
             var bytes = new List<byte>();
 
-            bytes.AddRange(FixedHeader.GetBytes(VariableHeader.GetBytes().Length+ Payload.GetBytes().Length));
             bytes.AddRange(VariableHeader.GetBytes());
             bytes.AddRange(Payload.GetBytes());
 
+            FixedHeader.RemainingLength = bytes.Count;
+
+            bytes.InsertRange(0, FixedHeader.GetBytes(bytes.Count));
+            
             return bytes.ToArray();
         }
     }
