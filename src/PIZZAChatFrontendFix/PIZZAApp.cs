@@ -85,6 +85,12 @@ namespace PIZZA.Client
             _hubClient = new HubClient();
 
             _hubClient.Connect(_frontend.HubHostname, _frontend.HubPort);
+
+            var hosts = _hubClient.GetHostlist(true, false, false);
+
+            _servers = hosts.Select(h => new Tuple<string, string, string, bool>(h.Friendlyname, h.Description, h.Hostname, h.RequiresPassword)).ToList();
+
+            _frontend.ShowServerlist(_servers);
         }
 
         private void ShowServerlist(HubHostlistDatPayLoad hubHostlistDatPayLoad)
