@@ -30,6 +30,7 @@ namespace Pizza.Server
             {
                 Config = new PIZZAChatConfig();
 
+                SerializeConfig(Config, "Config.xml");
             }
 
             //todo: namen aus config
