@@ -6,7 +6,7 @@ namespace PIZZA.Chat.Core
 {
     public enum ChatEnterChannelReturnCode
     {
-        Acceptded,
+        Accepted,
         Denied,
         DeniedClientBannedFromChannel,
         DeniedBadPassword,

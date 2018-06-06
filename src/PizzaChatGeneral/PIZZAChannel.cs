@@ -29,6 +29,12 @@ namespace PIZZA.Chat.Core
             }
         }
 
+        public PIZZAChannel()
+        {
+            Channelname = new PIZZAString();
+            HasPassword = 0;
+        }
+
         public int Length => GetBytes().Length;
 
         public PIZZAString Channelname { get; set; }

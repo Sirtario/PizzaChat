@@ -19,6 +19,10 @@ namespace PIZZA.Client
         event Action<int> Connect;
         event Action Disconnect;
         event Action GetServers;
+        event Action<string> ConnectDirectly;
+
+        int HubPort { get; }
+        string HubHostname { get; }
 
         void ReceiveMessage(string Message, string sender, bool isWhispered);
 
@@ -27,10 +31,10 @@ namespace PIZZA.Client
         /// </summary>
         /// <param name="servers"></param>
         void ShowServerlist(List<Tuple<string, string, string, bool>> servers);
-        void RefreshStatus(List<string> usersInChannel, List<PIZZAChannel> channels, string channel);
-        string GetClientId();
+        void RefreshStatus(List<string> usersInChannel, List<PIZZAChannel> channels, string channel, string hostname);
+        string GetClientId(string hostname);
         string GetPassword(string topic);
-        void ShowReturncode(ChatConnectReturncode returncode);
-        void ShowEnterChannelReturncode(ChatEnterChannelReturnCode returnCode);
+        void ShowReturncode(ChatConnectReturncode returncode, string hostname);
+        void ShowEnterChannelReturncode(ChatEnterChannelReturnCode returnCode, string channel);
     }
 }

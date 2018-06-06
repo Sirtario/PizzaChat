@@ -59,5 +59,108 @@ namespace PIZZA.Client.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;!doctype html&gt;
+        ///&lt;html&gt;
+        ///  &lt;head&gt;
+        ///    &lt;style&gt;
+        ///	body
+        ///	{
+        ///		background-color:#EEEEF2;
+        ///	}
+        ///	.mainwindow
+        ///	{
+        ///		height:100%;
+        ///		padding-left:200px;
+        ///	}
+        ///	.status 
+        ///	{
+        ///		color:gray;
+        ///		text-decoration:none;
+        ///		font-family:Arial;
+        ///		background-color:#E6E7E8;
+        ///		width:100%;
+        ///		position:fixed;
+        ///	}
+        ///	.sidebar
+        ///	{
+        ///		text-decoration:none;
+        ///		float:left;
+        ///		position:fixed;
+        ///		min-width: 200px;
+        ///		border-right:1px solid gray;
+        ///		height:100%;
+        ///		background-color:#E6E7E8;
+        ///	}
+        ///	.members
+        ///	{
+        ///		color:orange;
+        ///		text- [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        internal static string Content1 {
+            get {
+                return ResourceManager.GetString("Content1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        /// </summary>
+        internal static System.Drawing.Icon pizza {
+            get {
+                object obj = ResourceManager.GetObject("pizza", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        /// </summary>
+        internal static System.Drawing.Icon pizza_client {
+            get {
+                object obj = ResourceManager.GetObject("pizza_client", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        /// </summary>
+        internal static System.Drawing.Icon pizza_client_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("pizza_client_32x32", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;!doctype html&gt;
+        ///&lt;html&gt;
+        ///  &lt;head&gt;
+        ///  &lt;link href=&quot;ServerList.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+        ///  &lt;style&gt;
+        ///	a 
+        ///	{
+        ///		color:black;
+        ///		text-decoration:none;
+        ///		font-family:Arial;
+        ///	}
+        ///  &lt;/style&gt;
+        ///  &lt;/head&gt;
+        ///  &lt;body&gt;
+        ///    &lt;div class=&quot;server&quot;&gt;
+        ///      &lt;table&gt;
+        ///        __SERVER__
+        ///      &lt;/table&gt;
+        ///    &lt;/div&gt;
+        ///  &lt;/body&gt;
+        ///&lt;/html&gt; ähnelt.
+        /// </summary>
+        internal static string ServerList {
+            get {
+                return ResourceManager.GetString("ServerList", resourceCulture);
+            }
+        }
     }
 }

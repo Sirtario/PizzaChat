@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{041DDDE5-55C4-4A99-B264-244F89C8DE18}</ProjectGuid>
+    <ProjectGuid>{1CD1D532-6261-446A-9850-50BBFAEB1A13}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PIZZA.Client</RootNamespace>
-    <AssemblyName>PIZZAChatFrontendFix</AssemblyName>
+    <RootNamespace>PIZZAChatFrontend_Test</RootNamespace>
+    <AssemblyName>PIZZAChatFrontend-Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,34 +48,21 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PIZZAApp.cs" />
     <Compile Include="Programm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{ee560b1d-945e-461e-82d1-a1308363e58d}</Project>
+    <ProjectReference Include="..\..\src\Core\Core.csproj">
+      <Project>{EE560B1D-945E-461E-82D1-A1308363E58D}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PIZZA.Hub.Client\PIZZA.Hub.Client.csproj">
-      <Project>{36249C51-BFA0-46BA-91CE-B5258D108583}</Project>
-      <Name>PIZZA.Hub.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj">
-      <Project>{ac93b995-7638-43c8-83bd-50ef50d0d5dd}</Project>
-      <Name>PIZZA.Hub.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PIZZAChatFrontend\PIZZAChatFrontend.csproj">
-      <Project>{9209c287-4623-4351-bdff-f23e8af17342}</Project>
+    <ProjectReference Include="..\..\src\PIZZAChatFrontend\PIZZAChatFrontend.csproj">
+      <Project>{9209C287-4623-4351-BDFF-F23E8AF17342}</Project>
       <Name>PIZZAChatFrontend</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PizzaChatGeneral\PizzaChatCore.csproj">
-      <Project>{fae2d599-8632-40d4-a1fd-af101b85b8c1}</Project>
+    <ProjectReference Include="..\..\src\PizzaChatGeneral\PizzaChatCore.csproj">
+      <Project>{FAE2D599-8632-40D4-A1FD-AF101B85B8C1}</Project>
       <Name>PizzaChatCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TCPLibrary\TCPLibrary.csproj">
-      <Project>{546d5d2c-25f0-4973-8a94-3eb4952a658b}</Project>
-      <Name>TCPLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

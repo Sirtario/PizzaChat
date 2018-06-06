@@ -26,8 +26,10 @@ namespace PIZZA.Hub.Client
         private ManualResetEventSlim _receivedUnlistack;
 
         private ManualResetEventSlim _receivedPingack;
+
         private int _hostIdentifier;
         private int _interval;
+
         private System.Timers.Timer _pingTimer;
 
         public void Connect(string host, int port)
@@ -39,6 +41,12 @@ namespace PIZZA.Hub.Client
             _tcpConnection.TCPMessageReceived += TcpConnection_TCPMessageReceived;
 
             _tcpConnection.Connect(host, port);
+        }
+
+        public void Stop()
+        {
+            _pingTimer?.Dispose();
+            _tcpConnection?.Dispose();
         }
 
         private void TcpConnection_TCPMessageReceived(object sender, TcpMessageReceivedEventArgs e)

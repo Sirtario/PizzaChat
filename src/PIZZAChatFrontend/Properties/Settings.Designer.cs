@@ -22,5 +22,29 @@ namespace PIZZA.Client.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        public string HubHostname {
+            get {
+                return ((string)(this["HubHostname"]));
+            }
+            set {
+                this["HubHostname"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("56602")]
+        public int HubPort {
+            get {
+                return ((int)(this["HubPort"]));
+            }
+            set {
+                this["HubPort"] = value;
+            }
+        }
     }
 }

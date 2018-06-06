@@ -4,9 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIZZAChatFrontend"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        mc:Ignorable="d" Title="PIZZA Chat" d:DesignWidth="754"
+        Background="Beige" Height="522.333">
+    <Grid Margin="-1,0,1,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="327*"/>
+        </Grid.RowDefinitions>
+        <WebBrowser x:Name="_browserControl" Margin="0,13,0,44" Grid.Row="1" Grid.ColumnSpan="2" LoadCompleted="BrowserControl_LoadCompleted" Navigating="BrowserControl_Navigating"/>
+        <Button Content="Senden" Click="SendMessage_Click" Grid.Row="1" Height="44" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Grid.Column="1"/>
+
+        <Menu Height="26" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <MenuItem Header="Datei">
+                <MenuItem Header="Chatverlauf speichern"/>
+            </MenuItem>
+            <MenuItem Header="Server">
+                <MenuItem Header="Serverliste anzeigen" Click="ListServers_Click"/>
+                <MenuItem Header="Direkt verbinden" Click="MenuItemDirectConnect_Click"/>
+                <MenuItem Header="Verbindung beenden" Click="Disconnect_Click"/>
+            </MenuItem>
+        </Menu>
+        <TextBox KeyDown="Textbox_KeyDown" x:Name="_textbox" Grid.ColumnSpan="2" Margin="0,0,75,0" Grid.Row="1" TextWrapping="Wrap" Height="44" VerticalAlignment="Bottom"/>
+
     </Grid>
 </Window>

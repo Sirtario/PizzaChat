@@ -9,20 +9,21 @@ using PIZZA.Hub.Core.PayLoads;
 using PIZZA.ChatCore;
 using PIZZA.Chat.Core;
 using System.Timers;
+using PIZZA.Hub.Client;
 
 namespace PIZZA.Client
 {
     public class PIZZAApp
     {
         private TCPClient _tcpClientChat;
-        private TCPClient _tcpClientHub;
+        private HubClient _hubClient;
 
         private Timer _pingTimer;
 
-        public string HubHostName { get; set; }
-
         private List<Tuple<string, string, string, bool>> _servers;
         private IPIZZAFrontend _frontend;
+        private PIZZAChannel _enteringChannel;
+        private int _hostIndex;
 
         public void Prepare(IPIZZAFrontend frontend)
         {
@@ -32,8 +33,17 @@ namespace PIZZA.Client
             frontend.GetServers += Frontend_GetServers;
             frontend.SendMessage += Frontend_SendMessage;
             frontend.WhisperMessage += Frontend_WhisperMessage;
+            frontend.ConnectDirectly += Frontend_ConnectDirectly;
 
             _frontend = frontend;
+        }
+
+        private void Frontend_ConnectDirectly(string obj)
+        {
+            _servers.Clear();
+            _servers.Add(new Tuple<string, string, string, bool>(obj, obj, obj, false));
+
+            Frontend_Connect(0);
         }
 
         private void Frontend_WhisperMessage(string arg1, string arg2)
@@ -53,7 +63,6 @@ namespace PIZZA.Client
             var payload = message.Payload as ChatPayloadPublish;
 
             varheader.Datatype = ChatPayloadDatatypes.Text;
-
             payload.Payload = Encoding.UTF8.GetBytes(str);
 
             return message;
@@ -68,52 +77,14 @@ namespace PIZZA.Client
 
         private void Frontend_GetServers()
         {
-            if(_tcpClientHub == null || !_tcpClientHub.IsAlive)
+            if(_hubClient != null)
             {
-                _tcpClientHub = new TCPClient(Hub.Core.TcpDelegate.IsPIZZAHubMessageComplete);
+                _hubClient.Stop();
             }
 
-            _tcpClientHub.TCPMessageReceived += _tcpClientHub_TCPMessageReceived;
+            _hubClient = new HubClient();
 
-            _tcpClientHub.Connect(HubHostName);
-
-            var message = HubMessageFactory.GetMessage(HubPacketTypes.HOSTLISTREQ);
-
-            _tcpClientHub.Send(message.GetBytes());
-        }
-
-        private void _tcpClientHub_TCPMessageReceived(object sender, TcpMessageReceivedEventArgs e)
-        {
-            var message = HubMessageFactory.GetMessage(e.Message);
-
-            switch (message.Header.PacketType)
-            {
-                //case HubPacketTypes.SERVERENLISTREQ:
-                //    break;
-                //case HubPacketTypes.CLIENTENLISTREQ:
-                //    break;
-                case HubPacketTypes.ENLISTACK:
-                    break;
-                //case HubPacketTypes.HOSTLISTREQ:
-                //    break;
-                case HubPacketTypes.HOSTLISTDAT:
-                    ShowServerlist(message.PayLoad as HubHostlistDatPayLoad);
-                    break;
-                //case HubPacketTypes.HOSTAVAILABLEREQ:
-                //    break;
-                case HubPacketTypes.HOSTAVAILABLEDAT:
-                    break;
-                //case HubPacketTypes.UNLISTREQ:
-                //    break;
-                case HubPacketTypes.UNLISTTACK:
-                    break;
-                //case HubPacketTypes.PING:
-                //    break;
-                case HubPacketTypes.PINGACK:
-                    break;
-                //default:
-                //    break;
-            }
+            _hubClient.Connect(_frontend.HubHostname, _frontend.HubPort);
         }
 
         private void ShowServerlist(HubHostlistDatPayLoad hubHostlistDatPayLoad)
@@ -135,6 +106,8 @@ namespace PIZZA.Client
                 varheader.Password = _frontend.GetPassword(obj.Channelname.Value);
             }
 
+            _enteringChannel = obj;
+
             _tcpClientChat.Send(message.GetBytes());
         }
 
@@ -152,6 +125,8 @@ namespace PIZZA.Client
                 return;
             }
 
+            _hostIndex = obj;
+
             var hostname = _servers[obj].Item3;
 
             InitChatTcpConnection(hostname);
@@ -159,7 +134,7 @@ namespace PIZZA.Client
             var message = new PizzaChatMessage(Packettypes.CONNECT);
             var varheader = message.VariableHeader as ChatVarHeaderConnect;
 
-            varheader.ClientID = _frontend.GetClientId();
+            varheader.ClientID = _frontend.GetClientId(_servers[_hostIndex].Item1);
 
             if(_servers[obj].Item4)
             {
@@ -178,7 +153,7 @@ namespace PIZZA.Client
             
             _tcpClientChat.TCPMessageReceived += TcpClientChat_TCPMessageReceived;
 
-            var port = Constants.DefaultPort;
+            var port = ChatCore.Constants.DefaultPort;
 
             if (hostname.Contains(':'))
             {
@@ -234,21 +209,21 @@ namespace PIZZA.Client
             var varheader = message.VariableHeader as ChatVarHeaderStatus;
             var payload = message.Payload as ChatPayloadStatus;
 
-            _frontend.RefreshStatus(payload.ClientsInCurrentChannel.ToList(), payload.Channels.ToList(), varheader.CurrentChannel);
+            _frontend.RefreshStatus(payload.ClientsInCurrentChannel.ToList(), payload.Channels.ToList(), varheader.CurrentChannel, _servers[_hostIndex].Item1);
         }
 
         private void ReceiveEnterChannelAck(PizzaChatMessage message)
         {
             var varheader = message.VariableHeader as ChatVarHeaderEnterChannelAck;
 
-            _frontend.ShowEnterChannelReturncode(varheader.ReturnCode);
+            _frontend.ShowEnterChannelReturncode(varheader.ReturnCode, _enteringChannel.Channelname.Value);
         }
 
         private void ConnectionAccepted(PizzaChatMessage message)
         {
             var varheader = message.VariableHeader as ChatVarHeaderConnAck;
 
-            _frontend.ShowReturncode(varheader.Returncode);
+            _frontend.ShowReturncode(varheader.Returncode, _servers[_hostIndex].Item1);
 
             if(varheader.Returncode != ChatConnectReturncode.ACCEPTED)
             {

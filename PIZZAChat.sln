@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaChatCore", "src\PizzaChatGeneral\PizzaChatCore.csproj", "{FAE2D599-8632-40D4-A1FD-AF101B85B8C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPLibrary", "src\TCPLibrary\TCPLibrary.csproj", "{546D5D2C-25F0-4973-8A94-3EB4952A658B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Core\Core.csproj", "{EE560B1D-945E-461E-82D1-A1308363E58D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIZZAChatFrontend", "src\PIZZAChatFrontend\PIZZAChatFrontend.csproj", "{9209C287-4623-4351-BDFF-F23E8AF17342}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIZZAChatFrontend-Test", "test\PIZZAChatFrontend-Test\PIZZAChatFrontend-Test.csproj", "{1CD1D532-6261-446A-9850-50BBFAEB1A13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIZZAChatFrontendFix", "src\PIZZAChatFrontendFix\PIZZAChatFrontendFix.csproj", "{041DDDE5-55C4-4A99-B264-244F89C8DE18}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PIZZA.Hub.Core", "src\PIZZA.Hub.Core\PIZZA.Hub.Core.csproj", "{AC93B995-7638-43C8-83BD-50EF50D0D5DD}"
 EndProject
@@ -59,6 +65,24 @@ Global
 		{EE560B1D-945E-461E-82D1-A1308363E58D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE560B1D-945E-461E-82D1-A1308363E58D}.Testen|Any CPU.ActiveCfg = Testen|Any CPU
 		{EE560B1D-945E-461E-82D1-A1308363E58D}.Testen|Any CPU.Build.0 = Testen|Any CPU
+		{9209C287-4623-4351-BDFF-F23E8AF17342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9209C287-4623-4351-BDFF-F23E8AF17342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9209C287-4623-4351-BDFF-F23E8AF17342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9209C287-4623-4351-BDFF-F23E8AF17342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9209C287-4623-4351-BDFF-F23E8AF17342}.Testen|Any CPU.ActiveCfg = Release|Any CPU
+		{9209C287-4623-4351-BDFF-F23E8AF17342}.Testen|Any CPU.Build.0 = Release|Any CPU
+		{1CD1D532-6261-446A-9850-50BBFAEB1A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD1D532-6261-446A-9850-50BBFAEB1A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD1D532-6261-446A-9850-50BBFAEB1A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD1D532-6261-446A-9850-50BBFAEB1A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CD1D532-6261-446A-9850-50BBFAEB1A13}.Testen|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD1D532-6261-446A-9850-50BBFAEB1A13}.Testen|Any CPU.Build.0 = Release|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Testen|Any CPU.ActiveCfg = Release|Any CPU
+		{041DDDE5-55C4-4A99-B264-244F89C8DE18}.Testen|Any CPU.Build.0 = Release|Any CPU
 		{AC93B995-7638-43C8-83BD-50EF50D0D5DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC93B995-7638-43C8-83BD-50EF50D0D5DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC93B995-7638-43C8-83BD-50EF50D0D5DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
