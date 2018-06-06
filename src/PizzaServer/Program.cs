@@ -107,7 +107,7 @@ namespace Pizza.Server
         {
             if (Config.Channels.Find(s => s.Channelname == e.Channel).Password == e.Password)
             {
-                e.ReturnCode = ChatEnterChannelReturnCode.Acceptded;
+                e.ReturnCode = ChatEnterChannelReturnCode.Accepted;
             }
             else
             {

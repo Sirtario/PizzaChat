@@ -198,7 +198,7 @@ namespace Tests
             var message = new PizzaChatMessage(Packettypes.ENTERCHANNELACK);
             var varheader = message.VariableHeader as ChatVarHeaderEnterChannelAck;
 
-            varheader.ReturnCode = ChatEnterChannelReturnCode.Acceptded;
+            varheader.ReturnCode = ChatEnterChannelReturnCode.Accepted;
 
             var exp = new byte[] { 0x50, 0x49, 0x5a, 0x5a, 0x41, 0x43, 1, 8, 0, 0, 0, 0, 6, 0, 0, 0, 0, 6, 0 };
         }
@@ -214,7 +214,7 @@ namespace Tests
             Assert.AreEqual(1, message.FixedHeader.ProtokollVersion);
             Assert.AreEqual(6, message.FixedHeader.RemainingLength);
 
-            Assert.AreEqual(ChatEnterChannelReturnCode.Acceptded, varheader.ReturnCode);
+            Assert.AreEqual(ChatEnterChannelReturnCode.Accepted, varheader.ReturnCode);
         }
 
         [TestMethod]
