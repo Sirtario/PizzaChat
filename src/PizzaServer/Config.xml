@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PIZZAChatConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DefaultChannel>Home</DefaultChannel>
+  <Hostname>PIZZA!</Hostname>
+  <Channels>
+    <PizzaChatConfigChannel />
+    <PizzaChatConfigChannel />
+  </Channels>
+  <Users>
+    <PIZZAChatConfigUser>
+      <ClientID>default</ClientID>
+      <Password />
+    </PIZZAChatConfigUser>
+    <PIZZAChatConfigUser>
+      <ClientID>default</ClientID>
+      <Password />
+    </PIZZAChatConfigUser>
+  </Users>
+  <HubIPAdress>127.0.0.1</HubIPAdress>
+  <HubPort>56602</HubPort>
+  <HubPass />
+</PIZZAChatConfig>

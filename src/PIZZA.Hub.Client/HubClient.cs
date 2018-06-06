@@ -118,6 +118,8 @@ namespace PIZZA.Hub.Client
 
             _tcpConnection.Send(pingMessage.GetBytes());
 
+            _receivedPingack = new ManualResetEventSlim();
+
             if(!_receivedPingack.Wait(Constants.Timeout))
             {
                 PingExceeded?.Invoke();

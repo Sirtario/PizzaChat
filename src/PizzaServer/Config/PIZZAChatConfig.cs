@@ -9,7 +9,7 @@ namespace Pizza.Server
         public PIZZAChatConfig()
         {
             DefaultChannel = "Home";
-            Hostname = "PIZZA!";
+            Hostname = "127.0.0.1";
             Channels = new List<PizzaChatConfigChannel>();
             Users = new List<PIZZAChatConfigUser>();
             HubIPAdress = "127.0.0.1";

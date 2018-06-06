@@ -48,7 +48,7 @@ namespace PIZZA.Hub.Core
 
         public byte[] GetBytes(int payloadLength)
         {
-            var bytes = ProtocollName;
+            byte[] bytes = ProtocollName;
 
             _payloadLength.Value = payloadLength;
 
@@ -62,7 +62,7 @@ namespace PIZZA.Hub.Core
 
         public static HubHeader FromBytes(byte[] bytes)
         {
-            var result = new HubHeader(bytes);
+            HubHeader result = new HubHeader(bytes);
 
             return result;
         }
