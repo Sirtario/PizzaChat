@@ -91,7 +91,7 @@ namespace PIZZAChatFrontend
             html = html.Replace("__MEMBER__", _members);
             html = html.Replace("__CHANNEL__", _channels);
 
-            _browserControl.NavigateToString(html);
+            _browserControl.Dispatcher.Invoke(new Action(() => { _browserControl.NavigateToString(html); }));
         }
 
         private void ListServers_Click(object sender, RoutedEventArgs e)

@@ -10,7 +10,7 @@ namespace PIZZA.Chat.Server
         public event Action<PizzaChatMessage, IPEndPoint> SendMessage;
         internal event Action<ChatClientConnection> ClientConnected;
 
-        internal void RecieveConnect(PizzaChatMessage message, ChatClientConnection connection)
+        internal void RecieveConnect(PizzaChatMessage message, IPEndPoint ip)
         {
             var Fixedheader = message.FixedHeader;
             var Varheader = message.VariableHeader as ChatVarHeaderConnect;
@@ -19,11 +19,11 @@ namespace PIZZA.Chat.Server
 
             ClientConnectionApprove.Invoke(this, eventargs);
 
-            SendMessage.Invoke(GenerateAckMessage(eventargs.ConnectReturncode, eventargs.CommunicationMode, eventargs.PingIntervall), connection.ClientIP);
+            SendMessage.Invoke(GenerateAckMessage(eventargs.ConnectReturncode, eventargs.CommunicationMode, eventargs.PingIntervall), ip);
 
             if (eventargs.ConnectReturncode == ChatConnectReturncode.ACCEPTED)
             {
-                ClientConnected.Invoke(new ChatClientConnection(Varheader.ClientID, connection.ClientIP, eventargs.PingIntervall));
+                ClientConnected.Invoke(new ChatClientConnection(Varheader.ClientID, ip, eventargs.PingIntervall));
             }
         }
 
