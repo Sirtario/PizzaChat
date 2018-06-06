@@ -6,6 +6,6 @@ namespace PIZZA.Hub.Client
 {
     public class Constants
     {
-        public static readonly int Timeout = 500;
+        public static readonly int Timeout = 9000;
     }
 }
