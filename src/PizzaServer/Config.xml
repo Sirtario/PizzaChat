@@ -4,14 +4,27 @@
   <Hostname>PIZZA!</Hostname>
   <Channels>
     <PizzaChatConfigChannel />
+<<<<<<< HEAD
+=======
+    <PizzaChatConfigChannel />
+>>>>>>> origin/pizza-hub-core
   </Channels>
   <Users>
     <PIZZAChatConfigUser>
       <ClientID>default</ClientID>
       <Password />
     </PIZZAChatConfigUser>
+<<<<<<< HEAD
   </Users>
   <HubIPAdress>172.11.0.37</HubIPAdress>
+=======
+    <PIZZAChatConfigUser>
+      <ClientID>default</ClientID>
+      <Password />
+    </PIZZAChatConfigUser>
+  </Users>
+  <HubIPAdress>127.0.0.1</HubIPAdress>
+>>>>>>> origin/pizza-hub-core
   <HubPort>56602</HubPort>
   <HubPass />
 </PIZZAChatConfig>

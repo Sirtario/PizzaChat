@@ -69,15 +69,15 @@ namespace PIZZA.Hub.Core
 
             _hostname = PIZZAString.FromBytes(tmp.ToArray());
 
-            tmp.RemoveRange(0, 2);
+            tmp.RemoveRange(0,_hostname.Length.Value + 2);
 
             _friendlyname = PIZZAString.FromBytes(tmp.ToArray());
 
-            tmp.RemoveRange(0, 2);
+            tmp.RemoveRange(0,_friendlyname.Length.Value + 2);
 
             _description = PIZZAString.FromBytes(tmp.ToArray());
 
-            tmp.RemoveRange(0, 2);
+            tmp.RemoveRange(0,_description.Length.Value + 2);
 
             _requiresPassword = tmp[0];
 

@@ -109,6 +109,10 @@ namespace PIZZA.Hub.Interface
             HubTerminal.Cout(ConsoleColor.Green, "##", false);
             HubTerminal.Cout(ConsoleColor.White, " removehost {id}       ", false); HubTerminal.Cout(ConsoleColor.Green, " # ", false); HubTerminal.Cout(ConsoleColor.White," remove a host by id     ", false);
             HubTerminal.Cout(ConsoleColor.Green, "##");
+            HubTerminal.Cout(ConsoleColor.Green, "##---------------------------------------------------##");
+            HubTerminal.Cout(ConsoleColor.Green, "##", false);
+            HubTerminal.Cout(ConsoleColor.White, " exit                  ", false); HubTerminal.Cout(ConsoleColor.Green, " # ", false); HubTerminal.Cout(ConsoleColor.White, " exit/shutdown PizzaHub  ", false);
+            HubTerminal.Cout(ConsoleColor.Green, "##");
             HubTerminal.Cout(ConsoleColor.Green, "#######################################################");
             return 0;
         }

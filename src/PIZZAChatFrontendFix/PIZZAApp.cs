@@ -20,7 +20,11 @@ namespace PIZZA.Client
 
         private Timer _pingTimer;
 
+<<<<<<< HEAD
         private List<Tuple<string, string, string, bool>> _servers= new List<Tuple<string, string, string, bool>>();
+=======
+        private List<Tuple<string, string, string, bool>> _servers = new List<Tuple<string, string, string, bool>>();
+>>>>>>> origin/pizza-hub-core
         private IPIZZAFrontend _frontend;
         private PIZZAChannel _enteringChannel;
         private int _hostIndex;
