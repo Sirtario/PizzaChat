@@ -197,10 +197,22 @@ namespace PIZZA.Client
                     break;
                 //case Packettypes.DISCONNECT:
                 //    break;
-                //case Packettypes.PUBLISH:
-                //    break;
+                case Packettypes.PUBLISH:
+                    ReceiveMessage(message);
+                    break;
                 default:
                     break;
+            }
+        }
+
+        private void ReceiveMessage(PizzaChatMessage message)
+        {
+            var payload = message.Payload as ChatPayloadPublish;
+            var varHeader = message.VariableHeader as ChatVarHeaderPublish;
+
+            if(varHeader.Datatype == ChatPayloadDatatypes.Text)
+            {
+                _frontend.ReceiveMessage(Encoding.UTF8.GetString(payload.Payload), varHeader.SenderName, string.IsNullOrEmpty(varHeader.WhisperTarget));
             }
         }
 

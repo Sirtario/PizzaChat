@@ -8,6 +8,10 @@ namespace Pizza.Server
     {
         public PIZZAChatConfig()
         {
+        }
+
+        public PIZZAChatConfig(bool b)
+        {
             DefaultChannel = "Home";
             Hostname = "PIZZA!";
             Channels = new List<PizzaChatConfigChannel>();
@@ -17,7 +21,8 @@ namespace Pizza.Server
             HubPass = string.Empty;
 
             Users.Add(new PIZZAChatConfigUser());
-            Channels.Add(new PizzaChatConfigChannel());
+            Channels.Add(new PizzaChatConfigChannel("tests",string.Empty));
+            Channels.Add(new PizzaChatConfigChannel("Home", string.Empty));
         }
 
         public string DefaultChannel { get; set; }

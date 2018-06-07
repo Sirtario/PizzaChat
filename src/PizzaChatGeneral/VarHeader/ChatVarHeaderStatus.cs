@@ -21,7 +21,7 @@ namespace PIZZA.Chat.Core
             list.RemoveRange(0, 5);
 
             _courentChannel = PIZZAString.FromBytes(list.ToArray());
-            list.RemoveRange(0, _courentChannel.Length.Value);
+            list.RemoveRange(0, _courentChannel.GetBytes().Length);
 
             ChannelPower = list[0];
             list.RemoveAt(0);

@@ -76,12 +76,13 @@ namespace PIZZA.Chat.Server
 
         {
             obj.CourentChannel = DefaultChannel;
-            obj.PingTimer.Elapsed += (s,e) =>{
-                if (_tcpServer.ConnectedClients.Any(c => c == obj.ClientIP))
-                {
-                    _tcpServer.DisconnectClient(obj.ClientIP);
-                }
-            };
+            //obj.PingTimer.Elapsed += (s,e) =>{
+            //    if (_tcpServer.ConnectedClients.Any(c => c == obj.ClientIP))
+            //    {
+            //        Console.WriteLine($"{obj.ClientID} got disconnected because of Ping");
+            //        _tcpServer.DisconnectClient(obj.ClientIP);
+            //    }
+            //};
             Connections.Add(obj);
 
             _statusManager.SendStatus(obj, Connections.FindAll(c=>c.CourentChannel== obj.CourentChannel),Channels );
@@ -114,8 +115,6 @@ namespace PIZZA.Chat.Server
 
             var myconnection = Connections.Find(prop => prop.ClientIP == e.Sender);
             
-            var usersInMyChannel = Connections.FindAll(prop => prop.CourentChannel == myconnection.CourentChannel);
-
             //dispatches the message to the managers 
             switch (message.FixedHeader.PacketType)
             {
@@ -123,10 +122,11 @@ namespace PIZZA.Chat.Server
                     _connectManager.RecieveConnect(message, e.Sender);
                     break;
                 case Packettypes.GETSTATUS:
+                    var usersInMyChannel = Connections.FindAll(prop => prop.CourentChannel == myconnection.CourentChannel);
                     _statusManager.RecieveGetStatus( myconnection, usersInMyChannel, Channels);
                     break;
                 case Packettypes.PING:
-                    ResetPingTimer(Connections.Find(prop => prop.ClientIP == e.Sender));
+                    //ResetPingTimer(Connections.Find(prop => prop.ClientIP == e.Sender));
                     SendPingRESP(Connections.Find(prop => prop.ClientIP == e.Sender).ClientIP);
                     break;
                 case Packettypes.ENTERCHANNEL:
@@ -139,6 +139,7 @@ namespace PIZZA.Chat.Server
                     _tcpServer.DisconnectClient(e.Sender);
                     break;
                 case Packettypes.PUBLISH:
+                    usersInMyChannel = Connections.FindAll(prop => prop.CourentChannel == myconnection.CourentChannel);
                     _publishManager.Publish(message,myconnection,usersInMyChannel);
                     break;
                 default:

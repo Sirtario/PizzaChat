@@ -5,7 +5,6 @@ using PIZZA.Core;
 using PIZZA.Hub.Client;
 using System;
 using System.IO;
-using System.Linq;
 using System.Xml.Serialization;
 
 namespace Pizza.Server
@@ -28,7 +27,7 @@ namespace Pizza.Server
             }
             catch (Exception)
             {
-                Config = new PIZZAChatConfig();
+                Config = new PIZZAChatConfig(true);
 
                 SerializeConfig(Config, "Config.xml");
             }
@@ -46,11 +45,9 @@ namespace Pizza.Server
                     throw new Exception($"{Hubres.Returncode.ToString()}");
                 }
                 _hub.StartPing(Hubres.HostIdentifier,Hubres.Pinginterval);
-
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine($"unable to connect to hub: {ex.Message}");
             }
             
@@ -71,7 +68,6 @@ namespace Pizza.Server
 
             _server?.Dispose();
             SerializeConfig(Config,"Config.xml");
-
         }
 
         private static PIZZAChatConfig DeSerializeConfig( string path)
@@ -92,7 +88,6 @@ namespace Pizza.Server
         }
 
         private static void SetBasicConfig()
-
         {
             _server.DefaultChannel = Config.DefaultChannel;
 
@@ -118,11 +113,6 @@ namespace Pizza.Server
 
         private static void _server_ClientConnecting(object sender, ChatConnectApprovalEventArgs e)
         {
-            //if (Config.Users.Any(c => c.ClientID == e.ClientID)
-            //{
-
-            //}
-
             Console.WriteLine($"client {e.ClientID} connects");
 
             e.CommunicationMode = 1;

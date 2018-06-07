@@ -12,7 +12,13 @@ namespace Pizza.Server
             Password = string.Empty;
         }
 
-        public string Channelname { get; }
-        public string Password{get;}
+        public PizzaChatConfigChannel(string channelname, string password)
+        {
+            Channelname = channelname;
+            Password = password;
+        }
+
+        public string Channelname { get; set; }
+        public string Password{ get; set; }
     }
 }

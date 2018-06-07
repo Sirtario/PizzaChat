@@ -18,15 +18,10 @@ namespace PIZZA.Chat.Core
             var list = bytes.ToList();
 
             Channelname = PIZZAString.FromBytes(list.ToArray());
-            list.RemoveRange(0, Channelname.Length.Value);
+            list.RemoveRange(0, Channelname.GetBytes().Length);
 
             HasPassword = list[0];
             list.RemoveAt(0);
-
-            if (list.Count != 0)
-            {
-                throw new Exception();
-            }
         }
 
         public PIZZAChannel()

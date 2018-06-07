@@ -16,20 +16,20 @@ namespace PIZZA.Chat.Core
         {
         }
 
-        private ChatPayloadStatus(byte[] bytes)
+        private ChatPayloadStatus(byte[] bytes, ChatVarHeaderStatus varHeader)
         {
             _clientsInCurrentChannel = new List<PIZZAString>();
             _channels = new List<PIZZAChannel>();
 
             var list = bytes.ToList();
 
-            for (int i = 0; i < _clientsInCurrentChannel.Count; i++)
+            for (int i = 0; i < varHeader.ClientCount; i++)
             {
                 _clientsInCurrentChannel.Add(PIZZAString.FromBytes(list.ToArray()));
-                list.RemoveRange(0, _clientsInCurrentChannel[_clientsInCurrentChannel.Count - 1].Length.Value);
+                list.RemoveRange(0, _clientsInCurrentChannel[_clientsInCurrentChannel.Count - 1].GetBytes().Length);
             }
 
-            for (int i = 0; i < _channels.Count; i++)
+            for (int i = 0; i < varHeader.ChannelCount; i++)
             {
                 _channels.Add(PIZZAChannel.FromBytes(list.ToArray()));
                 list.RemoveRange(0, _channels[_channels.Count - 1].Length);
@@ -67,9 +67,9 @@ namespace PIZZA.Chat.Core
             }
         }
 
-        public static ChatPayloadStatus FromBytes(byte[] bytes)
+        public static ChatPayloadStatus FromBytes(byte[] bytes, ChatVarHeaderStatus varHeader)
         {
-            return new ChatPayloadStatus(bytes);
+            return new ChatPayloadStatus(bytes, varHeader);
         }
 
         public override byte[] GetBytes()

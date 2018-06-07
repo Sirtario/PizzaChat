@@ -15,7 +15,7 @@ namespace PIZZA.Chat.Core
 
             var fixedHeader = ChatFixedHeader.FromBytes(bytes);
 
-            return fixedHeader.RemainingLength >= bytes.Length + 13;
+            return fixedHeader.RemainingLength == bytes.Length - 13;
         }
     }
 }

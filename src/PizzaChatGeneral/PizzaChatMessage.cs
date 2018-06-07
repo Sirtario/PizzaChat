@@ -119,7 +119,7 @@ namespace PIZZA.Chat.Core
             switch (FixedHeader.PacketType)
             {
                 case Packettypes.STATUS:
-                    Payload = ChatPayloadStatus.FromBytes(list.ToArray());
+                    Payload = ChatPayloadStatus.FromBytes(list.ToArray(), VariableHeader as ChatVarHeaderStatus);
                     list.RemoveRange(0, Payload.GetBytes().Length);
                     break;
                 case Packettypes.PUBLISH:

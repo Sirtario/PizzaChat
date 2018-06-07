@@ -274,5 +274,10 @@ namespace PIZZAChatFrontend
 
             ConnectDirectly?.Invoke(window.Value);
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Disconnect?.Invoke();
+        }
     }
 }
