@@ -43,7 +43,7 @@ namespace PIZZA.Hub.Core.PayLoads
 
             foreach(HubHostInfo i in _hosts)
             {
-                result.Concat(i.GetBytes());
+                result.AddRange(i.GetBytes());
             }
 
             return result.ToArray();

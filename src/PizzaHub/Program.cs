@@ -20,7 +20,7 @@ namespace PIZZA.Hub
             HubServerAuthentication ServerAuthentication = new HubServerAuthentication();
             HubTerminalCommands Commands = new HubTerminalCommands(ServerList, ClientList,respondinghosts);
 
-            TCPServer server = new TCPServer(IsPackageCompleteHb);
+            TCPServer server = new TCPServer(TcpDelegate.IsPIZZAHubMessageComplete);
             HubTerminal term = new HubTerminal(server);
             Thread listener = new Thread(term.RunListener);
 
@@ -37,22 +37,6 @@ namespace PIZZA.Hub
 
             listener.Start();
 
-        }
-
-        private static bool IsPackageCompleteHb(byte[] currentBytes)
-        {
-            HubMessage message;
-
-            try
-            {
-                message = HubMessageFactory.GetMessage(currentBytes);
-            }
-            catch
-            {
-                return false;
-            }
-
-            return message.Header.PayloadLength >= message.PayLoad.GetBytes().Length;
         }
     }
 }

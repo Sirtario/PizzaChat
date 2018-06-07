@@ -85,35 +85,35 @@ namespace PIZZA.Hub.Interface
 
         public int help(string[] input)
         {
-            HubTerminal.Cout(ConsoleColor.Green, "#####################", false); HubTerminal.Cout(ConsoleColor.Yellow, "ConsoleCommands", false);HubTerminal.Cout(ConsoleColor.Green,"###################");
-            HubTerminal.Cout(ConsoleColor.Green, "##", false);
-            HubTerminal.Cout(ConsoleColor.White, " setpass {new_password}", false);HubTerminal.Cout(ConsoleColor.Green, " # ", false);HubTerminal.Cout(ConsoleColor.White," set server password     ",false);
-            HubTerminal.Cout(ConsoleColor.Green, "##");
-            HubTerminal.Cout(ConsoleColor.Green, "##---------------------------------------------------##");
-            HubTerminal.Cout(ConsoleColor.Green, "##", false);
-            HubTerminal.Cout(ConsoleColor.White, " showpass              ", false); HubTerminal.Cout(ConsoleColor.Green, " # ", false);HubTerminal.Cout(ConsoleColor.White," show password hash      ", false);
-            HubTerminal.Cout(ConsoleColor.Green, "##");
-            HubTerminal.Cout(ConsoleColor.Green, "##---------------------------------------------------##");
-            HubTerminal.Cout(ConsoleColor.Green, "##", false);
-            HubTerminal.Cout(ConsoleColor.White, " serverlist            ", false); HubTerminal.Cout(ConsoleColor.Green, " # ",false); HubTerminal.Cout(ConsoleColor.White,"list all servers         ", false);
-            HubTerminal.Cout(ConsoleColor.Green, "##");
-            HubTerminal.Cout(ConsoleColor.Green, "##---------------------------------------------------##");
-            HubTerminal.Cout(ConsoleColor.Green, "##", false);
-            HubTerminal.Cout(ConsoleColor.White, " clientlist            ", false); HubTerminal.Cout(ConsoleColor.Green, " # ",false); HubTerminal.Cout(ConsoleColor.White," list all clients        ", false);
-            HubTerminal.Cout(ConsoleColor.Green, "##");
-            HubTerminal.Cout(ConsoleColor.Green, "##---------------------------------------------------##");
-            HubTerminal.Cout(ConsoleColor.Green, "##", false);
-            HubTerminal.Cout(ConsoleColor.White, " setpass               ", false); HubTerminal.Cout(ConsoleColor.Green, " # ",false); HubTerminal.Cout(ConsoleColor.White," set server password     ", false);
-            HubTerminal.Cout(ConsoleColor.Green, "##");
-            HubTerminal.Cout(ConsoleColor.Green, "##---------------------------------------------------##");
-            HubTerminal.Cout(ConsoleColor.Green, "##", false);
-            HubTerminal.Cout(ConsoleColor.White, " removehost {id}       ", false); HubTerminal.Cout(ConsoleColor.Green, " # ", false); HubTerminal.Cout(ConsoleColor.White," remove a host by id     ", false);
-            HubTerminal.Cout(ConsoleColor.Green, "##");
-            HubTerminal.Cout(ConsoleColor.Green, "##---------------------------------------------------##");
-            HubTerminal.Cout(ConsoleColor.Green, "##", false);
-            HubTerminal.Cout(ConsoleColor.White, " exit                  ", false); HubTerminal.Cout(ConsoleColor.Green, " # ", false); HubTerminal.Cout(ConsoleColor.White, " exit/shutdown PizzaHub  ", false);
-            HubTerminal.Cout(ConsoleColor.Green, "##");
-            HubTerminal.Cout(ConsoleColor.Green, "#######################################################");
+            HubTerminal._Cout(ConsoleColor.Green, "#####################", false); HubTerminal._Cout(ConsoleColor.Yellow, "ConsoleCommands", false);HubTerminal._Cout(ConsoleColor.Green,"###################");
+            HubTerminal._Cout(ConsoleColor.Green, "##", false);
+            HubTerminal._Cout(ConsoleColor.White, " setpass {new_password}", false);HubTerminal._Cout(ConsoleColor.Green, " # ", false);HubTerminal._Cout(ConsoleColor.White," set server password     ",false);
+            HubTerminal._Cout(ConsoleColor.Green, "##");
+            HubTerminal._Cout(ConsoleColor.Green, "##---------------------------------------------------##");
+            HubTerminal._Cout(ConsoleColor.Green, "##", false);
+            HubTerminal._Cout(ConsoleColor.White, " showpass              ", false); HubTerminal._Cout(ConsoleColor.Green, " # ", false);HubTerminal._Cout(ConsoleColor.White," show password hash      ", false);
+            HubTerminal._Cout(ConsoleColor.Green, "##");
+            HubTerminal._Cout(ConsoleColor.Green, "##---------------------------------------------------##");
+            HubTerminal._Cout(ConsoleColor.Green, "##", false);
+            HubTerminal._Cout(ConsoleColor.White, " serverlist            ", false); HubTerminal._Cout(ConsoleColor.Green, " # ",false); HubTerminal._Cout(ConsoleColor.White,"list all servers         ", false);
+            HubTerminal._Cout(ConsoleColor.Green, "##");
+            HubTerminal._Cout(ConsoleColor.Green, "##---------------------------------------------------##");
+            HubTerminal._Cout(ConsoleColor.Green, "##", false);
+            HubTerminal._Cout(ConsoleColor.White, " clientlist            ", false); HubTerminal._Cout(ConsoleColor.Green, " # ",false); HubTerminal._Cout(ConsoleColor.White," list all clients        ", false);
+            HubTerminal._Cout(ConsoleColor.Green, "##");
+            HubTerminal._Cout(ConsoleColor.Green, "##---------------------------------------------------##");
+            HubTerminal._Cout(ConsoleColor.Green, "##", false);
+            HubTerminal._Cout(ConsoleColor.White, " setpass               ", false); HubTerminal._Cout(ConsoleColor.Green, " # ",false); HubTerminal._Cout(ConsoleColor.White," set server password     ", false);
+            HubTerminal._Cout(ConsoleColor.Green, "##");
+            HubTerminal._Cout(ConsoleColor.Green, "##---------------------------------------------------##");
+            HubTerminal._Cout(ConsoleColor.Green, "##", false);
+            HubTerminal._Cout(ConsoleColor.White, " removehost {id}       ", false); HubTerminal._Cout(ConsoleColor.Green, " # ", false); HubTerminal._Cout(ConsoleColor.White," remove a host by id     ", false);
+            HubTerminal._Cout(ConsoleColor.Green, "##");
+            HubTerminal._Cout(ConsoleColor.Green, "##---------------------------------------------------##");
+            HubTerminal._Cout(ConsoleColor.Green, "##", false);
+            HubTerminal._Cout(ConsoleColor.White, " exit                  ", false); HubTerminal._Cout(ConsoleColor.Green, " # ", false); HubTerminal._Cout(ConsoleColor.White, " exit/shutdown PizzaHub  ", false);
+            HubTerminal._Cout(ConsoleColor.Green, "##");
+            HubTerminal._Cout(ConsoleColor.Green, "#######################################################");
             return 0;
         }
 

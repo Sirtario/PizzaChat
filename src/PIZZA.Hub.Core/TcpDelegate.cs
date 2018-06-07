@@ -8,18 +8,14 @@ namespace PIZZA.Hub.Core
     {
         public static bool IsPIZZAHubMessageComplete(byte[] bytes)
         {
-            HubMessage message;
-
-            try
-            {
-                message = HubMessageFactory.GetMessage(bytes);
-            }
-            catch
+            if(bytes.Length < 11)
             {
                 return false;
             }
 
-            return message.Header.PayloadLength >= message.PayLoad.GetBytes().Length;
+            var header = HubHeader.FromBytes(bytes);
+
+            return header.PayloadLength == bytes.Length - 11;
         }
     }
 }
