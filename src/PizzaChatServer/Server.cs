@@ -44,6 +44,24 @@ namespace PIZZA.Chat.Server
             _channelmanager = new ChannelManager();
             _channelmanager.SendMessage += SendMessage;
             _channelmanager.ClientEnteringChannel += _channelmanager_ClientEnteringChannel;
+            _channelmanager.ChannelChanged += _channelmanager_ChannelChanged;
+        }
+
+        private void _channelmanager_ChannelChanged(string arg1, string arg2)
+        {
+            var connectionsInArg1 = Connections.FindAll(c => c.CourentChannel == arg1);
+
+            foreach (var connection in Connections.FindAll(c => c.CourentChannel == arg1))
+            {
+                _statusManager.SendStatus(connection, connectionsInArg1, Channels);
+            }
+
+            var connectionsInArg2 = Connections.FindAll(c => c.CourentChannel == arg2);
+
+            foreach (var connection in Connections.FindAll(c => c.CourentChannel == arg2))
+            {
+                _statusManager.SendStatus(connection, connectionsInArg2, Channels);
+            }
         }
 
         /// <summary>

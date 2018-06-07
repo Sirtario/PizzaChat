@@ -2,11 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PIZZA.Client.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="HubHostname" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1</Value>
-    </Setting>
     <Setting Name="HubPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">56602</Value>
+    </Setting>
+    <Setting Name="HubHostname" Type="System.String" Scope="User">
+      <Value Profile="(Default)">172.11.0.37</Value>
     </Setting>
   </Settings>
 </SettingsFile>
