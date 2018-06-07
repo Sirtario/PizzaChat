@@ -20,13 +20,27 @@ namespace PIZZA.Hub.Interface
             _server = server;
         }
 
-        public static void Cout(ConsoleColor color, string txt, bool IsLine = true)
+        public static void _Cout(ConsoleColor color, string txt, bool IsLine = true)
         {
             Console.ForegroundColor = color;
 
             if (IsLine)
                 Console.WriteLine(txt);
             else Console.Write(txt);
+        }
+
+        public static void Cout(ConsoleColor color, string txt, bool IsLine = true)
+        {
+            Console.CursorLeft = 0;
+            Console.ForegroundColor = color;
+
+            if (IsLine)
+                Console.WriteLine(txt);
+            else Console.Write(txt);
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.Write("cmd>>");
         }
 
         public void CommandAdd(string cmd,cmdFunc cmdFunct)
@@ -41,7 +55,7 @@ namespace PIZZA.Hub.Interface
             Cout(ConsoleColor.Yellow, "[TCP] Server started...");
             while (run)
             {
-                Cout(ConsoleColor.Gray, "cmd>> ", false);
+               // Cout(ConsoleColor.Gray, "cmd>> ", false);
                 string[] cmd = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 if (cmd[0] == "exit")

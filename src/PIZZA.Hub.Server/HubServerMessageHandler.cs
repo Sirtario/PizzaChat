@@ -14,7 +14,7 @@ namespace PIZZA.Hub
     public class HubServerMessageHandler
     {
         private HubPizzaServerList _serverlist;
-        private int _MaxID = 1;
+        private int _MaxID = 0;
         private ITCPServer _server;
         private HubPizzaClientList _clientlist;
         private HubRespondingHosts _respondingHost;
@@ -71,7 +71,7 @@ namespace PIZZA.Hub
 
                             anser = new HubMessage(HubPacketTypes.ENLISTACK, pl);
 
-                            HubTerminal.Cout(ConsoleColor.Green, $"[Server Added] Server with EndPoint {e.Sender} has been added as ID: { _MaxID } Hostname: { ServerInfo }");
+                            HubTerminal.Cout(ConsoleColor.Green, $"[Server Added] Server with EndPoint {e.Sender} has been added as ID: { _MaxID } Hostname: { ServerInfo.Hostname }");
 
                             _MaxID++;
                         }
@@ -85,7 +85,7 @@ namespace PIZZA.Hub
 
                             anser = new HubMessage(HubPacketTypes.ENLISTACK, pl);
 
-                            HubTerminal.Cout(ConsoleColor.Red, $"Server with Hostname: { ServerInfo } could not be added because it is alredy listed...");
+                            HubTerminal.Cout(ConsoleColor.Red, $"Server with Hostname: { ServerInfo.Hostname } could not be added because it is alredy listed...");
                         }
 
                         _server.Send(e.Sender, anser.GetBytes());
@@ -144,14 +144,14 @@ namespace PIZZA.Hub
 
                         flags = message.PayLoad.GetBytes()[0];
 
-                        if (IsBitSet(flags, 1))
+                        if (IsBitSet(flags, 0))
                         {
                             
                             if (IsBitSet(flags, 0) && !IsBitSet(flags, 2))
                             {
                                 try
                                 {
-                                    for (int i = 0; i <= _serverlist.Count; i++)
+                                    for (int i = 0; i < _serverlist.Count; i++)
                                     { payload = payload.Concat(_serverlist.GetHostInfo(i).GetBytes()).ToArray(); }
                                 }
                                 catch { }
@@ -159,7 +159,7 @@ namespace PIZZA.Hub
                             if (IsBitSet(flags, 0) && IsBitSet(flags, 2))
                             {
 
-                                for (int i = 0; i <= _serverlist.Count; i++)
+                                for (int i = 0; i < _serverlist.Count; i++)
                                 {
                                     try
                                     {

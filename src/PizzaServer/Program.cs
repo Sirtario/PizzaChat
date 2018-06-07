@@ -35,6 +35,7 @@ namespace Pizza.Server
             //todo: namen aus config
             //Hub stuff
             Console.WriteLine("Enlisting in Hub");
+
             try
             {
                 _hub = new HubClient();

@@ -190,7 +190,7 @@ namespace PIZZA.Hub.Client
 
             _tcpConnection.Send(message.GetBytes());
 
-            if(!_receivedHostlistDat.Wait(Constants.Timeout))
+            if(!_receivedHostlistDat.Wait(Constants.Timeout /*90000*/))
             {
                 throw new TimeoutException($"Hub didn't answer in {Constants.Timeout}ms");
             }
