@@ -39,7 +39,7 @@ namespace ACX.ViciOne.TCPLibrary
         /// </summary>
         public void ServerStart(int port)
         {
-            _listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+            _listener = new TcpListener(IPAddress.Any, port);
             _listener.Start();
 
             var threadStart = new ParameterizedThreadStart(AcceptConnections);
@@ -66,7 +66,6 @@ namespace ACX.ViciOne.TCPLibrary
 
         private void AcceptConnections(object token)
         {
-
             if (!(token is ThreadCancelationToken cancelationToken))
             {
                 throw new ArgumentException($"token has to be {typeof(ThreadCancelationToken)}");
